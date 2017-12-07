@@ -108,7 +108,21 @@ create table DONNE(
     FOREIGN KEY(NumGroupe) REFERENCES GROUPE(NumGroupe),
     FOREIGN KEY(idNote) REFERENCES NOTE(idNote),
     CONSTRAINT Pk_DONNE PRIMARY KEY(NumJury,NumGroupe,idNote)
-)
+);
 
+create table ADMINISTRATEUR(
+  login varchar(30),
+  MotDePasse varchar(30),
+  CONSTRAINT Pk_ADMNISTRATEUR PRIMARY KEY(login,MotDePasse)
+);
 
-
+create table OLYMPIADES(
+  NumEdition int,
+  LogOlympiades varchar(100),
+  LogoSponsor varchar(100),
+  LogoUPSTI varchar(100),
+  dateOlymp date,
+  BandeauPartenaires varchar(100),
+  LogoIUT varchar(100),
+  PRIMARY KEY(NumEdition)
+);
