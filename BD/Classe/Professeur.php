@@ -2,8 +2,13 @@
 class Professeur{
     private $_ID;
 
+    public function __construct($ID)
+    {   
+        $this->_ID = $ID;
+    }
+
     public function getID(){
-        return $_ID;
+        return $this->_ID;
     }
 }
 

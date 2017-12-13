@@ -4,6 +4,14 @@ class Jury{
     private $_Login;
     private $_Password;
 
+    public function __construct($id,$login,$pass)
+    {   
+        $this->_NumJury = $id;
+        $this->_Login = $login;
+        $this->_Password = $pass;
+    }
+
+
     public function getNumJury(){
         return $_NumJury;
     }

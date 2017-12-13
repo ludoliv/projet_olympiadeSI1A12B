@@ -4,16 +4,23 @@ class Personne{
     private $_Nom;
     private $_Prenom;
 
+    public function __construct($id,$nom,$prenom)
+    {   
+        $this->_ID = $id;
+        $this->_Nom = $nom;
+        $this->_Prenom = $prenom;
+    }
+
     public function getID(){
-        return $_ID;
+        return $this->_ID;
     }
 
     public function getNom(){
-        return $_Nom;
+        return $this->_Nom;
     }
 
     public function getPrenom(){
-        return $_Prenom;
+        return $this->_Prenom;
     }
 
     public function setNom($New_nom){
