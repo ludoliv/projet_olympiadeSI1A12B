@@ -5,7 +5,7 @@ class Heure{
     private $_hFin;
 
     public function __construct($id,$deb,$fin)
-    {   
+    {
         $this->_ID = $id;
         $this->_hDeb = $deb;
         $this->_hFin = $fin;

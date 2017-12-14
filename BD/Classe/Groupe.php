@@ -6,10 +6,9 @@ class Groupe{
     private $_Lycee;
     private $_ImageProjet;
 
-    public function __construct($groupe,$Filiere,$Proj,$Lycee,$img)
-    {   
+    public function __construct($groupe,$Proj,$Lycee,$img)
+    {
         $this->_NumGroupe = $groupe;
-        $this->_Filiere = $Filiere;
         $this->_NomProj = $Proj;
         $this->_Lycee = $Lycee;
         $this->_ImageProjet = $img;
@@ -17,10 +16,6 @@ class Groupe{
 
     public function getNumGroupe(){
         return $this->_NumGroupe;
-    }
-
-    public function getFiliere(){
-        return $this->_Filiere;
     }
 
     public function getNomProj(){
@@ -33,10 +28,6 @@ class Groupe{
 
     public function getImageProjet(){
         return  $this->_ImageProjet;
-    }
-
-    public function setFiliere($Filiere){
-        $this->_Filiere = $Filiere;
     }
 
     public function setNomProj($NomProj){
@@ -52,9 +43,5 @@ class Groupe{
     }
 
 }
-
-$groupe = new Groupe(1,"STMG","Boum","LOL","../");
-$groupe->setLycee("MDR");
-echo $groupe->getLycee();
 
 ?>
