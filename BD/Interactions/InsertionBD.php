@@ -3,7 +3,7 @@
     function getMaxIDPersonne($connexion)
     {
         // Writing the request 
-        $request = "Select max(ID) from ELEVE";
+        $request = "Select max(ID) from Personne";
 
         // Getting the result after the query
         $result = $connexion->query($request);
@@ -20,7 +20,7 @@
         }
     }
 
-    function insertPersonne($connexion,$ListeEleve)
+    function insertPersonne($connexion,$ListePersonne)
     {
         try{
             // Creation of the statement
@@ -35,12 +35,12 @@
             $statement->bindParam(':Prenom',$Prenom);
     
     
-            for($i = 0;$i < count($ListeEleve);$i++)
+            for($i = 0;$i < count($ListePersonne);$i++)
             {
                 // Passing the value to the parameter
                 $id = $max + i;
-                $Nom = $ListeEleve[i].getNom();
-                $Prenom = $ListeEleve[i].getPrenom();
+                $Nom = $ListePersonne[i].getNom();
+                $Prenom = $ListePersonne[i].getPrenom();
 
                 // Execute the insertion
                 $statement.execute();
