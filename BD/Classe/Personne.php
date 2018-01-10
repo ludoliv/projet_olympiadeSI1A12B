@@ -1,17 +1,17 @@
-<?php 
+<?php
 class Personne{
     private $_ID;
     private $_Nom;
     private $_Prenom;
 
     public function __construct($id,$nom,$prenom)
-    {   
+    {
         $this->_ID = $id;
         $this->_Nom = $nom;
         $this->_Prenom = $prenom;
     }
 
-    public function getID(){
+    public function getiD(){
         return $this->_ID;
     }
 

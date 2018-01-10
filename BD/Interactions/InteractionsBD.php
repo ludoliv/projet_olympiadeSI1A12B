@@ -2,7 +2,7 @@
 
     function getMaxIDPersonne($connexion)
     {
-        // Writing the request 
+        // Writing the request
         $request = "Select max(ID) from Personne";
 
         // Getting the result after the query
@@ -25,16 +25,16 @@
         try{
             // Creation of the statement
             $statement = $connexion->prepare("INSERT INTO PERSONNE (ID,Nom,Prenom) VALUES (:id,:Nom, :Prenom)");
-            
+
             // Getting the max ID in the database
             $max = getMaxIDPersonne($connexion);
-    
-            // Binding 
+
+            // Binding
             $statement->bindParam(':id',$id);
             $statement->bindParam(':Nom',$Nom);
             $statement->bindParam(':Prenom',$Prenom);
-    
-    
+
+
             for($i = 0;$i < count($ListePersonne);$i++)
             {
                 // Passing the value to the parameter
