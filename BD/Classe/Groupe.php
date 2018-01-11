@@ -1,7 +1,6 @@
 <?php
 class Groupe{
     private $_NumGroupe;
-    private $_Filiere;
     private $_NomProj;
     private $_Lycee;
     private $_ImageProjet;
