@@ -105,6 +105,15 @@
 
     function insertGroupe($connexion,$ListeGroupe)
     {
+        /**
+         * This function is inserting the groups 
+         * in the database
+         * 
+         * @author Quentin Bouny
+         * 
+         * @param PDO $connexion link with the Database
+         * @param array $ListeGroupe list of the groups that need to be inserted
+         */
         try{
 
             $statement = $connexion->prepare("INSERT INTO GROUPE (NumGroupe,NomProjet,Lycee,image_Projet) VALUES (:Num,:Nom,:Lycee,:img)");
@@ -134,6 +143,15 @@
 
     function insertJury($connexion,$ListeJury)
     {
+        /**
+         * This function is inserting the jury 
+         * in the database
+         * 
+         * @author Quentin Bouny
+         * 
+         * @param PDO $connexion link with the Database
+         * @param array $ListeJury list of the jury that need to be inserted
+         */
         try{
 
             $statement = $connexion->prepare("INSERT INTO JURY (NumJury,login_,password_) VALUES (:Num,:log,:passwd)");
@@ -156,6 +174,41 @@
         catch(Exception $e)
         {
             echo $e->getMessage();
+        }
+    }
+
+    function getPersonneFromGroupe($connexion,$idGroupe)
+    {
+        /**
+         * This function is getting the Personne that are in
+         * the groupe specified with the parameter $idGroupe
+         * 
+         * @author Quentin Bouny
+         * 
+         * @param PDO $connexion link with the Database
+         * @param int $idGroupe id of the groupe we're searching members
+         */
+        try{
+            $prep = "SELECT * from PERSONNE where $idGroupe";
+
+            $reponse = $connexion->query($prep);
+            $ListePersonne = array();
+
+            while ($donnees = $reponse->fetch())
+            {
+                $id = $donnees[0];
+                $Nom = $donnees[1];
+                $Prenom = $donnees[2];
+
+                $p = new Personne($id,$Nom,$Prenom);
+                array_push($ListePersonne,$p);
+            }
+
+            return $ListePersonne;
+        }
+        catch(Exception $e)
+        {
+            echo e.getMessage();
         }
     }
 

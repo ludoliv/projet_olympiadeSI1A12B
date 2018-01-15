@@ -1,6 +1,6 @@
 <?php
 
-function getCSV($filename){
+function getCSV($connexion,$filename){
     $row = 1;
     $handle = fopen($filename,"r");
     $tabE = [];

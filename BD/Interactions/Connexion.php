@@ -1,18 +1,15 @@
 <?php
 function connect_database()
 {
-
   try
   {
-    $database = new PDO('mysql:host=sql.hebergeur.com;dbname=mabase;charset=utf8', 'bouny', 's3cr3t');
-    $database -> setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+    $file_db = new PDO("mysql:dbname=Olympiade;host=eclegv.fr;port=3306", "Admin", "admin");
+    $file_db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_WARNING);
+    return $file_db;
   }
-  catch(PDOException $e)
-  {
-      printf("Échec de la connexion : %s\n", $e -> getMessage());
-      exit();
+  catch(PDOException $e){
+    echo $e->getMessage();
   }
-  return $database;
 }
 
 ?>
