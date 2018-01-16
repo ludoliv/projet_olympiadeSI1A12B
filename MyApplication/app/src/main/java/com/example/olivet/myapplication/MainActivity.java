@@ -35,7 +35,16 @@ public class MainActivity extends Activity {
                 startActivity(new Intent(MainActivity.this,Envoi_Donnees.class));
             }
         });
+
     }
+
+    public Button getButton(){
+        return this.button;
+    }
+
+
+
+
 
 
 }
