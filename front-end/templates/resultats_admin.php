@@ -24,7 +24,6 @@
   <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; Menu</span>
   <center><h1>Résultats finaux</h1></center>
 
-<<<<<<< HEAD
   <div>
     <div style="padding-top: 1% ; padding-left: 5% ; padding-right: 5% ; padding-bottom: 2%">
       <table class="table table-striped" style="text-align: center;">
@@ -144,7 +143,8 @@
 
   function closeNav() {
     document.getElementById("mySidenav").style.width = "0";
-=======
+  }
+  </script>
   <div style="padding: 5%">
   <table class="table table-striped" style="text-align: center;">
     <thead class="thead-dark">
@@ -177,7 +177,6 @@
 
   function closeNav() {
       document.getElementById("mySidenav").style.width = "0";
->>>>>>> ludoliv/master
   }
 
   </script>
