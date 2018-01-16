@@ -253,7 +253,6 @@
          * @param PDO:$connexion link with the Database
          * @param int:$numGroupe number of the group we want to get the notes
          */
-
         try
         {
             $Liste = array("Prototype"=>0,"Originalite"=> 0,"DemarcheSI"=>0,"pluriDisciplinarite"=>0,"Maitrise"=>0,"devDurable"=>0);
@@ -293,4 +292,44 @@
         }
     }
 
+    function checkLogin($connexion,$Login,$password)
+    {
+        /**
+         * @author Quentin Bouny
+         * 
+         * @param PDO $connexion Link to the database
+         * @param String $Login the login that need to be checked
+         * @param String $password the password that need to be checked
+         * 
+         */
+        try
+        {
+            $prep = "SELECT login_, password_ FROM JURY";
+            $prep1 = "SELECT login, MotDePasse FROM ADMINISTRATEUR";
+
+            $rep = $connexion->query($prep1);
+
+            $test = $rep->fetch();
+            if ( ($test['login'] == $Login) && ($test['MotDePasse'] == $password) ) 
+            {
+                return 'Admin';
+            }
+
+            $rep = $connexion->query($prep);
+
+            while ($test = $rep->fetch())
+            {
+                if ( ($test['login_'] == $Login) && ($test['password_'] == $password) )
+                {
+                    return 'Jury';
+                }
+            }
+
+            return 'None';
+        }
+        catch(PDOException $e)
+        {
+            echo $e->getMessage();
+        }
+    }
 ?>
