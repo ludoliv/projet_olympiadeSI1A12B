@@ -94,7 +94,6 @@ public class AjoutNote extends Activity {
             @Override
             public void onClick(View view) {
                 finish();
-                startActivity(new Intent(AjoutNote.this, MainActivity.class));
             }
         });
     }
