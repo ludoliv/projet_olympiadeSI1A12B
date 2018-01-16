@@ -30,6 +30,11 @@ class Personne{
     public function setPrenom($New_prenom){
         $_Prenom = $New_prenom;
     }
+
+    public function __toString()
+    {
+        return $this->_Prenom;
+    }
 }
 
 ?>

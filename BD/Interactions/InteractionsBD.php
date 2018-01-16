@@ -1,19 +1,18 @@
 <?php
-
     function getMaxIDPersonne($connexion)
     {
         // Writing the request
-        $request = "Select max(ID) from Personne";
+        $request = "SELECT max(ID) from PERSONNE";
 
         // Getting the result after the query
         $result = $connexion->query($request);
 
         // Fetch the result in var $max
-        $max = $result->fetch(PDO::FETCH_ASSOC);
+        $max = $result->fetch();
 
         // Testing the value of $max
-        if($max > 0){
-            return $max;
+        if($max['max(ID)'] > 0){
+            return $max['max(ID)'];
         }
         else{
             return 0;
@@ -26,8 +25,6 @@
             // Creation of the statement
             $statement = $connexion->prepare("INSERT INTO PERSONNE (ID,Nom,Prenom) VALUES (:id,:Nom, :Prenom)");
 
-            // Getting the max ID in the database
-            $max = getMaxIDPersonne($connexion);
 
             // Binding
             $statement->bindParam(':id',$id);
@@ -38,12 +35,13 @@
             for($i = 0;$i < count($ListePersonne);$i++)
             {
                 // Passing the value to the parameter
-                $id = $max + i;
-                $Nom = $ListePersonne[i].getNom();
-                $Prenom = $ListePersonne[i].getPrenom();
+                $p = $ListePersonne[$i];
+                $id = $p->getiD();
+                $Nom = $p->getNom();
+                $Prenom = $p->getPrenom();
 
                 // Execute the insertion
-                $statement.execute();
+                $statement->execute();
             }
         }
         catch(Exception $e){
@@ -64,12 +62,12 @@
             for($i = 0;$i < count($ListeEleve);$i++)
             {
                 // Passing the value to the parameter
-                $id = $ListeEleve[i].getID();
-                $Filiere = $ListeEleve[i].getFiliere();
-                $Num = $ListeEleve[i].getNumGroupe();
+                $id = $ListeEleve[$i]->getID();
+                $Filiere = $ListeEleve[$i]->getFiliere();
+                $Num = $ListeEleve[$i]->getNumGroupe();
 
                 // Execute the insertion
-                $statement.execute();
+                $statement->execute();
             }
         }
         catch(Exception $e)
@@ -90,8 +88,8 @@
             for($i = 0;$i < count($ListeProf);$i++)
             {
                 // Passing the value to the parameter
-                $id = $ListeProf[i].getID();
-                $Num = $ListeProf[i].getNumJury();
+                $id = $ListeProf[$i]->getID();
+                $Num = $ListeProf[$i]->getNumJury();
 
                 // Execute the insertion
                 $statement.execute();
@@ -126,10 +124,10 @@
             for($i = 0;$i < count($ListeGroupe);$i++)
             {
                 // Passing the value to the parameter
-                $Num = $ListeGroupe[i].getNumJury();
-                $Nom = $ListeGroupe[i].getNomProj();
-                $Lycee = $ListeGroupe[i].getLycee();
-                $img = $ListeGroupe[i].getImageProjet();
+                $Num = $ListeGroupe[$i]->getNumJury();
+                $Nom = $ListeGroupe[$i]->getNomProj();
+                $Lycee = $ListeGroupe[$i]->getLycee();
+                $img = $ListeGroupe[$i]->getImageProjet();
 
                 // Execute the insertion
                 $statement.execute();
@@ -163,9 +161,9 @@
             for($i = 0;$i < count($ListeGroupe);$i++)
             {
                 // Passing the value to the parameter
-                $Num = $ListeJury[i].getNumJury();
-                $log = $ListeJury[i].getLogin();
-                $pass = $ListeJury[i].getPassword();
+                $Num = $ListeJury[$i]->getNumJury();
+                $log = $ListeJury[$i]->getLogin();
+                $pass = $ListeJury[$i]->getPassword();
 
                 // Execute the insertion
                 $statement.execute();
@@ -189,7 +187,42 @@
          * @param int $idGroupe id of the groupe we're searching members
          */
         try{
-            $prep = "SELECT * from PERSONNE where $idGroupe";
+            $prep = "SELECT ID, Nom, Prenom from PERSONNE NATURAL JOIN ELEVE where IDEleve = ID and NumGroupe=$idGroupe;";
+
+            $reponse = $connexion->query($prep);
+            $ListePersonne = array();
+
+            while ($donnees = $reponse->fetch())
+            {
+                $id = $donnees[0];
+                $Nom = $donnees[1];
+                $Prenom = $donnees[2];
+
+                $p = new Personne($id,$Nom,$Prenom);
+                echo $p;
+                array_push($ListePersonne,$p);
+            }
+
+            return $ListePersonne;
+        }
+        catch(Exception $e)
+        {
+            echo e.getMessage();
+        }
+    }
+
+    function getEleve($connexion)
+    {
+        /**
+         * This function is getting the Personne that are in
+         * the groupe specified with the parameter $idGroupe
+         * 
+         * @author Quentin Bouny
+         * 
+         * @param PDO $connexion link with the Database
+         */
+        try{
+            $prep = "SELECT * from PERSONNE where ID=(SELECT IDEleve from ELEVE where IDEleve=ID);";
 
             $reponse = $connexion->query($prep);
             $ListePersonne = array();
@@ -202,8 +235,8 @@
 
                 $p = new Personne($id,$Nom,$Prenom);
                 array_push($ListePersonne,$p);
+                echo $p.getNom();
             }
-
             return $ListePersonne;
         }
         catch(Exception $e)
@@ -211,6 +244,5 @@
             echo e.getMessage();
         }
     }
-
 
 ?>
