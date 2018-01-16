@@ -1,30 +1,46 @@
 <?php
 
-function getCSV($filename){
+function getCSVForEleve($connexion,$filename){
     $row = 1;
     $handle = fopen($filename,"r");
-    $tabE = [];
-    $tabP = [];
-    $id = 1;
-    while(($data = fgetcsv($handle, 1000, ",")) !== FALSE){
+    $tabE = array();
+    $tabP = array();
+    $id = getMaxIDPersonne($connexion)+1;
+    while(($data = fgetcsv($handle, 1000, ",")) !== FALSE)
+    {
          $num = count($data);
          for ($c=0; $c < $num; $c++)
          {
            $p = new Personne($id,$data[0],$data[1]);
-           $e = new Eleve($id,$data[2]);
-           $tabE[$id-1] = $e;
-           $tabP[$id-1] = $p;
+           $e = new Eleve($id,$data[2],$data[3]);
+           if (test($tabP,$id))
+           {
+             break;
+           }
+           else
+           {
+            array_push($tabP,$p);
+            array_push($tabE,$e);
+           }
          }
          $row++;
          $id++;
     }
-
-    for($i = 0;$i < $row-1;$i++)
-    {
-      $Personne = $tabP[$i];
-      echo $Personne->getNom();
-    }
+    insertPersonne($connexion,$tabP);
+    insertEleve($connexion,$tabE);
     fclose($handle);
+}
+
+function test($Liste,$id)
+{
+  foreach ($Liste as $p)
+  {
+    if ($p->getiD() == $id)
+    {
+      return true;
+    }
+  }
+  return false;
 }
 
 ?>
