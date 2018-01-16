@@ -20,7 +20,7 @@ public class NoteManager {
     public static final String KEY_PLURIDISCIPLIANRITE="pluriDisciplinarite";
     public static final String KEY_MAITRISE="maitrise";
     public static final String KEY_DEVDURABLE="devDurable";
-    public static final String CREATE_TABLE_NOTE = "CREATE TABLE "+TABLE_NAME+
+    public static final String CREATE_TABLE_NOTE = "CREATE TABLE IF NOT EXISTS "+TABLE_NAME+
             " (" +
             " "+KEY_ID_NOTE+" INTEGER primary key," +
             " "+KEY_PROTOTYPE+" INTEGER" +

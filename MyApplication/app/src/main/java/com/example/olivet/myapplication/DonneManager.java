@@ -15,7 +15,7 @@ public class DonneManager {
     public static final String KEY_NUMJURY="NumJury";
     public static final String KEY_NUMGROUPE="NumGroupe";
     public static final String KEY_IDNOTE="idNote";
-    public static final String CREATE_TABLE_DONNE = "CREATE TABLE "+TABLE_NAME+
+    public static final String CREATE_TABLE_DONNE = "CREATE TABLE IF NOT EXISTS "+TABLE_NAME+
             " (" +
             " "+KEY_NUMJURY+" INTEGER " +
             " "+KEY_NUMGROUPE+" INTEGER " +

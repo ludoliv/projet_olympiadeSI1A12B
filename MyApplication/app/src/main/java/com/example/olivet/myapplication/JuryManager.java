@@ -15,7 +15,7 @@ public class JuryManager {
     public static final String KEY_NUMJURY="NumJury";
     public static final String KEY_LOGIN_="login_";
     public static final String KEY_PASSWORD_="password_";
-    public static final String CREATE_TABLE_JURY = "CREATE TABLE "+TABLE_NAME+
+    public static final String CREATE_TABLE_JURY = "CREATE TABLE IF NOT EXISTS "+TABLE_NAME+
             " (" +
             " "+KEY_NUMJURY+" INTEGER primary key," +
             " "+KEY_LOGIN_+" TEXT" +

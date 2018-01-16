@@ -15,7 +15,7 @@ public class HeureManager {
     public static final String KEY_IDHEURE="idHeure";
     public static final String KEY_HDEB="hDeb";
     public static final String KEY_HFIN="hFin";
-    public static final String CREATE_TABLE_HEURE = "CREATE TABLE "+TABLE_NAME+
+    public static final String CREATE_TABLE_HEURE = "CREATE TABLE IF NOT EXISTS "+TABLE_NAME+
             " (" +
             " "+KEY_IDHEURE+" INTEGER primary key," +
             " "+KEY_HDEB+" TEXT" +
