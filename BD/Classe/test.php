@@ -7,7 +7,10 @@ include 'Personne.php';
 include 'Eleve.php';
 $connexion = connect_database();
 
-getCSVForEleve($connexion,"../../eleves.csv");
 
+$Liste = getNote($connexion,1);
 
+foreach ($Liste as $key ) {
+    echo $key."<br>";
+}
 ?>
