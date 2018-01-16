@@ -24,6 +24,7 @@
   <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; Menu</span>
   <center><h1>Résultats finaux</h1></center>
 
+<<<<<<< HEAD
   <div>
     <div style="padding-top: 1% ; padding-left: 5% ; padding-right: 5% ; padding-bottom: 2%">
       <table class="table table-striped" style="text-align: center;">
@@ -143,6 +144,40 @@
 
   function closeNav() {
     document.getElementById("mySidenav").style.width = "0";
+=======
+  <div style="padding: 5%">
+  <table class="table table-striped" style="text-align: center;">
+    <thead class="thead-dark">
+    <tr>
+      <th>Équipe</th>
+      <th>Originalité</th>
+      <th>Prototype</th>
+      <th>Démarche SI</th>
+      <th style="margin: 10%">Pluridisciplinarité</th>
+      <th>Maîtrise</th>
+      <th>Développement Durable</th>
+      <th>Moyenne</th>
+    </tr>
+    </thead>
+  <?php
+    for($i=1; $i<11;$i++){
+      echo "<tr>";
+      for($j=1;$j<9;$j++){
+        echo "<td>".$i."</td>";
+      }
+      echo "</tr>";
+    }
+  ?>
+  </table>
+  </div>
+  <script>
+  function openNav() {
+      document.getElementById("mySidenav").style.width = "250px";
+  }
+
+  function closeNav() {
+      document.getElementById("mySidenav").style.width = "0";
+>>>>>>> ludoliv/master
   }
 
   </script>
