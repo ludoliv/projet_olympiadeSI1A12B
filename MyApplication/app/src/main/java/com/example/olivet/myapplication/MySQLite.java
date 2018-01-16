@@ -1,5 +1,9 @@
 package com.example.olivet.myapplication;
 
+/**
+ * Created by schultz on 16/01/18.
+ */
+
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -28,6 +32,7 @@ public class MySQLite extends SQLiteOpenHelper {
             // Création de la base de données
             // on exécute ici les requêtes de création des tables
             sqLiteDatabase.execSQL(GroupeManager.CREATE_TABLE_GROUPE); // création table "animal"
+            sqLiteDatabase.execSQL(JuryManager.CREATE_TABLE_JURY);
         }
 
         @Override
