@@ -31,7 +31,7 @@ public class MySQLite extends SQLiteOpenHelper {
         public void onCreate(SQLiteDatabase sqLiteDatabase) {
             // Création de la base de données
             // on exécute ici les requêtes de création des tables
-            sqLiteDatabase.execSQL(GroupeManager.CREATE_TABLE_GROUPE); // création table "animal"
+            sqLiteDatabase.execSQL(GroupeManager.CREATE_TABLE_GROUPE);
             sqLiteDatabase.execSQL(JuryManager.CREATE_TABLE_JURY);
             sqLiteDatabase.execSQL(NoteManager.CREATE_TABLE_NOTE);
             sqLiteDatabase.execSQL(DonneManager.CREATE_TABLE_DONNE);
