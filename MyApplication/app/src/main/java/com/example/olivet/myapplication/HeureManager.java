@@ -10,6 +10,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 public class HeureManager {
+
     private static final String TABLE_NAME = "heure";
     public static final String KEY_IDHEURE="idHeure";
     public static final String KEY_HDEB="hDeb";
