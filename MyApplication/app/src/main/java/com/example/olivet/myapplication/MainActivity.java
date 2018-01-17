@@ -11,18 +11,19 @@ import android.widget.Button;
 
 public class MainActivity extends Activity {
     Button button;
+    Button button2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Button button = (Button)findViewById(R.id.button);
-        //button.setEnabled(false);
+        button = (Button)findViewById(R.id.button);
+        button.setEnabled(false);
         button.setBackgroundColor(Color.WHITE);
         button.setTextColor(Color.GRAY);
 
-        Button button2 = (Button)findViewById(R.id.button2);
+        button2 = (Button)findViewById(R.id.button2);
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -36,10 +37,6 @@ public class MainActivity extends Activity {
             }
         });
 
-    }
-
-    public Button getButton(){
-        return this.button;
     }
 
 
