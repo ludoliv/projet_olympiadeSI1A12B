@@ -3,6 +3,7 @@ package com.example.olivet.myapplication;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
@@ -19,16 +20,25 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        buttonEnvoie = (Button)findViewById(R.id.buttonEnvoie);
+        buttonConsulter = (Button)findViewById(R.id.buttonConsulter);
 
-
-        NetworkInfo info = getIntent().getParcelableExtra(WifiManager.EXTRA_NETWORK_INFO);
-        if(info != null && info.isConnected()){
+        ConnectivityManager connManager = (ConnectivityManager) getSystemService(this.CONNECTIVITY_SERVICE);
+        NetworkInfo mWifi = connManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+        if(mWifi.isConnected()){
+            buttonConsulter.setEnabled(true);
+            buttonConsulter.setBackgroundColor(Color.GRAY);
+            buttonConsulter.setTextColor(Color.BLACK);
 
         }
         else {
+            System.out.println("oui");
+            buttonConsulter.setEnabled(false);
+            buttonConsulter.setBackgroundColor(Color.WHITE);
+            buttonConsulter.setTextColor(Color.GRAY);
 
         }
-        buttonEnvoie = (Button)findViewById(R.id.buttonEnvoie);
+
         buttonEnvoie.setEnabled(false);
         buttonEnvoie.setBackgroundColor(Color.WHITE);
         buttonEnvoie.setTextColor(Color.GRAY);
@@ -38,11 +48,7 @@ public class MainActivity extends Activity {
                 startActivity(new Intent(MainActivity.this,Envoi_Donnees.class));
             }
         });
-        //buttonEnvoie.setEnabled(false);
-        buttonEnvoie.setBackgroundColor(Color.WHITE);
-        buttonEnvoie.setTextColor(Color.GRAY);
 
-        buttonConsulter = (Button)findViewById(R.id.buttonConsulter);
         buttonConsulter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
