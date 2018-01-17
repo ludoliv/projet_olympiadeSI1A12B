@@ -2,6 +2,7 @@
 <head>
   <link rel="stylesheet" href="../../css/index.css"/>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -11,164 +12,127 @@
     header('Location: ../protection/connexion.php');
   }?>
 
-  <?php include 'menu_admin.php'; ?>
+  <?php
+    include 'menu_admin.php';
+    include '../Interactions/InteractionsBD.php';
+    include '../Interactions/Connexion.php';
+
+    $db = connect_database();
+    $all_grp = array();
+    $all_jury = array();
+    $all_hours = array();
+
+    try{
+      $stmt = $db->prepare("SELECT NumGroupe FROM GROUPE where NumGroupe != 0");
+      $stmt->execute();
+
+      $stmt2 = $db->prepare("SELECT NumJury FROM JURY");
+      $stmt2->execute();
+
+      $stmt3 = $db->prepare("SELECT hDeb, hFin FROM HEURE");
+      $stmt3->execute();
+
+      while($row = $stmt->fetch()){
+        array_push($all_grp,$row['NumGroupe']);
+      }
+
+      while($row = $stmt2->fetch()){
+        array_push($all_jury,$row['NumJury']);
+      }
+
+      while($row = $stmt3->fetch()){
+        array_push($all_hours, $row['hDeb']." - ".$row['hFin']);
+      }
+    }
+    catch(Exception $e){}
+  ?>
   <center><h1>Planning</h1></center>
 
   <div style="padding: 5%">
-    <form>
-      <table class="table table-sm">
+    <form method="post" action="insert_planning.php">
+      <table class="table table-sm table-striped">
         <tr style="text-align: center;">
-          <td></td>
+          <thead class="thead thead-dark" style="text-align:center;">
+            <th></th>
           <?php
-          $nb_jury = 8;
-          $nb_grp = 11;
+          $nb_jury = sizeof($all_jury)+1;
+          $cpt = 0;
           for($i=1;$i<$nb_jury;$i++)
           {
             echo "<th>Jury ".$i."</th>";
           }
           ?>
+          </thead>
         </tr>
-        <tr>
-          <td>09h40 - 10h00</td>
+          <?php
+          foreach ($all_hours as $creneau){
+
+            echo "<tr>";
+            echo "<td>".explode(":", $creneau)[0].":".explode(":", $creneau)[1]." - ".explode("-", explode(":", $creneau)[2])[1].":".explode(":", $creneau)[3]."</td>";
+          ?>
           <?php
           for($i=1;$i<$nb_jury;$i++){
             ?>
             <td>
+              <?php
+              $cr1 = explode("-", $creneau)[0];
+              $cr2 = explode("-", $creneau)[1];
+
+              $h1 = explode(":", $cr1)[0];
+              $m1 = explode(":", $cr1)[1];
+
+              $h2 = explode(":", $cr2)[0];
+              $m2 = explode(":", $cr2)[1];
+
+              if ($h2 - $h1 == 0){
+                $inter = $m2 - $m1;
+              }
+              else{
+                $inter = 60-($m1 - $m2);
+              }
+              // echo $inter;
+              if ($inter != 10){
+              ?>
               <center>
-                <select>
+                <select id = <?php echo "select".$cpt; ?> name=<?php echo "select".$cpt; $cpt+=1; ?>>
                   <option value="none"></option>
                   <?php
-                  for($j=1;$j<$nb_grp;$j++){?>
-                    <option value=<?php echo $j ; ?> > <?php echo "Groupe ".$j ;?></option>;
-                  <?php } ?>
+                    foreach ($all_grp as $num) {
+                      echo "<option value='".$num."'>Groupe ".$num."</option>";
+                    }?>
                 </select>
               </center>
+            <?php }
+
+            else{
+              echo "<center>Pause</center>";
+            }
+
+            ?>
+
             </td>
             <?php
           }
+          }
+          echo "</tr>";
           ?>
 
-        </tr>
-        <tr>
-          <td>10h00 - 10h20</td>
-          <?php
-          for($i=1;$i<$nb_jury;$i++){
-            ?>
-            <td>
-              <center>
-                <select>
-                  <option value="none"></option>
-                  <?php
-                  for($j=1;$j<$nb_grp;$j++){?>
-                    <option value=<?php echo $j ; ?> > <?php echo "Groupe ".$j ;?></option>;
-                  <?php } ?>
-                </select>
-              </center>
-            </td>
-            <?php
-          }
-          ?>
-        </tr>
-        <tr>
-          <td>10h20 - 10h40</td>
-          <?php
-          for($i=1;$i<$nb_jury;$i++){
-            ?>
-            <td>
-              <center>
-                <select>
-                  <option value="none"></option>
-                  <?php
-                  for($j=1;$j<$nb_grp;$j++){?>
-                    <option value=<?php echo $j ; ?> > <?php echo "Groupe ".$j ;?></option>;
-                  <?php } ?>
-                </select>
-              </center>
-            </td>
-            <?php
-          }
-          ?>
-        </tr>
-        <tr>
-          <td>10h40 - 10h50</td>
-          <td colspan=<?php echo $nb_jury; ?> style="text-align: center;">Pause</td>
-        </tr>
-        <tr>
-          <td>10h50 - 11h10</td>
-          <?php
-          for($i=1;$i<$nb_jury;$i++){
-            ?>
-            <td>
-              <center>
-                <select>
-                  <option value="none"></option>
-                  <?php
-                  for($j=1;$j<$nb_grp;$j++){?>
-                    <option value=<?php echo $j ; ?> > <?php echo "Groupe ".$j ;?></option>;
-                  <?php } ?>
-                </select>
-              </center>
-            </td>
-            <?php
-          }
-          ?>
-        </tr>
-        <tr>
-          <td>11h10 - 11h30</td>
-          <?php
-          for($i=1;$i<$nb_jury;$i++){
-            ?>
-            <td>
-              <center>
-                <select>
-                  <option value="none"></option>
-                  <?php
-                  for($j=1;$j<$nb_grp;$j++){?>
-                    <option value=<?php echo $j ; ?> > <?php echo "Groupe ".$j ;?></option>;
-                  <?php } ?>
-                </select>
-              </center>
-            </td>
-            <?php
-          }
-          ?>
-        </tr>
-        <tr>
-          <td>11h30 - 11h50</td>
-          <?php
-          for($i=1;$i<$nb_jury;$i++){
-            ?>
-            <td>
-              <center>
-                <select>
-                  <option value="none"></option>
-                  <?php
-                  for($j=1;$j<$nb_grp;$j++){?>
-                    <option value=<?php echo $j ; ?> > <?php echo "Groupe ".$j ;?></option>;
-                  <?php } ?>
-                </select>
-              </center>
-            </td>
-            <?php
-          }
-          ?>
-        </tr>
       </table>
       <input type="submit" class="btn btn-dark">
     </form>
+    <button onclick="ok2()">click me</button>
+    <p id="demo"></p>
   </div>
 
+<script>
+  function ok(){
+    document.getElementById("demo").innerHTML = $('select').length;
+  };
 
-
-  <script>
-  function openNav() {
-    document.getElementById("mySidenav").style.width = "250px";
+  function ok2(){
+    $("select#select4 option[value='1']").remove(); 
   }
-
-  function closeNav() {
-    document.getElementById("mySidenav").style.width = "0";
-  }
-  </script>
+</script>
 </body>
 
 </html>

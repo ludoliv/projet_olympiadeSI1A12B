@@ -1,5 +1,6 @@
 <html>
 <head>
+  <link rel="stylesheet" href="../../css/index.css"/>
 </head>
 
 <body>
@@ -8,6 +9,9 @@
   if(!isset($_SESSION['loginOK'])){
     header('Location: ../protection/connexion.php');
   }?>
+
+  <?php include 'menu_admin.php'; ?>
+
   <center><h1>Paramétrage du site</h1></center>
   <h4>Renseignez les champs à mettre à jour :</h4>
   <center>
@@ -23,12 +27,12 @@
 
     <br/>
 
-    <label for="sponsors">Sponsors</label>
+    <label for="sponsors">Logo Sponsors</label>
     <input name="sponsors" type="file"/>
 
     <br/>
 
-    <label for="illustration">Illustration</label>
+    <label for="illustration">Logo Olympiades</label>
     <input name="illustration" type="file"/>
 
     <br/>
