@@ -36,6 +36,7 @@ public class MySQLite extends SQLiteOpenHelper {
             sqLiteDatabase.execSQL(NoteManager.CREATE_TABLE_NOTE);
             sqLiteDatabase.execSQL(DonneManager.CREATE_TABLE_DONNE);
             sqLiteDatabase.execSQL(HeureManager.CREATE_TABLE_HEURE);
+            sqLiteDatabase.execSQL(JugeManager.CREATE_TABLE_JUGE);
         }
 
         @Override

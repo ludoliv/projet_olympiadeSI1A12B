@@ -52,6 +52,30 @@ public class MainActivity extends Activity {
                 Groupe paul = new Groupe(1, "STMG", "Paul", "Claude de France a Romorantin", "bite.png");
                 Groupe fred = new Groupe(2, "STMG", "Fred", "Claude de France a Romorantin", "alcool.png");
                 Groupe herbert = new Groupe(3, "STMG", "Herbert", "Claude de France a Romorantin", "bite.png");
+                grpMan.addGroupe(paul);
+                grpMan.addGroupe(fred);
+                grpMan.addGroupe(herbert);
+                grpMan.close();
+
+                HeureManager hMan = new HeureManager(view.getContext());
+                hMan.open();
+                Heure creneau1 = new Heure(1, "9h40", "10h00");
+                Heure creneau2 = new Heure(2, "10h00", "10h20");
+                Heure creneau3 = new Heure(3, "10h20", "10h40");
+                hMan.addHeure(creneau1);
+                hMan.addHeure(creneau2);
+                hMan.addHeure(creneau3);
+                hMan.close();
+
+                JugeManager jMan = new JugeManager(view.getContext());
+                jMan.open();
+                Juge juge1 = new Juge(12, 1, 1);
+                Juge juge2 = new Juge(12, 2, 2);
+                Juge juge3 = new Juge(12, 3, 3);
+                jMan.addJuge(juge1);
+                jMan.addJuge(juge2);
+                jMan.addJuge(juge3);
+                jMan.close();
                 //A PLUS DELETE
 
 
