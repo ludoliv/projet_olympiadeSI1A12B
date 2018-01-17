@@ -46,6 +46,7 @@ public class JuryManager {
         // Ajout d'un enregistrement dans la table
 
         ContentValues values = new ContentValues();
+        values.put(KEY_NUMJURY, jury.getNumJury());
         values.put(KEY_LOGIN_, jury.getLogin_());
         values.put(KEY_PASSWORD_, jury.getPassword_());
 
@@ -78,7 +79,7 @@ public class JuryManager {
     }
 
     public Jury getJury(int num) {
-        // Retourne l'animal dont l'id est passé en paramètre
+        // Retourne le jury dont l'id est passé en paramètre
 
         Jury j=new Jury(0,"","");
 

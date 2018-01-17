@@ -70,9 +70,9 @@ public class WifiReceiver extends BroadcastReceiver {
                 ((MainActivity) act).button.setBackgroundColor(Color.GRAY);
                 ((MainActivity) act).button.setTextColor(Color.BLACK);
 
-                ((MainActivity) act).button2.setEnabled(true);
-                ((MainActivity) act).button2.setBackgroundColor(Color.GRAY);
-                ((MainActivity) act).button2.setTextColor(Color.BLACK);
+                ((MainActivity) act).buttonEnvoie.setEnabled(true);
+                ((MainActivity) act).buttonEnvoie.setBackgroundColor(Color.GRAY);
+                ((MainActivity) act).buttonEnvoie.setTextColor(Color.BLACK);
             }
 
             // e.g. To check the Network Name or other info:
@@ -87,9 +87,9 @@ public class WifiReceiver extends BroadcastReceiver {
                 ((MainActivity) act).button.setBackgroundColor(Color.WHITE);
                 ((MainActivity) act).button.setTextColor(Color.GRAY);
 
-                ((MainActivity) act).button2.setEnabled(false);
-                ((MainActivity) act).button2.setBackgroundColor(Color.WHITE);
-                ((MainActivity) act).button2.setTextColor(Color.GRAY);
+                ((MainActivity) act).buttonEnvoie.setEnabled(false);
+                ((MainActivity) act).buttonEnvoie.setBackgroundColor(Color.WHITE);
+                ((MainActivity) act).buttonEnvoie.setTextColor(Color.GRAY);
             }
 
             /*if(act instanceof Envoi_Donnees){
