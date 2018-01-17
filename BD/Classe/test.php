@@ -7,7 +7,4 @@ include 'Personne.php';
 include 'Eleve.php';
 $connexion = connect_database();
 
-getCSVForEleve($connexion,"../../eleves.csv");
-
-
 ?>

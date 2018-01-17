@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
+import android.widget.TextView;
 
 public class Planning extends Activity {
 
@@ -46,6 +47,8 @@ public class Planning extends Activity {
             }
         });
 
+        TextView tvIdJury = (TextView) findViewById(R.id.textViewIdJury);
+        tvIdJury.setText(tvIdJury.getText().toString()+getIntent().getExtras().getInt("NumJury"));
 
         ImageView legende=(ImageView) findViewById(R.id.imageView7);
         legende.setImageResource(R.drawable.legende_planning);

@@ -51,7 +51,6 @@ public class projet_desc extends Activity {
         buttonModifNotes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                finish();
                 startActivity(new Intent(projet_desc.this, AjoutNote.class));
             }
         });
