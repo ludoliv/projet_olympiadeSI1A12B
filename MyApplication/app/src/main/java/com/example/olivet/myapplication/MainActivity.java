@@ -3,6 +3,8 @@ package com.example.olivet.myapplication;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.NetworkInfo;
+import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -17,6 +19,14 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        NetworkInfo info = getIntent().getParcelableExtra(WifiManager.EXTRA_NETWORK_INFO);
+        if(info != null && info.isConnected()){
+
+        }
+        else {
+
+        }
 
         button = (Button)findViewById(R.id.button);
         button.setEnabled(false);
