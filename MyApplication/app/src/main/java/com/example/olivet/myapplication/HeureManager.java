@@ -18,7 +18,7 @@ public class HeureManager {
     public static final String CREATE_TABLE_HEURE = "CREATE TABLE IF NOT EXISTS "+TABLE_NAME+
             " (" +
             " "+KEY_IDHEURE+" INTEGER primary key," +
-            " "+KEY_HDEB+" TEXT" +
+            " "+KEY_HDEB+" TEXT," +
             " "+KEY_HFIN+" TEXT "+
             ");";
     private MySQLite maBaseSQLite; // notre gestionnaire du fichier SQLite

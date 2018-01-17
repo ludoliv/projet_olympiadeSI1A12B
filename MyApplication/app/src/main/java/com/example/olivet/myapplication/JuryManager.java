@@ -18,7 +18,7 @@ public class JuryManager {
     public static final String CREATE_TABLE_JURY = "CREATE TABLE IF NOT EXISTS "+TABLE_NAME+
             " (" +
             " "+KEY_NUMJURY+" INTEGER primary key," +
-            " "+KEY_LOGIN_+" TEXT" +
+            " "+KEY_LOGIN_+" TEXT," +
             " "+KEY_PASSWORD_+" TEXT "+
             ");";
     private MySQLite maBaseSQLite; // notre gestionnaire du fichier SQLite

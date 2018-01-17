@@ -14,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
+import android.widget.TextView;
 
 /**
  * Created by fdubois on 11/01/18.
@@ -25,6 +26,9 @@ public class projet_desc extends Activity {
         super.onCreate(saveInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.projet_desc);
+
+        TextView tvDescIdJury = (TextView) findViewById(R.id.textViewDescIdJury);
+        tvDescIdJury.setText(tvDescIdJury.getText().toString()+getIntent().getExtras().getInt("NumJury"));
 
         Button buttonSupprNotes = (Button)findViewById(R.id.buttonSupprimer);
         buttonSupprNotes.setOnClickListener(new View.OnClickListener() {

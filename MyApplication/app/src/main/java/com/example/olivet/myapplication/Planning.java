@@ -48,7 +48,8 @@ public class Planning extends Activity {
         });
 
         TextView tvIdJury = (TextView) findViewById(R.id.textViewIdJury);
-        tvIdJury.setText(tvIdJury.getText().toString()+getIntent().getExtras().getInt("NumJury"));
+        final int id = getIntent().getExtras().getInt("NumJury");
+        tvIdJury.setText(tvIdJury.getText().toString()+id);
 
         ImageView legende=(ImageView) findViewById(R.id.imageView7);
         legende.setImageResource(R.drawable.legende_planning);
@@ -110,7 +111,9 @@ public class Planning extends Activity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 if(i == 1) {
-                    startActivity(new Intent(Planning.this, projet_desc.class));
+                    Intent intent = new Intent(Planning.this, projet_desc.class);
+                    intent.putExtra("NumJury", id);
+                    startActivity(intent);
                 }
                 if(i==5 || i==7){
                     startActivity(new Intent(Planning.this, AjoutNote.class));

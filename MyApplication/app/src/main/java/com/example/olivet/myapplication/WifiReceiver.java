@@ -66,9 +66,9 @@ public class WifiReceiver extends BroadcastReceiver {
         if(info != null && info.isConnected()) {
 
             if (act instanceof MainActivity){
-                ((MainActivity) act).button.setEnabled(true);
-                ((MainActivity) act).button.setBackgroundColor(Color.GRAY);
-                ((MainActivity) act).button.setTextColor(Color.BLACK);
+                ((MainActivity) act).buttonConsulter.setEnabled(true);
+                ((MainActivity) act).buttonConsulter.setBackgroundColor(Color.GRAY);
+                ((MainActivity) act).buttonConsulter.setTextColor(Color.BLACK);
 
                 ((MainActivity) act).buttonEnvoie.setEnabled(true);
                 ((MainActivity) act).buttonEnvoie.setBackgroundColor(Color.GRAY);
@@ -83,9 +83,9 @@ public class WifiReceiver extends BroadcastReceiver {
         else {
 
             if (act instanceof MainActivity){
-                ((MainActivity) act).button.setEnabled(false);
-                ((MainActivity) act).button.setBackgroundColor(Color.WHITE);
-                ((MainActivity) act).button.setTextColor(Color.GRAY);
+                ((MainActivity) act).buttonConsulter.setEnabled(false);
+                ((MainActivity) act).buttonConsulter.setBackgroundColor(Color.WHITE);
+                ((MainActivity) act).buttonConsulter.setTextColor(Color.GRAY);
 
                 ((MainActivity) act).buttonEnvoie.setEnabled(false);
                 ((MainActivity) act).buttonEnvoie.setBackgroundColor(Color.WHITE);
