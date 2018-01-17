@@ -239,10 +239,97 @@
             }
             return $ListePersonne;
         }
-        catch(Exception $e)
+        catch(PDOException $e)
         {
-            echo e.getMessage();
+            echo $e.getMessage();
         }
     }
 
+    function getNote($connexion,$numGroupe)
+    {
+        /**
+         * @author Quentin Bouny
+         * 
+         * @param PDO:$connexion link with the Database
+         * @param int:$numGroupe number of the group we want to get the notes
+         */
+        try
+        {
+            $Liste = array("Prototype"=>0,"Originalite"=> 0,"DemarcheSI"=>0,"pluriDisciplinarite"=>0,"Maitrise"=>0,"devDurable"=>0);
+
+            $prep = "select idNote from DONNE where NumGroupe = $numGroupe";
+            $reponse = $connexion->query($prep);
+
+            while ($donnees = $reponse->fetch())
+            {
+                $id = $donnees['idNote'];
+                $req = "select * from NOTE where idNote = $id";
+                
+                $data = $connexion->query($req);
+                $rep = $data->fetch();
+                
+                $Liste["Prototype"] += $rep['prototype'];
+                $Liste["Originalite"] += $rep['originalite'];
+                $Liste["DemarcheSI"] += $rep['demarcheSI'];
+                $Liste["pluriDisciplinarite"] += $rep['pluriDisciplinarite'];
+                $Liste["Maitrise"] += $rep['maitrise'];
+                $Liste["devDurable"] += $rep['devDurable'];
+            }
+            $NB = $reponse->rowCount();
+
+            $Liste["Prototype"] = $Liste["Prototype"] / $NB;
+            $Liste["Originalite"] = $Liste["Originalite"]/$NB;
+            $Liste["DemarcheSI"] = $Liste["DemarcheSI"]/$NB;
+            $Liste["pluriDisciplinarite"] = $Liste["pluriDisciplinarite"]/$NB;
+            $Liste["Maitrise"] = $Liste["Maitrise"]/$NB;
+            $Liste["devDurable"] = $Liste["devDurable"]/$NB;
+
+            return $Liste;
+        }
+        catch(PDOException $e)
+        {
+        echo $e.getMessage();
+        }
+    }
+
+    function checkLogin($connexion,$Login,$password)
+    {
+        /**
+         * @author Quentin Bouny
+         * 
+         * @param PDO $connexion Link to the database
+         * @param String $Login the login that need to be checked
+         * @param String $password the password that need to be checked
+         * 
+         */
+        try
+        {
+            $prep = "SELECT login_, password_ FROM JURY";
+            $prep1 = "SELECT login, MotDePasse FROM ADMINISTRATEUR";
+
+            $rep = $connexion->query($prep1);
+
+            $test = $rep->fetch();
+            if ( ($test['login'] == $Login) && ($test['MotDePasse'] == $password) ) 
+            {
+                return 'Admin';
+            }
+
+            $rep = $connexion->query($prep);
+
+            while ($test = $rep->fetch())
+            {
+                if ( ($test['login_'] == $Login) && ($test['password_'] == $password) )
+                {
+                    return 'Jury';
+                }
+            }
+
+            return 'None';
+        }
+        catch(PDOException $e)
+        {
+            echo $e->getMessage();
+        }
+    }
 ?>
