@@ -3,7 +3,7 @@ function connect_database()
 {
   try
   {
-    $file_db = new PDO("mysql:dbname=dbbouny;host=servinfo-db", "bouny", "bouny");
+    $file_db = new PDO("mysql:dbname=dbcama;host=servinfo-db", "cama", "cama");
     $file_db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_WARNING);
     return $file_db;
   }

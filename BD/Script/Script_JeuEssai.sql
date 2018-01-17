@@ -33,3 +33,5 @@ insert into RECOMPENSE values(3,0,"pluriDisciplinarite");
 insert into RECOMPENSE values(4,0,"Maitrise");
 insert into RECOMPENSE values(5,0,"devDurable");
 insert into RECOMPENSE values(6,0,"Moyenne");
+
+-- insert into HEURE values(1,'9:00','9:20');

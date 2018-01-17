@@ -59,6 +59,27 @@
         }
     }
 
+    function getMaxIDHeure($connexion)
+    {
+        // Writing the request
+        $request = "SELECT max(IDHeure) as max from HEURE";
+
+        // Getting the result after the query
+        $result = $connexion->query($request);
+
+        // Fetch the result in var $max
+        $max = $result->fetch();
+
+        // Testing the value of $max
+        if($max['max'] > 0){
+            return $max['max'];
+        }
+        else{
+            return 0;
+        }
+    }
+
+
     function insertPersonne($connexion,$ListePersonne)
     {
         try{
@@ -204,6 +225,78 @@
                 $Num = $ListeJury[$i]->getNumJury();
                 $log = $ListeJury[$i]->getLogin();
                 $pass = $ListeJury[$i]->getPassword();
+
+                // Execute the insertion
+                $statement->execute();
+            }
+        }
+        catch(Exception $e)
+        {
+            echo $e->getMessage();
+        }
+    }
+
+    function insertHeure($connexion,$ListeHeure)
+    {
+        /**
+         * This function is inserting the Heure 
+         * in the database
+         * 
+         * @author Quentin Bouny
+         * 
+         * @param PDO $connexion link with the Database
+         * @param array $ListeHeure list of the Heure that need to be inserted
+         */
+        try{
+
+            $statement = $connexion->prepare("INSERT INTO HEURE (idHeure,hDeb,hFin) VALUES (:id,:hDeb,:hFin)");
+
+            $statement->bindParam(':id',$id);
+            $statement->bindParam(':hDeb',$hdeb);
+            $statement->bindParam(':hFin',$hfin);
+
+            for($i = 0;$i < count($ListeHeure);$i++)
+            {
+                // Passing the value to the parameter
+                $id = $ListeHeure[$i]->getID();
+                $hdeb = $ListeHeure[$i]->getDeb();
+                $hfin = $ListeHeure[$i]->getFin();
+
+                // Execute the insertion
+                $statement->execute();
+            }
+        }
+        catch(Exception $e)
+        {
+            echo $e->getMessage();
+        }
+    }
+
+    function insertJuge($connexion,$ListeJuge)
+    {
+        /**
+         * This function is inserting the Juge values 
+         * in the database
+         * 
+         * @author Quentin Bouny
+         * 
+         * @param PDO $connexion link with the Database
+         * @param array $ListeHeure list of the Heure that need to be inserted
+         */
+        try{
+
+            $statement = $connexion->prepare("INSERT INTO JUGE (NumJury,NumGroupe,idHeure) VALUES (:NumJury,:NumGroupe,:id)");
+
+            $statement->bindParam(':NumJury',$NumJury);
+            $statement->bindParam(':NumGroupe',$NumGroupe);
+            $statement->bindParam(':id',$id);
+
+            for($i = 0;$i < count($ListeJuge);$i++)
+            {
+                // Passing the value to the parameter
+                $NumJury = $ListeJuge[$i]->get_NumJury();
+                $NumGroupe = $ListeJuge[$i]->get_NumGroupe();
+                $id = $ListeJuge[$i]->get_idHeure();
 
                 // Execute the insertion
                 $statement->execute();

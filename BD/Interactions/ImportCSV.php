@@ -137,4 +137,45 @@ function testPInListeJ($Liste,$id)
   }
   return false;
 }
+
+function getCSVforHeure($connexion,$filename)
+{
+    $handle = fopen($filename,"r");
+    $tabHeure = array();
+    $tabJuge = array();
+    $id = getMaxIDHeure($connexion)+1;
+    while(($data = fgetcsv($handle, 1000, ",")) !== FALSE)
+    {
+        $Hdeb = $data[0];
+        $Hfin = $data[1];
+        $NumGroupe = $data[2];
+        $NumJury = $data[3];
+        
+        $Heure = new Heure($id,$Hdeb,$Hfin);
+        $Juge = new Juge($NumJury,$NumGroupe,$id);
+
+        if(!testPInListeH($tabHeure,$id))
+        {
+            array_push($tabHeure,$Heure);
+            array_push($tabJuge,$Juge);
+            $id++;
+        }
+    }
+
+    insertHeure($connexion,$tabHeure);
+    insertJuge($connexion,$tabJuge);
+    fclose($handle);
+}
+
+function testPInListeH($Liste,$id)
+{
+  foreach ($Liste as $h)
+  {
+    if ($h->getID() == $id)
+    {
+      return true;
+    }
+  }
+  return false;
+}
 ?>
