@@ -106,7 +106,6 @@ public class JugeManager {
     }
 
     public Cursor getNaturalJoinJuge() {
-
-        return db.rawQuery("SELECT * FROM "+TABLE_NAME+" natural join Jury natural join Groupe natural join Heure", null);
+        return db.rawQuery("SELECT * FROM "+TABLE_NAME+" NATURAL JOIN jury NATURAL JOIN groupe NATURAL JOIN heure", null);
     }
 }

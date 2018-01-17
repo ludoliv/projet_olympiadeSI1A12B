@@ -99,7 +99,11 @@ public class DonneManager {
         return d;
     }
 
-    public Cursor getHeures() {
+    public Cursor getDonneNJNote(){
+        return db.rawQuery("SELECT * FROM "+TABLE_NAME+" NATURAL JOIN note", null);
+    }
+
+    public Cursor getDonnes() {
         // sélection de tous les enregistrements de la table
         return db.rawQuery("SELECT * FROM "+TABLE_NAME, null);
     }

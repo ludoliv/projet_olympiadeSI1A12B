@@ -18,7 +18,21 @@ import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 public class Planning extends Activity {
+
+    Integer sommeListeSansPre(ArrayList<Integer> liste){
+        int somme = 0;
+        boolean pre = true;
+        for (Integer elem : liste){
+            if (pre){
+                pre = false;
+            }
+            somme+=elem;
+        }
+        return somme;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,14 +79,43 @@ public class Planning extends Activity {
 // utilisez votre "cursor" au lieu du "matrixCursor"
         MatrixCursor matrixCursor= new MatrixCursor(columns);
         startManagingCursor(matrixCursor);
-        matrixCursor.addRow(new Object[] { 1,"Nom évenement","Horaire" });
-        matrixCursor.addRow(new Object[] { 2,"Projet Ariane","9h40 - 10h00" });
-        matrixCursor.addRow(new Object[] { 3,"Projet RoboDop","10h00 - 10h20" });
-        matrixCursor.addRow(new Object[] { 4,"Projet ElectroCar","10h20 - 10h40" });
-        matrixCursor.addRow(new Object[] { 5,"Pause","10h40 - 10h50" });
-        matrixCursor.addRow(new Object[] { 6,"Projet Sondage","10h50 - 11h10" });
-        matrixCursor.addRow(new Object[] { 7,"Projet Test","11h10 - 11h30" });
-        matrixCursor.addRow(new Object[] { 8,"Projet Jalon","11h30 - 11h50" });
+        int k = 1;
+        matrixCursor.addRow(new Object[] { k,"Nom évenement","Horaire" });
+        k += 1;
+        for (int i = 0; i < getIntent().getExtras().getStringArrayList("nomProjet").size(); i++){
+            if (i == 0){
+                matrixCursor.addRow(new Object[] { k,
+                        getIntent().getExtras().getStringArrayList("nomProjet").get(0),
+                        getIntent().getExtras().getStringArrayList("heureD").get(0)+" - "
+                        + getIntent().getExtras().getStringArrayList("heureF").get(0) });
+                k += 1;
+            }
+            else if (getIntent().getExtras().getStringArrayList("heureF").get(i-1).equals(getIntent().getExtras().getStringArrayList("heureD").get(i))){
+                matrixCursor.addRow(new Object[] { k,
+                        getIntent().getExtras().getStringArrayList("nomProjet").get(i),
+                        getIntent().getExtras().getStringArrayList("heureD").get(i)+" - "
+                                + getIntent().getExtras().getStringArrayList("heureF").get(i) });
+                k += 1;
+            }
+            else {
+                matrixCursor.addRow(new Object[] { k,"Pause",
+                        getIntent().getExtras().getStringArrayList("heureF").get(i-1)+" - "
+                                +getIntent().getExtras().getStringArrayList("heureD").get(i)});
+                k += 1;
+                matrixCursor.addRow(new Object[] { k,
+                        getIntent().getExtras().getStringArrayList("nomProjet").get(i),
+                        getIntent().getExtras().getStringArrayList("heureD").get(i)+" - "
+                                + getIntent().getExtras().getStringArrayList("heureF").get(i) });
+                k += 1;
+            }
+        }
+        //matrixCursor.addRow(new Object[] { 2,"Projet Ariane","9h40 - 10h00" });
+        //matrixCursor.addRow(new Object[] { 3,"Projet RoboDop","10h00 - 10h20" });
+        //matrixCursor.addRow(new Object[] { 4,"Projet ElectroCar","10h20 - 10h40" });
+        //matrixCursor.addRow(new Object[] { 5,"Pause","10h40 - 10h50" });
+        //matrixCursor.addRow(new Object[] { 6,"Projet Sondage","10h50 - 11h10" });
+        //matrixCursor.addRow(new Object[] { 7,"Projet Test","11h10 - 11h30" });
+        //matrixCursor.addRow(new Object[] { 8,"Projet Jalon","11h30 - 11h50" });
 
 // on prendra les données des colonnes 1 et 2...
         String[] from = new String[] {"col1", "col2"};
@@ -86,20 +129,32 @@ public class Planning extends Activity {
             public View getView(int position, View convertView, ViewGroup parent){
                 // Get the current item from ListView
                 View view = super.getView(position,convertView,parent);
-                if(position == 1 || position == 3 || position == 6)
-                {
-                    // Set a background color for ListView regular row/item
-                    view.setBackgroundColor(Color.parseColor("#389f38"));
-                }
-                else if (position == 2)
-                {
-                    // Set the background color for alternate row/item
-                    view.setBackgroundColor(Color.parseColor("#dddf1d"));
-                }
-                else if (position == 5 || position == 7)
-                {
-                    // Set the background color for alternate row/item
-                    view.setBackgroundColor(Color.parseColor("#df1d1d"));
+                ArrayList<ArrayList<Integer>> listeGrpNote = Page_connexion.listeGrpNote;
+                //for (ArrayList<Integer> listeNote : (ArrayList<ArrayList<Integer>>)getIntent().getExtras().getParcelableArrayList("listeGrpNote"))
+                System.out.println(listeGrpNote.toString());
+                System.out.println(getIntent().getExtras().getIntegerArrayList("NumGroupe").toString());
+                for (ArrayList<Integer> listeNote : listeGrpNote) {
+                    System.out.println("boucle groupe " + listeNote.get(0));
+                    for (Integer numGrp : getIntent().getExtras().getIntegerArrayList("NumGroupe")){
+                        System.out.println("boucle planning " + numGrp);
+                        if (numGrp == listeNote.get(0)){
+                            int fin = 0;
+                            String couleur = "#389f38";//Vert
+                            while (fin < listeNote.size() && couleur.equals("#389f38")) {
+                                System.out.println(listeNote);
+                                if (sommeListeSansPre(listeNote) == 0) {
+                                    // Set a background color for ListView regular row/item
+                                    couleur = "#dddf1d";//Jaune
+                                }
+                                else if (listeNote.get(fin)==null) {
+                                    // Set the background color for alternate row/item
+                                    couleur = "#df1d1d";//Rouge
+                                }
+                                fin += 1;
+                            }
+                            view.setBackgroundColor(Color.parseColor(couleur));
+                        }
+                    }
                 }
                 return view;
             }
