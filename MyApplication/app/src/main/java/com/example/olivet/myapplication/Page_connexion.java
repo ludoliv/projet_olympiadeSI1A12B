@@ -32,14 +32,16 @@ public class Page_connexion extends Activity {
                 finish();
                 Intent i = new Intent(Page_connexion.this,Planning.class);
                 JuryManager juryMan = new JuryManager(view.getContext());
+                juryMan.open();
                 Cursor jurys = juryMan.getJurys();
                 int id = 0;
-                if (jurys.moveToFirst()) {
+                while (jurys.moveToNext()) {
                     if (jurys.getString(jurys.getColumnIndex(KEY_LOGIN_)).equals(identifiant.getText().toString())) {
                         id = jurys.getInt(jurys.getColumnIndex(KEY_NUMJURY));
                     }
-                    jurys.close();
                 }
+                jurys.close();
+                juryMan.close();
                 i.putExtra("NumJury", id);
                 startActivity(i);
             }

@@ -12,13 +12,14 @@ import android.view.View;
 import android.widget.Button;
 
 public class MainActivity extends Activity {
-    Button button;
+    Button buttonConsulter;
     Button buttonEnvoie;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
 
         NetworkInfo info = getIntent().getParcelableExtra(WifiManager.EXTRA_NETWORK_INFO);
         if(info != null && info.isConnected()){
@@ -27,13 +28,10 @@ public class MainActivity extends Activity {
         else {
 
         }
-
-        button = (Button)findViewById(R.id.button);
-        button.setEnabled(false);
-        button.setBackgroundColor(Color.WHITE);
-        button.setTextColor(Color.GRAY);
-
-        Button buttonEnvoie = (Button)findViewById(R.id.buttonEnvoie);
+        buttonEnvoie = (Button)findViewById(R.id.buttonEnvoie);
+        buttonEnvoie.setEnabled(false);
+        buttonEnvoie.setBackgroundColor(Color.WHITE);
+        buttonEnvoie.setTextColor(Color.GRAY);
         buttonEnvoie.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -44,11 +42,13 @@ public class MainActivity extends Activity {
         buttonEnvoie.setBackgroundColor(Color.WHITE);
         buttonEnvoie.setTextColor(Color.GRAY);
 
-
-        Button buttonConsulter = (Button)findViewById(R.id.buttonConsulter);
+        buttonConsulter = (Button)findViewById(R.id.buttonConsulter);
         buttonConsulter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                view.getContext().deleteDatabase("db.sqlite");
+
+                //A DELETE
                 JuryManager juryMan = new JuryManager(view.getContext());
                 juryMan.open();
                 Jury jury12 = new Jury(12, "Martin", "banane");
@@ -56,6 +56,15 @@ public class MainActivity extends Activity {
                 juryMan.addJury(jury12);
                 juryMan.addJury(jury23);
                 juryMan.close();
+
+                GroupeManager grpMan = new GroupeManager(view.getContext());
+                grpMan.open();
+                Groupe paul = new Groupe(1, "STMG", "Paul", "Claude de France a Romorantin", "bite.png");
+                Groupe fred = new Groupe(2, "STMG", "Fred", "Claude de France a Romorantin", "alcool.png");
+                Groupe herbert = new Groupe(3, "STMG", "Herbert", "Claude de France a Romorantin", "bite.png");
+                //A PLUS DELETE
+
+
                 startActivity(new Intent(MainActivity.this,Page_connexion.class));
             }
         });

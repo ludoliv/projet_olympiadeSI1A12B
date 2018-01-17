@@ -19,9 +19,9 @@ public class GroupeManager {
     public static final String CREATE_TABLE_GROUPE = "CREATE TABLE IF NOT EXISTS "+TABLE_NAME+
             " (" +
             " "+KEY_ID_GROUPE+" INTEGER primary key," +
-            " "+KEY_FILIERE_GROUPE+" TEXT" +
-            " "+KEY_NOMPROJ_GROUPE+" TEXT" +
-            " "+KEY_LYCEE_GROUPE+" TEXT" +
+            " "+KEY_FILIERE_GROUPE+" TEXT," +
+            " "+KEY_NOMPROJ_GROUPE+" TEXT," +
+            " "+KEY_LYCEE_GROUPE+" TEXT," +
             " "+KEY_IMAGE_GROUPE+" TEXT" +
             ");";
     private MySQLite maBaseSQLite; // notre gestionnaire du fichier SQLite

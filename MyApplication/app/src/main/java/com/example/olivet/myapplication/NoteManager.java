@@ -23,11 +23,11 @@ public class NoteManager {
     public static final String CREATE_TABLE_NOTE = "CREATE TABLE IF NOT EXISTS "+TABLE_NAME+
             " (" +
             " "+KEY_ID_NOTE+" INTEGER primary key," +
-            " "+KEY_PROTOTYPE+" INTEGER" +
-            " "+KEY_ORIGINALITE+" INTEGER" +
-            " "+KEY_DEMARCHESI+" INTEGER" +
-            " "+KEY_PLURIDISCIPLIANRITE+" INTEGER" +
-            " "+KEY_MAITRISE+" INTEGER" +
+            " "+KEY_PROTOTYPE+" INTEGER," +
+            " "+KEY_ORIGINALITE+" INTEGER," +
+            " "+KEY_DEMARCHESI+" INTEGER," +
+            " "+KEY_PLURIDISCIPLIANRITE+" INTEGER," +
+            " "+KEY_MAITRISE+" INTEGER," +
             " "+KEY_DEVDURABLE+" INTEGER" +
             ");";
     private MySQLite maBaseSQLite; // notre gestionnaire du fichier SQLite
