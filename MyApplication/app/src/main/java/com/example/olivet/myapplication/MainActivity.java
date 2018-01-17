@@ -12,6 +12,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 
+import java.io.File;
+
 public class MainActivity extends Activity {
     Button buttonConsulter;
     Button buttonEnvoie;
@@ -22,26 +24,39 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
         buttonEnvoie = (Button)findViewById(R.id.buttonEnvoie);
         buttonConsulter = (Button)findViewById(R.id.buttonConsulter);
+        File f=new File("/data/data/com.example.olivet.myapplication/databases/db.sqlite");
 
+        buttonEnvoie.setEnabled(false);
+        buttonEnvoie.setBackgroundColor(Color.WHITE);
+        buttonEnvoie.setTextColor(Color.GRAY);
         ConnectivityManager connManager = (ConnectivityManager) getSystemService(this.CONNECTIVITY_SERVICE);
         NetworkInfo mWifi = connManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
         if(mWifi.isConnected()){
             buttonConsulter.setEnabled(true);
             buttonConsulter.setBackgroundColor(Color.GRAY);
             buttonConsulter.setTextColor(Color.BLACK);
+            if(f.exists() && !f.isDirectory()){
+                buttonEnvoie.setEnabled(true);
+                buttonEnvoie.setBackgroundColor(Color.GRAY);
+                buttonEnvoie.setTextColor(Color.BLACK);
+            }
+
 
         }
         else {
-            System.out.println("oui");
-            buttonConsulter.setEnabled(false);
-            buttonConsulter.setBackgroundColor(Color.WHITE);
-            buttonConsulter.setTextColor(Color.GRAY);
-
+            if(f.exists() && !f.isDirectory()){
+                buttonConsulter.setEnabled(true);
+                buttonConsulter.setBackgroundColor(Color.GRAY);
+                buttonConsulter.setTextColor(Color.BLACK);
+            }
+            else {
+                buttonConsulter.setEnabled(false);
+                buttonConsulter.setBackgroundColor(Color.WHITE);
+                buttonConsulter.setTextColor(Color.GRAY);
+            }
         }
 
-        buttonEnvoie.setEnabled(false);
-        buttonEnvoie.setBackgroundColor(Color.WHITE);
-        buttonEnvoie.setTextColor(Color.GRAY);
+
         buttonEnvoie.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
