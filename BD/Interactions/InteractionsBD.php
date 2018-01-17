@@ -215,7 +215,7 @@
     {
         /**
          * This function is getting the Personne that are in
-         * the groupe specified with the parameter $idGroupe
+         * the ELEVE table
          * 
          * @author Quentin Bouny
          * 
@@ -235,7 +235,6 @@
 
                 $p = new Personne($id,$Nom,$Prenom);
                 array_push($ListePersonne,$p);
-                echo $p.getNom();
             }
             return $ListePersonne;
         }
@@ -330,6 +329,39 @@
         catch(PDOException $e)
         {
             echo $e->getMessage();
+        }
+    }
+
+    function getProf($connexion)
+    {
+        /**
+         * This function is getting the Personne that are in
+         * the PROFESSEUR table
+         * 
+         * @author Quentin Bouny
+         * 
+         * @param PDO $connexion link with the Database
+         */
+        try{
+            $prep = "SELECT * from PERSONNE where ID=(SELECT IDProf from PROFESSEUR where IDProf=ID);";
+
+            $reponse = $connexion->query($prep);
+            $ListePersonne = array();
+
+            while ($donnees = $reponse->fetch())
+            {
+                $id = $donnees[0];
+                $Nom = $donnees[1];
+                $Prenom = $donnees[2];
+
+                $p = new Personne($id,$Nom,$Prenom);
+                array_push($ListePersonne,$p);
+            }
+            return $ListePersonne;
+        }
+        catch(PDOException $e)
+        {
+            echo $e.getMessage();
         }
     }
 ?>
