@@ -154,7 +154,7 @@ function getCSVforHeure($connexion,$filename)
         $Heure = new Heure($id,$Hdeb,$Hfin);
         $Juge = new Juge($NumJury,$NumGroupe,$id);
 
-        if(!testPInListeH($tabHeure,$id))
+        if(!testPInListeH($tabHeure,$Heure))
         {
             array_push($tabHeure,$Heure);
             array_push($tabJuge,$Juge);
@@ -167,11 +167,11 @@ function getCSVforHeure($connexion,$filename)
     fclose($handle);
 }
 
-function testPInListeH($Liste,$id)
+function testPInListeH($Liste,$heure)
 {
   foreach ($Liste as $h)
   {
-    if ($h->getID() == $id)
+    if ( ($h->getID() == $heure->getID()) || ($h->getDeb() == $heure->getDeb()) || ($h->getFin() == $heure->getFin()) )
     {
       return true;
     }
