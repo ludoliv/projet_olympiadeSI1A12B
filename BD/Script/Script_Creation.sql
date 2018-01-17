@@ -59,7 +59,7 @@ create table RECOMPENSE(
     idRecompense int,
     idGroupe int,
     NomCategorie varchar(30),
-    FOREIGN KEY(idRecompense) REFERENCES GROUPE(NumGroupe),
+    FOREIGN KEY(idGroupe) REFERENCES GROUPE(NumGroupe),
     CONSTRAINT Pk_RECOMPENSE PRIMARY KEY(idRecompense,idGroupe)
 );
 
