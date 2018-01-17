@@ -46,12 +46,12 @@ create table HEURE(
 
 create table NOTE(
     idNote int,
-    prototype int CHECK(prototype<6),
-    originalite int CHECK(originalite<6),
-    demarcheSI int CHECK(demarcheSI<6),
-    pluriDisciplinarite int CHECK(pluriDisciplinarite<6),
-    maitrise int CHECK(maitrise<6),
-    devDurable int CHECK(devDurable<6),
+    prototype int,
+    originalite int,
+    demarcheSI int,
+    pluriDisciplinarite int,
+    maitrise int,
+    devDurable int,
     PRIMARY key(idNote)
 );
 
@@ -59,7 +59,7 @@ create table RECOMPENSE(
     idRecompense int,
     idGroupe int,
     NomCategorie varchar(30),
-    FOREIGN KEY(idRecompense) REFERENCES GROUPE(NumGroupe),
+    FOREIGN KEY(idGroupe) REFERENCES GROUPE(NumGroupe),
     CONSTRAINT Pk_RECOMPENSE PRIMARY KEY(idRecompense,idGroupe)
 );
 

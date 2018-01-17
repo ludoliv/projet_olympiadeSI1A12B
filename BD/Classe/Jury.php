@@ -13,15 +13,15 @@ class Jury{
 
 
     public function getNumJury(){
-        return $_NumJury;
+        return $this->_NumJury;
     }
 
     public function getLogin(){
-        return $_Login;
+        return $this->_Login;
     }
 
     public function getPassword(){
-        return $_Password;
+        return $this->_Password;
     }
 
     public function setPassword($Password){

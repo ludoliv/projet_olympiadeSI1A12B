@@ -19,6 +19,46 @@
         }
     }
 
+    function getMaxIDGROUPE($connexion)
+    {
+        // Writing the request
+        $request = "SELECT max(NumGroupe) from GROUPE";
+
+        // Getting the result after the query
+        $result = $connexion->query($request);
+
+        // Fetch the result in var $max
+        $max = $result->fetch();
+
+        // Testing the value of $max
+        if($max['max(NumGroupe)'] > 0){
+            return $max['max(NumGroupe)'];
+        }
+        else{
+            return 0;
+        }
+    }
+
+    function getMaxIDJURY($connexion)
+    {
+        // Writing the request
+        $request = "SELECT max(NumJury) from JURY";
+
+        // Getting the result after the query
+        $result = $connexion->query($request);
+
+        // Fetch the result in var $max
+        $max = $result->fetch();
+
+        // Testing the value of $max
+        if($max['max(NumJury)'] > 0){
+            return $max['max(NumJury)'];
+        }
+        else{
+            return 0;
+        }
+    }
+
     function insertPersonne($connexion,$ListePersonne)
     {
         try{
@@ -92,7 +132,7 @@
                 $Num = $ListeProf[$i]->getNumJury();
 
                 // Execute the insertion
-                $statement.execute();
+                $statement->execute();
             }
         }
         catch(Exception $e)
@@ -118,19 +158,19 @@
 
             $statement->bindParam(':Num',$Num);
             $statement->bindParam(':Nom',$Nom);
-            $statement->bindParam(':Nom',$Lycee);
-            $statement->bindParam(':Nom',$img);
+            $statement->bindParam(':Lycee',$Lycee);
+            $statement->bindParam(':img',$img);
 
             for($i = 0;$i < count($ListeGroupe);$i++)
             {
                 // Passing the value to the parameter
-                $Num = $ListeGroupe[$i]->getNumJury();
+                $Num = $ListeGroupe[$i]->getNumGroupe();
                 $Nom = $ListeGroupe[$i]->getNomProj();
                 $Lycee = $ListeGroupe[$i]->getLycee();
                 $img = $ListeGroupe[$i]->getImageProjet();
 
                 // Execute the insertion
-                $statement.execute();
+                $statement->execute();
             }
         }
         catch(Exception $e)
@@ -158,7 +198,7 @@
             $statement->bindParam(':log',$log);
             $statement->bindParam(':passwd',$pass);
 
-            for($i = 0;$i < count($ListeGroupe);$i++)
+            for($i = 0;$i < count($ListeJury);$i++)
             {
                 // Passing the value to the parameter
                 $Num = $ListeJury[$i]->getNumJury();
@@ -166,7 +206,7 @@
                 $pass = $ListeJury[$i]->getPassword();
 
                 // Execute the insertion
-                $statement.execute();
+                $statement->execute();
             }
         }
         catch(Exception $e)
@@ -215,7 +255,7 @@
     {
         /**
          * This function is getting the Personne that are in
-         * the groupe specified with the parameter $idGroupe
+         * the ELEVE table
          * 
          * @author Quentin Bouny
          * 
@@ -235,7 +275,6 @@
 
                 $p = new Personne($id,$Nom,$Prenom);
                 array_push($ListePersonne,$p);
-                echo $p.getNom();
             }
             return $ListePersonne;
         }
@@ -277,12 +316,20 @@
             }
             $NB = $reponse->rowCount();
 
-            $Liste["Prototype"] = $Liste["Prototype"] / $NB;
-            $Liste["Originalite"] = $Liste["Originalite"]/$NB;
-            $Liste["DemarcheSI"] = $Liste["DemarcheSI"]/$NB;
-            $Liste["pluriDisciplinarite"] = $Liste["pluriDisciplinarite"]/$NB;
-            $Liste["Maitrise"] = $Liste["Maitrise"]/$NB;
-            $Liste["devDurable"] = $Liste["devDurable"]/$NB;
+            if ($NB == 0)
+            {
+                return array("Prototype"=>0,"Originalite"=> 0,"DemarcheSI"=>0,"pluriDisciplinarite"=>0,"Maitrise"=>0,"devDurable"=>0);
+            }
+            else
+            {
+                $Liste["Prototype"] = $Liste["Prototype"] / $NB;
+                $Liste["Originalite"] = $Liste["Originalite"]/$NB;
+                $Liste["DemarcheSI"] = $Liste["DemarcheSI"]/$NB;
+                $Liste["pluriDisciplinarite"] = $Liste["pluriDisciplinarite"]/$NB;
+                $Liste["Maitrise"] = $Liste["Maitrise"]/$NB;
+                $Liste["devDurable"] = $Liste["devDurable"]/$NB;
+
+            }
 
             return $Liste;
         }
@@ -330,6 +377,39 @@
         catch(PDOException $e)
         {
             echo $e->getMessage();
+        }
+    }
+
+    function getProf($connexion)
+    {
+        /**
+         * This function is getting the Personne that are in
+         * the PROFESSEUR table
+         * 
+         * @author Quentin Bouny
+         * 
+         * @param PDO $connexion link with the Database
+         */
+        try{
+            $prep = "SELECT * from PERSONNE where ID=(SELECT IDProf from PROFESSEUR where IDProf=ID);";
+
+            $reponse = $connexion->query($prep);
+            $ListePersonne = array();
+
+            while ($donnees = $reponse->fetch())
+            {
+                $id = $donnees[0];
+                $Nom = $donnees[1];
+                $Prenom = $donnees[2];
+
+                $p = new Personne($id,$Nom,$Prenom);
+                array_push($ListePersonne,$p);
+            }
+            return $ListePersonne;
+        }
+        catch(PDOException $e)
+        {
+            echo $e.getMessage();
         }
     }
 ?>
