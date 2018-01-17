@@ -97,4 +97,11 @@ public class AjoutNote extends Activity {
             }
         });
     }
+
+    @Override
+    public void onPause(){
+        super.onPause();
+        finish();
+
+    }
 }
