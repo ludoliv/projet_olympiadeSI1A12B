@@ -154,11 +154,17 @@ function getCSVforHeure($connexion,$filename)
         $Heure = new Heure($id,$Hdeb,$Hfin);
         $Juge = new Juge($NumJury,$NumGroupe,$id);
 
-        if(!testPInListeH($tabHeure,$Heure))
+        $resTest = testPInListeH($tabHeure,$Heure);
+        if(!$resTest)
         {
             array_push($tabHeure,$Heure);
             array_push($tabJuge,$Juge);
             $id++;
+        }
+        else
+        {
+            $Juge->setIdHeure($resTest);
+            array_push($tabJuge,$Juge);
         }
     }
 
@@ -173,7 +179,7 @@ function testPInListeH($Liste,$heure)
   {
     if ( ($h->getID() == $heure->getID()) || ($h->getDeb() == $heure->getDeb()) || ($h->getFin() == $heure->getFin()) )
     {
-      return true;
+      return $h->getID();
     }
   }
   return false;

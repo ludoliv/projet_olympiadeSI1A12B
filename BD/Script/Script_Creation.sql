@@ -64,9 +64,9 @@ create table RECOMPENSE(
 );
 
 create table JUGE(
+    idHeure int,
     NumJury int,
     NumGroupe int,
-    idHeure int,
     FOREIGN KEY(NumJury) REFERENCES JURY(NumJury),
     FOREIGN KEY(NumGroupe) REFERENCES GROUPE(NumGroupe),
     FOREIGN KEY(idHeure) REFERENCES HEURE(idHeure),

@@ -27,6 +27,16 @@ class Juge
   public function get_idHeure(){
     return $this->_IdHeure;
   }
+
+  public function setIdHeure($id)
+  {
+    $this->_IdHeure = $id;
+  }
+
+  public function __toString()
+  {
+      return $this->_NumGroupe. " ".$this->_IdHeure." ".$this->_NumJury."<br>";
+  }
 }
 
 

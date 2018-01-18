@@ -505,4 +505,105 @@
             echo $e.getMessage();
         }
     }
+
+    function getHeure($connexion)
+    {
+       /**
+         * This function is getting the heure that are in
+         * the HEURE table
+         * 
+         * @author Quentin Bouny
+         * 
+         * @param PDO $connexion link with the Database
+         */
+        try{
+            $prep = "SELECT * from HEURE;";
+
+            $reponse = $connexion->query($prep);
+            $ListeHeure = array();
+
+            while ($donnees = $reponse->fetch())
+            {
+                $id = $donnees[0];
+                $HDeb = $donnees[1];
+                $HFin = $donnees[2];
+
+                $p = new Heure($id,$HDeb,$HFin);
+                array_push($ListeHeure,$p);
+            }
+            return $ListeHeure;
+        }
+        catch(PDOException $e)
+        {
+            echo $e.getMessage();
+        } 
+    }
+
+    function getGroupe($connexion)
+    {
+       /**
+         * This function is getting the groups that are in
+         * the GROUPE table
+         * 
+         * @author Quentin Bouny
+         * 
+         * @param PDO $connexion link with the Database
+         */
+        try{
+            $prep = "SELECT * from GROUPE where NumGroupe > 0;";
+
+            $reponse = $connexion->query($prep);
+            $ListeGroupe = array();
+
+            while ($donnees = $reponse->fetch())
+            {
+                $id = $donnees[0];
+                $Nom = $donnees[1];
+                $Lycee = $donnees[2];
+                $img = $donnees[3];
+
+                $p = new Groupe($id,$Nom,$Lycee,$img);
+                array_push($ListeGroupe,$p);
+            }
+            return $ListeGroupe;
+        }
+        catch(PDOException $e)
+        {
+            echo $e.getMessage();
+        } 
+    }
+
+    function getJury($connexion)
+    {
+       /**
+         * This function is getting the jurys that are in
+         * the JURY table
+         * 
+         * @author Quentin Bouny
+         * 
+         * @param PDO $connexion link with the Database
+         */
+        try{
+            $prep = "SELECT * from JURY;";
+
+            $reponse = $connexion->query($prep);
+            $ListeJury = array();
+
+            while ($donnees = $reponse->fetch())
+            {
+                $id = $donnees[0];
+                $Log = $donnees[1];
+                $Pass = $donnees[2];
+
+                $p = new Jury($id,$Log,$Pass);
+                array_push($ListeJury,$p);
+            }
+            return $ListeJury;
+        }
+        catch(PDOException $e)
+        {
+            echo $e.getMessage();
+        } 
+    }
+
 ?>
