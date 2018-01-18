@@ -180,28 +180,6 @@ public class Planning extends Activity {
                         }
                         view.setBackgroundColor(Color.parseColor(couleur));
                     }
-
-                    /*for (ArrayList<Integer> listeNote : listeGrpNote) {
-                        String couleur = "#389f38";//Vert
-                        System.out.println(listeNote.get(0));
-                        if (idGp == listeNote.get(0)) {
-                            int fin = 0;
-                            while (fin < listeNote.size() && couleur.equals("#389f38")) {
-                                if (sommeListeSansPre(listeNote) == 0) {
-                                    // Set a background color for ListView regular row/item
-                                    couleur = "#dddf1d";//Jaune
-                                } else if (listeNote.get(fin) == null) {
-                                    // Set the background color for alternate row/item
-                                    couleur = "#df1d1d";//Rouge
-                                }
-                                fin += 1;
-                            }
-                        }
-                        else{
-                            couleur = "#df1d1d";//Rouge
-                        }
-                        view.setBackgroundColor(Color.parseColor(couleur));
-                    }*/
                 }
                 return view;
             }

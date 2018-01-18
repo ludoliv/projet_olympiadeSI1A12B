@@ -2,6 +2,8 @@ package com.example.olivet.myapplication;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.pdf.PdfDocument;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -104,12 +106,38 @@ public class AjoutNote extends Activity {
         bValider.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                ArrayList<Integer> listeNote = new ArrayList<Integer>();
+
+                GroupeManager gpMan = new GroupeManager(view.getContext());
+                gpMan.open();
+                int idGp = gpMan.getNumGroupe(NomProj);
+                gpMan.close();
+
+                listeNote.add(idGp);
+                listeNote.add(Integer.parseInt((String)spinnerDevDur.getSelectedItem()));
+                listeNote.add(Integer.parseInt((String)spinnerMait.getSelectedItem()));
+                listeNote.add(Integer.parseInt((String)spinnerPluri.getSelectedItem()));
+                listeNote.add(Integer.parseInt((String)spinnerDem.getSelectedItem()));
+                listeNote.add(Integer.parseInt((String)spinnerProto.getSelectedItem()));
+                listeNote.add(Integer.parseInt((String)spinnerOri.getSelectedItem()));
+                Page_connexion.listeGrpNote.add(listeNote);
+
+                NoteManager noteMan = new NoteManager(view.getContext());
+                noteMan.open();
+                Note note = new Note(1, listeNote.get(1), listeNote.get(2), listeNote.get(3), listeNote.get(4), listeNote.get(5), listeNote.get(6));
+                noteMan.addNote(note);
+                noteMan.close();
+
+                DonneManager donMan = new DonneManager(view.getContext());
+                donMan.open();
+                Donne donne = new Donne(id, idGp, 1);
+                donMan.addDonne(donne);
+                donMan.close();
+
                 Planning.planning.finish();
                 Intent i = new Intent(AjoutNote.this,Planning.class);
                 i.putExtra("NumJury", getIntent().getExtras().getInt("NumJury"));
-                ArrayList<String> liste = getIntent().getExtras().getStringArrayList("nomProjet");
-                liste.set(0, "Caca");
-                i.putExtra("nomProjet", liste);
+                i.putExtra("nomProjet", getIntent().getExtras().getStringArrayList("nomProjet"));
                 i.putExtra("heureD", getIntent().getExtras().getStringArrayList("heureD"));
                 i.putExtra("heureF", getIntent().getExtras().getStringArrayList("heureF"));
                 i.putExtra("NumGroupe", getIntent().getExtras().getIntegerArrayList("NumGroupe"));

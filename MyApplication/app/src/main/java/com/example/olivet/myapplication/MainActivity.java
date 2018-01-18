@@ -132,6 +132,7 @@ public class MainActivity extends Activity {
                 donMan.addDonne(donne1);
                 donMan.addDonne(donne2);
                 donMan.addDonne(donne3);
+                donMan.close();
                 //A PLUS DELETE
 
 

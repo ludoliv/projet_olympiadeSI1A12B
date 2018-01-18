@@ -84,7 +84,7 @@ public class DonneManager {
     }
 
     public Donne getDonne(int numj, int numg, int idN) {
-        // Retourne l'animal dont l'id est passé en paramètre
+        // Retourne la donne dont l'id est passé en paramètre
 
         Donne d=new Donne(0,0,0);
 
@@ -97,6 +97,10 @@ public class DonneManager {
         }
 
         return d;
+    }
+
+    public Cursor getDonneIdNote(int numJ, int numG){
+        return db.rawQuery("SELECT idNote FROM " + TABLE_NAME + " WHERE NumJury = " + numJ + " and NumGroupe = " + numG, null);
     }
 
     public Cursor getDonneNJNote(){

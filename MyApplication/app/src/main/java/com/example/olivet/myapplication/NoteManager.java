@@ -95,7 +95,7 @@ public class NoteManager {
     }
 
     public Note getNote(int id) {
-        // Retourne l'animal dont l'id est passé en paramètre
+        // Retourne la note dont l'id est passé en paramètre
 
         Note n=new Note(0,0, 0, 0, 0, 0, 0);
 
@@ -114,7 +114,7 @@ public class NoteManager {
         return n;
     }
 
-    public Cursor getNote() {
+    public Cursor getNotes() {
         // sélection de tous les enregistrements de la table
         return db.rawQuery("SELECT * FROM "+TABLE_NAME, null);
     }
