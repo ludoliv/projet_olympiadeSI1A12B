@@ -104,7 +104,7 @@ public class AjoutNote extends Activity {
         bValider.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                finishFromChild(AjoutNote.this);
+                Planning.planning.finish();
                 Intent i = new Intent(AjoutNote.this,Planning.class);
                 i.putExtra("NumJury", getIntent().getExtras().getInt("NumJury"));
                 ArrayList<String> liste = getIntent().getExtras().getStringArrayList("nomProjet");

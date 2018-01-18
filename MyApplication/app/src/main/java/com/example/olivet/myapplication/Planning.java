@@ -2,8 +2,11 @@ package com.example.olivet.myapplication;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.database.MatrixCursor;
 import android.graphics.Color;
 import android.graphics.pdf.PdfDocument;
@@ -25,6 +28,7 @@ import java.util.ArrayList;
 public class Planning extends Activity {
 
     ArrayList<ArrayList<Integer>> listeGrpNote = Page_connexion.listeGrpNote;
+    public static Activity planning;
 
     Integer sommeListeSansPre(ArrayList<Integer> liste){
         int somme = 0;
@@ -51,6 +55,7 @@ public class Planning extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        planning = this;
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.planning);
 
