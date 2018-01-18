@@ -39,8 +39,8 @@ create table ELEVE(
 
 create table HEURE(
     idHeure int,
-    hDeb date,
-    hFin date,
+    hDeb time,
+    hFin time,
     PRIMARY key(idHeure)
 );
 
@@ -94,7 +94,7 @@ create table OLYMPIADES(
   LogOlympiades varchar(100),
   LogoSponsor varchar(100),
   LogoUPSTI varchar(100),
-  dateOlymp date,
+  datetimeOlymp datetime,
   BandeauPartenaires varchar(100),
   LogoIUT varchar(100),
   PRIMARY KEY(NumEdition)
