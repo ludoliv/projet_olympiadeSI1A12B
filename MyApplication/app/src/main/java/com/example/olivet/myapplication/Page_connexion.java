@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import java.util.ArrayList;
+
 import static com.example.olivet.myapplication.JuryManager.KEY_LOGIN_;
 import static com.example.olivet.myapplication.JuryManager.KEY_NUMJURY;
 
@@ -16,6 +18,8 @@ import static com.example.olivet.myapplication.JuryManager.KEY_NUMJURY;
  */
 
 public class Page_connexion extends Activity {
+
+    static ArrayList<ArrayList<Integer>> listeGrpNote;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +47,48 @@ public class Page_connexion extends Activity {
                 jurys.close();
                 juryMan.close();
                 i.putExtra("NumJury", id);
+
+                JugeManager jugeMan = new JugeManager(view.getContext());
+                jugeMan.open();
+                Cursor juges = jugeMan.getNaturalJoinJuge();
+                ArrayList<String> nomProjet = new ArrayList<String>();
+                ArrayList<String> heureD = new ArrayList<String>();
+                ArrayList<String> heureF = new ArrayList<String>();
+                ArrayList<Integer> numGrp = new ArrayList<Integer>();
+                while (juges.moveToNext()) {
+                    if (juges.getString(juges.getColumnIndex(KEY_NUMJURY)).equals(id+"")){
+                        nomProjet.add(juges.getString(juges.getColumnIndex("NomProj")));
+                        heureD.add(juges.getString(juges.getColumnIndex("hDeb")));
+                        heureF.add(juges.getString(juges.getColumnIndex("hFin")));
+                        numGrp.add(juges.getInt(juges.getColumnIndex("NumGroupe")));
+                    }
+                }
+                juges.close();
+                jugeMan.close();
+                i.putExtra("nomProjet", nomProjet);
+                i.putExtra("heureD", heureD);
+                i.putExtra("heureF", heureF);
+                i.putExtra("NumGroupe", numGrp);
+
+                DonneManager donMan = new DonneManager(view.getContext());
+                donMan.open();
+                Cursor donnes = donMan.getDonneNJNote();
+                listeGrpNote = new ArrayList<ArrayList<Integer>>();
+                while (donnes.moveToNext()){
+                    if (donnes.getString(donnes.getColumnIndex(KEY_NUMJURY)).equals(id+"")) {
+                        ArrayList<Integer> listeAux = new ArrayList<Integer>();
+                        listeAux.add(donnes.getInt(donnes.getColumnIndex("NumGroupe")));
+                        listeAux.add(donnes.getInt(donnes.getColumnIndex("prototype")));
+                        listeAux.add(donnes.getInt(donnes.getColumnIndex("originalite")));
+                        listeAux.add(donnes.getInt(donnes.getColumnIndex("demarcheSI")));
+                        listeAux.add(donnes.getInt(donnes.getColumnIndex("pluriDisciplinarite")));
+                        listeAux.add(donnes.getInt(donnes.getColumnIndex("maitrise")));
+                        listeAux.add(donnes.getInt(donnes.getColumnIndex("devDurable")));
+                        listeGrpNote.add(listeAux);
+                    }
+                }
+                donnes.close();
+                donMan.close();
                 startActivity(i);
             }
         });

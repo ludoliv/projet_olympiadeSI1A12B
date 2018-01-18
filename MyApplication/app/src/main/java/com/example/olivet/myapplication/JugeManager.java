@@ -100,8 +100,12 @@ public class JugeManager {
         return j;
     }
 
-    public Cursor getHeures() {
+    public Cursor getJuges() {
         // sélection de tous les enregistrements de la table
         return db.rawQuery("SELECT * FROM "+TABLE_NAME, null);
+    }
+
+    public Cursor getNaturalJoinJuge() {
+        return db.rawQuery("SELECT * FROM "+TABLE_NAME+" NATURAL JOIN jury NATURAL JOIN groupe NATURAL JOIN heure", null);
     }
 }
