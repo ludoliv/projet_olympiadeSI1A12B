@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.MatrixCursor;
 import android.graphics.Color;
+import android.graphics.pdf.PdfDocument;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -22,6 +23,8 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 public class Planning extends Activity {
+
+    ArrayList<ArrayList<Integer>> listeGrpNote = Page_connexion.listeGrpNote;
 
     Integer sommeListeSansPre(ArrayList<Integer> liste){
         int somme = 0;
@@ -147,7 +150,6 @@ public class Planning extends Activity {
                     gpMan.open();
                     int idGp = gpMan.getNumGroupe(text);
                     gpMan.close();
-                    ArrayList<ArrayList<Integer>> listeGrpNote = Page_connexion.listeGrpNote;
                     boolean test = true;
                     int indice = 0;
                     while (indice<listeGrpNote.size() && test){
@@ -212,20 +214,29 @@ public class Planning extends Activity {
                     gpMan.open();
                     int idGp = gpMan.getNumGroupe(text);
                     gpMan.close();
-                    if (listeID(Page_connexion.listeGrpNote).contains(idGp)){
+                    if (listeID(listeGrpNote).contains(idGp)){
+                        ArrayList<Integer> listeNote = new ArrayList<Integer>();
+                        int indice = 0;
+                        boolean trouve = false;
+                        while (!trouve && indice < listeGrpNote.size()){
+                            if (idGp == listeGrpNote.get(indice).get(0)){
+                                listeNote = listeGrpNote.get(indice);
+                                trouve = true;
+                            }
+                            indice += 1;
+                        }
                         Intent intent = new Intent(Planning.this, projet_desc.class);
                         intent.putExtra("NumJury", id);
+                        intent.putExtra("listeNote", listeNote);
+                        intent.putExtra("NomProj", text);
                         startActivity(intent);
                     }
                     else{
                         Intent intent = new Intent(Planning.this, AjoutNote.class);
                         intent.putExtra("NumJury", id);
+                        intent.putExtra("NomProj", text);
                         startActivity(intent);
                     }
-                }
-
-                if(i==5 || i==7){
-
                 }
             }
         });
@@ -250,10 +261,10 @@ public class Planning extends Activity {
                 .show();
     }
 
-    @Override
+    /*@Override
     public void onPause(){
         super.onPause();
         finish();
 
-    }
+    }*/
 }

@@ -67,7 +67,7 @@ public class MainActivity extends Activity {
         buttonConsulter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                view.getContext().deleteDatabase("db.sqlite");
+                view.getContext().deleteDatabase("/data/data/com.example.olivet.myapplication/databases/db.sqlite");
 
                 //A DELETE
                 JuryManager juryMan = new JuryManager(view.getContext());

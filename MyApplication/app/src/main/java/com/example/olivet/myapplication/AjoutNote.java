@@ -67,6 +67,10 @@ public class AjoutNote extends Activity {
         final int id = getIntent().getExtras().getInt("NumJury");
         tvIdJury.setText(tvIdJury.getText().toString()+id);
 
+        TextView tvNomProjet = (TextView) findViewById(R.id.textViewNomProjet);
+        final String NomProj = getIntent().getExtras().getString("NomProj");
+        tvNomProjet.setText(tvNomProjet.getText().toString()+NomProj);
+
 
         Button bsuppr = (Button) findViewById(R.id.buttonSuppr);
         bsuppr.setOnClickListener(new View.OnClickListener() {

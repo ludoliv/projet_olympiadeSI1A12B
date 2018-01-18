@@ -27,6 +27,10 @@ public class projet_desc extends Activity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.projet_desc);
 
+        TextView tvNomProjet = (TextView) findViewById(R.id.textViewDescNomProjet);
+        final String NomProj = getIntent().getExtras().getString("NomProj");
+        tvNomProjet.setText(tvNomProjet.getText().toString()+NomProj);
+
         TextView tvDescIdJury = (TextView) findViewById(R.id.textViewDescIdJury);
         tvDescIdJury.setText(tvDescIdJury.getText().toString()+getIntent().getExtras().getInt("NumJury"));
 
@@ -70,12 +74,12 @@ public class projet_desc extends Activity {
 // utilisez votre "cursor" au lieu du "matrixCursor"
         MatrixCursor matrixCursor= new MatrixCursor(columns);
         startManagingCursor(matrixCursor);
-        matrixCursor.addRow(new Object[] { 1,"Originalité","4" });
-        matrixCursor.addRow(new Object[] { 2,"Prototype","3" });
-        matrixCursor.addRow(new Object[] { 3,"Démarche SI","1" });
-        matrixCursor.addRow(new Object[] { 4,"Pluridisciplinarité","3" });
-        matrixCursor.addRow(new Object[] { 5,"Maîtrise","5" });
-        matrixCursor.addRow(new Object[] { 6,"Développement Durable","0" });
+        matrixCursor.addRow(new Object[] { 1,"Originalité",getIntent().getExtras().getIntegerArrayList("listeNote").get(1)});
+        matrixCursor.addRow(new Object[] { 2,"Prototype",getIntent().getExtras().getIntegerArrayList("listeNote").get(2) });
+        matrixCursor.addRow(new Object[] { 3,"Démarche SI",getIntent().getExtras().getIntegerArrayList("listeNote").get(3) });
+        matrixCursor.addRow(new Object[] { 4,"Pluridisciplinarité",getIntent().getExtras().getIntegerArrayList("listeNote").get(4) });
+        matrixCursor.addRow(new Object[] { 5,"Maîtrise",getIntent().getExtras().getIntegerArrayList("listeNote").get(5) });
+        matrixCursor.addRow(new Object[] { 6,"Développement Durable",getIntent().getExtras().getIntegerArrayList("listeNote").get(6) });
 
 // on prendra les données des colonnes 1 et 2...
         String[] from = new String[] {"col1", "col2"};
