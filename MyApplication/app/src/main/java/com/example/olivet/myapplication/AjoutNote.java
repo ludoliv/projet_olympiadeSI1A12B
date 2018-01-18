@@ -20,6 +20,8 @@ import java.util.ArrayList;
 
 public class AjoutNote extends Activity {
 
+    ArrayList<Spinner> listeSpin = new ArrayList<Spinner>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,45 +29,6 @@ public class AjoutNote extends Activity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
 
         setContentView(R.layout.ajouternote);
-
-        final Spinner spinnerOri = (Spinner) findViewById(R.id.spinnerOriginalite);
-        // Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter<CharSequence> adapterOri = ArrayAdapter.createFromResource(this,
-                R.array.notes_array, android.R.layout.simple_spinner_item);
-        // Specify the layout to use when the list of choices appears
-        adapterOri.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        // Apply the adapter to the spinner
-        spinnerOri.setAdapter(adapterOri);
-
-        final Spinner spinnerProto = (Spinner) findViewById(R.id.spinnerProto);
-        ArrayAdapter<CharSequence> adapterProto = ArrayAdapter.createFromResource(this,
-                R.array.notes_array, android.R.layout.simple_spinner_item);
-        adapterProto.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerProto.setAdapter(adapterProto);
-
-        final Spinner spinnerDem = (Spinner) findViewById(R.id.spinnerDemarche);
-        ArrayAdapter<CharSequence> adapterDem = ArrayAdapter.createFromResource(this,
-                R.array.notes_array, android.R.layout.simple_spinner_item);
-        adapterDem.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerDem.setAdapter(adapterDem);
-
-        final Spinner spinnerPluri = (Spinner) findViewById(R.id.spinnerPluri);
-        ArrayAdapter<CharSequence> adapterPluri = ArrayAdapter.createFromResource(this,
-                R.array.notes_array, android.R.layout.simple_spinner_item);
-        adapterPluri.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerPluri.setAdapter(adapterPluri);
-
-        final Spinner spinnerMait = (Spinner) findViewById(R.id.spinnerMaitrise);
-        ArrayAdapter<CharSequence> adapterMait = ArrayAdapter.createFromResource(this,
-                R.array.notes_array, android.R.layout.simple_spinner_item);
-        adapterMait.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerMait.setAdapter(adapterMait);
-
-        final Spinner spinnerDevDur = (Spinner) findViewById(R.id.spinnerDevDurable);
-        ArrayAdapter<CharSequence> adapterDevDur = ArrayAdapter.createFromResource(this,
-                R.array.notes_array, android.R.layout.simple_spinner_item);
-        adapterDevDur.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerDevDur.setAdapter(adapterDevDur);
 
         TextView tvIdJury = (TextView) findViewById(R.id.textViewAjNoteIDJury);
         final int id = getIntent().getExtras().getInt("NumJury");
@@ -75,6 +38,72 @@ public class AjoutNote extends Activity {
         final String NomProj = getIntent().getExtras().getString("NomProj");
         tvNomProjet.setText(tvNomProjet.getText().toString()+NomProj);
 
+
+        final Spinner spinnerOri = (Spinner) findViewById(R.id.spinnerOriginalite);
+        // Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter<CharSequence> adapterOri = ArrayAdapter.createFromResource(this,
+                R.array.notes_array, android.R.layout.simple_spinner_item);
+        // Specify the layout to use when the list of choices appears
+        adapterOri.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // Apply the adapter to the spinner
+        spinnerOri.setAdapter(adapterOri);
+        listeSpin.add(spinnerOri);
+
+
+        final Spinner spinnerProto = (Spinner) findViewById(R.id.spinnerProto);
+        ArrayAdapter<CharSequence> adapterProto = ArrayAdapter.createFromResource(this,
+                R.array.notes_array, android.R.layout.simple_spinner_item);
+        adapterProto.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerProto.setAdapter(adapterProto);
+        listeSpin.add(spinnerProto);
+
+
+        final Spinner spinnerDem = (Spinner) findViewById(R.id.spinnerDemarche);
+        ArrayAdapter<CharSequence> adapterDem = ArrayAdapter.createFromResource(this,
+                R.array.notes_array, android.R.layout.simple_spinner_item);
+        adapterDem.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerDem.setAdapter(adapterDem);
+        listeSpin.add(spinnerDem);
+
+
+        final Spinner spinnerPluri = (Spinner) findViewById(R.id.spinnerPluri);
+        ArrayAdapter<CharSequence> adapterPluri = ArrayAdapter.createFromResource(this,
+                R.array.notes_array, android.R.layout.simple_spinner_item);
+        adapterPluri.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerPluri.setAdapter(adapterPluri);
+        listeSpin.add(spinnerPluri);
+
+
+        final Spinner spinnerMait = (Spinner) findViewById(R.id.spinnerMaitrise);
+        ArrayAdapter<CharSequence> adapterMait = ArrayAdapter.createFromResource(this,
+                R.array.notes_array, android.R.layout.simple_spinner_item);
+        adapterMait.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerMait.setAdapter(adapterMait);
+        listeSpin.add(spinnerMait);
+
+
+        final Spinner spinnerDevDur = (Spinner) findViewById(R.id.spinnerDevDurable);
+        ArrayAdapter<CharSequence> adapterDevDur = ArrayAdapter.createFromResource(this,
+                R.array.notes_array, android.R.layout.simple_spinner_item);
+        adapterDevDur.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerDevDur.setAdapter(adapterDevDur);
+        listeSpin.add(spinnerDevDur);
+
+
+        //FAire les add au meme moment apres creation et verif le sens
+        //REfaire la pârtie ou listeNote = [null, null...]
+
+
+        ArrayList<Integer> listeNote = getIntent().getExtras().getIntegerArrayList("listeNote");
+
+        for (int i = 1; i < listeNote.size(); i++) {
+            if (listeNote.get(i) != null) {
+                listeSpin.get(i-1).setSelection(listeNote.get(i) + 1);
+            }
+            else{
+                listeSpin.get(i-1).setSelection(0);
+            }
+        }
 
         Button bsuppr = (Button) findViewById(R.id.buttonSuppr);
         bsuppr.setOnClickListener(new View.OnClickListener() {

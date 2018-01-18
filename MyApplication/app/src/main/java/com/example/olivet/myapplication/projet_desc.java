@@ -15,9 +15,11 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+
 
 /**
  * Created by fdubois on 11/01/18.
@@ -105,7 +107,31 @@ public class projet_desc extends Activity {
         buttonModifNotes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(projet_desc.this, AjoutNote.class));
+                GroupeManager gpMan = new GroupeManager(view.getContext());
+                gpMan.open();
+                final int idGp = gpMan.getNumGroupe(NomProj);
+                gpMan.close();
+
+                Intent i = new Intent(projet_desc.this, AjoutNote.class);
+                boolean trouve = false;
+
+                for (ArrayList<Integer> listeNote : listeGrpNote){
+                    if (idGp == listeNote.get(0)){
+                        i.putExtra("listeNote", listeNote);
+                        trouve = true;
+                    }
+                }
+
+                if (!trouve){
+                    ArrayList<Integer> listeNote = new ArrayList<Integer>();
+                    for (int j = 0; j < 6; j++){
+                        listeNote.add(null);
+                    }
+                    i.putExtra("listeNote", listeNote);
+                }
+
+
+                startActivity(i);
             }
         });
 
