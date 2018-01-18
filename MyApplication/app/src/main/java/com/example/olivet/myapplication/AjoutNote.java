@@ -8,6 +8,7 @@ import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 /**
  * Created by schultz on 20/12/17.
@@ -61,6 +62,10 @@ public class AjoutNote extends Activity {
                 R.array.notes_array, android.R.layout.simple_spinner_item);
         adapterDevDur.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerDevDur.setAdapter(adapterDevDur);
+
+        TextView tvIdJury = (TextView) findViewById(R.id.textViewAjNoteIDJury);
+        final int id = getIntent().getExtras().getInt("NumJury");
+        tvIdJury.setText(tvIdJury.getText().toString()+id);
 
 
         Button bsuppr = (Button) findViewById(R.id.buttonSuppr);

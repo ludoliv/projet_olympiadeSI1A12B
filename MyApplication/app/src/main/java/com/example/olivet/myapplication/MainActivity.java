@@ -52,11 +52,11 @@ public class MainActivity extends Activity {
                 Groupe paul = new Groupe(1, "STMG", "Paul", "Claude de France a Romorantin", "bite.png");
                 Groupe fred = new Groupe(2, "STMG", "Fred", "Claude de France a Romorantin", "alcool.png");
                 Groupe herbert = new Groupe(3, "STMG", "Herbert", "Claude de France a Romorantin", "bite.png");
-                Groupe apresPage = new Groupe(4, "STMG", "Après-Pause", "Claude de France a Romorantin", "bite.png");
+                Groupe apresPause = new Groupe(4, "STMG", "Après-Pause", "Claude de France a Romorantin", "bite.png");
                 grpMan.addGroupe(paul);
                 grpMan.addGroupe(fred);
                 grpMan.addGroupe(herbert);
-                grpMan.addGroupe(apresPage);
+                grpMan.addGroupe(apresPause);
                 grpMan.close();
 
                 HeureManager hMan = new HeureManager(view.getContext());

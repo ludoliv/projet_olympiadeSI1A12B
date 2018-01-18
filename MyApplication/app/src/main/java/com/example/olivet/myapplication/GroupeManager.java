@@ -58,7 +58,7 @@ public class GroupeManager {
     }
 
     public Groupe getGroupe(int id) {
-        // Retourne l'animal dont l'id est passé en paramètre
+        // Retourne le groupe dont l'id est passé en paramètre
 
         Groupe a=new Groupe(0,new String(),new String(),new String(),new String());
 
@@ -73,6 +73,15 @@ public class GroupeManager {
         }
 
         return a;
+    }
+
+    public int getNumGroupe(String NomProj){
+        Cursor c = db.rawQuery("SELECT "+KEY_ID_GROUPE+" FROM "+TABLE_NAME+" WHERE "+KEY_NOMPROJ_GROUPE+"='"+NomProj+"'", null);
+        int res = 0;
+        if (c.moveToFirst()){
+            res = c.getInt(c.getColumnIndex(KEY_ID_GROUPE));
+        }
+        return res;
     }
 
     public Cursor getGroupes() {
