@@ -39,19 +39,19 @@ create table ELEVE(
 
 create table HEURE(
     idHeure int,
-    hDeb date,
-    hFin date,
+    hDeb time,
+    hFin time,
     PRIMARY key(idHeure)
 );
 
 create table NOTE(
     idNote int,
-    prototype int CHECK(prototype<6),
-    originalite int CHECK(originalite<6),
-    demarcheSI int CHECK(demarcheSI<6),
-    pluriDisciplinarite int CHECK(pluriDisciplinarite<6),
-    maitrise int CHECK(maitrise<6),
-    devDurable int CHECK(devDurable<6),
+    prototype int,
+    originalite int,
+    demarcheSI int,
+    pluriDisciplinarite int,
+    maitrise int,
+    devDurable int,
     PRIMARY key(idNote)
 );
 
@@ -59,7 +59,7 @@ create table RECOMPENSE(
     idRecompense int,
     idGroupe int,
     NomCategorie varchar(30),
-    FOREIGN KEY(idRecompense) REFERENCES GROUPE(NumGroupe),
+    FOREIGN KEY(idGroupe) REFERENCES GROUPE(NumGroupe),
     CONSTRAINT Pk_RECOMPENSE PRIMARY KEY(idRecompense,idGroupe)
 );
 
@@ -94,7 +94,7 @@ create table OLYMPIADES(
   LogOlympiades varchar(100),
   LogoSponsor varchar(100),
   LogoUPSTI varchar(100),
-  dateOlymp date,
+  datetimeOlymp datetime,
   BandeauPartenaires varchar(100),
   LogoIUT varchar(100),
   PRIMARY KEY(NumEdition)

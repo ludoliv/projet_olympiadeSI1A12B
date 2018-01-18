@@ -12,15 +12,15 @@ class Heure{
     }
 
     public function getID(){
-        return $_ID;
+        return $this->_ID;
     }
 
     public function getDeb(){
-        return $_hDeb;
+        return $this->_hDeb;
     }
 
     public function getFin(){
-        return $_hFin;
+        return $this->_hFin;
     }
 
 }

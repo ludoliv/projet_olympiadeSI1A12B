@@ -97,6 +97,12 @@ public class projet_desc extends Activity {
         ListView lv = (ListView) findViewById(R.id.lv);
         lv.setAdapter(adapter);
     }
+    @Override
+    public void onPause(){
+        super.onPause();
+        finish();
+
+    }
 
 
 }

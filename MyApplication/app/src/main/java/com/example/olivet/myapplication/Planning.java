@@ -249,4 +249,11 @@ public class Planning extends Activity {
                 .setNegativeButton("Non", null)
                 .show();
     }
+
+    @Override
+    public void onPause(){
+        super.onPause();
+        finish();
+
+    }
 }

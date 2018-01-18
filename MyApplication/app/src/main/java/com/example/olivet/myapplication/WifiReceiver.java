@@ -12,6 +12,7 @@ import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.view.View;
 
+import java.io.File;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
@@ -62,6 +63,7 @@ public class WifiReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
 
         NetworkInfo info = intent.getParcelableExtra(WifiManager.EXTRA_NETWORK_INFO);
+        File f=new File("/data/data/com.example.olivet.myapplication/databases/db.sqlite");
         Activity act=getForegroundActivity();
         if(info != null && info.isConnected()) {
 
@@ -69,10 +71,17 @@ public class WifiReceiver extends BroadcastReceiver {
                 ((MainActivity) act).buttonConsulter.setEnabled(true);
                 ((MainActivity) act).buttonConsulter.setBackgroundColor(Color.GRAY);
                 ((MainActivity) act).buttonConsulter.setTextColor(Color.BLACK);
+                if(f.exists() && !f.isDirectory()){
+                    ((MainActivity) act).buttonEnvoie.setEnabled(true);
+                    ((MainActivity) act).buttonEnvoie.setBackgroundColor(Color.GRAY);
+                    ((MainActivity) act).buttonEnvoie.setTextColor(Color.BLACK);
+                }
+                else {
+                    ((MainActivity) act).buttonEnvoie.setEnabled(false);
+                    ((MainActivity) act).buttonEnvoie.setBackgroundColor(Color.WHITE);
+                    ((MainActivity) act).buttonEnvoie.setTextColor(Color.GRAY);
+                }
 
-                ((MainActivity) act).buttonEnvoie.setEnabled(true);
-                ((MainActivity) act).buttonEnvoie.setBackgroundColor(Color.GRAY);
-                ((MainActivity) act).buttonEnvoie.setTextColor(Color.BLACK);
             }
 
             // e.g. To check the Network Name or other info:
@@ -83,10 +92,17 @@ public class WifiReceiver extends BroadcastReceiver {
         else {
 
             if (act instanceof MainActivity){
-                ((MainActivity) act).buttonConsulter.setEnabled(false);
-                ((MainActivity) act).buttonConsulter.setBackgroundColor(Color.WHITE);
-                ((MainActivity) act).buttonConsulter.setTextColor(Color.GRAY);
+                if(f.exists() && !f.isDirectory()){
+                    ((MainActivity) act).buttonConsulter.setEnabled(true);
+                    ((MainActivity) act).buttonConsulter.setBackgroundColor(Color.GRAY);
+                    ((MainActivity) act).buttonConsulter.setTextColor(Color.BLACK);
+                }
+                else {
+                    ((MainActivity) act).buttonConsulter.setEnabled(false);
+                    ((MainActivity) act).buttonConsulter.setBackgroundColor(Color.WHITE);
+                    ((MainActivity) act).buttonConsulter.setTextColor(Color.GRAY);
 
+                }
                 ((MainActivity) act).buttonEnvoie.setEnabled(false);
                 ((MainActivity) act).buttonEnvoie.setBackgroundColor(Color.WHITE);
                 ((MainActivity) act).buttonEnvoie.setTextColor(Color.GRAY);
