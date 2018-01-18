@@ -2,6 +2,7 @@
 <div id="mySidenav" class="sidenav">
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
   <a href="accueil_admin.php">Accueil</a>
+  <a href="insererDonnees.php">Ajout</a>
   <a href="resultats_admin.php">Résultats</a>
   <a href="parametrage.php">Paramétrage</a>
   <a href="planning.php">Planning</a>

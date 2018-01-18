@@ -17,6 +17,4 @@ $connexion = connect_database();
 // getCSVforGroupe($connexion,'../../csv/Groupe.csv');
 // getCSVforJury($connexion,'../../csv/Jury.csv');
 // getCSVforHeure($connexion,'../../csv/Horaires.csv');
-
-randomPlanning($connexion);
 ?>
