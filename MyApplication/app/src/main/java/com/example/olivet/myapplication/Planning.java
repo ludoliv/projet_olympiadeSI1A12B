@@ -214,6 +214,7 @@ public class Planning extends Activity {
                     gpMan.open();
                     int idGp = gpMan.getNumGroupe(text);
                     gpMan.close();
+                    Intent intent;
                     if (listeID(listeGrpNote).contains(idGp)){
                         ArrayList<Integer> listeNote = new ArrayList<Integer>();
                         int indice = 0;
@@ -225,18 +226,20 @@ public class Planning extends Activity {
                             }
                             indice += 1;
                         }
-                        Intent intent = new Intent(Planning.this, projet_desc.class);
-                        intent.putExtra("NumJury", id);
+                        intent = new Intent(Planning.this, projet_desc.class);
                         intent.putExtra("listeNote", listeNote);
-                        intent.putExtra("NomProj", text);
-                        startActivity(intent);
+
                     }
                     else{
-                        Intent intent = new Intent(Planning.this, AjoutNote.class);
-                        intent.putExtra("NumJury", id);
-                        intent.putExtra("NomProj", text);
-                        startActivity(intent);
+                        intent = new Intent(Planning.this, AjoutNote.class);
                     }
+                    intent.putExtra("NumJury", id);
+                    intent.putExtra("NomProj", text);
+                    intent.putExtra("nomProjet", getIntent().getExtras().getStringArrayList("nomProjet"));
+                    intent.putExtra("heureD", getIntent().getExtras().getStringArrayList("heureD"));
+                    intent.putExtra("heureF", getIntent().getExtras().getStringArrayList("heureF"));
+                    intent.putExtra("NumGroupe", getIntent().getExtras().getIntegerArrayList("NumGroupe"));
+                    startActivity(intent);
                 }
             }
         });

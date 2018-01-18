@@ -10,6 +10,8 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 /**
  * Created by schultz on 20/12/17.
  */
@@ -102,7 +104,17 @@ public class AjoutNote extends Activity {
         bValider.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                finishFromChild(AjoutNote.this);
+                Intent i = new Intent(AjoutNote.this,Planning.class);
+                i.putExtra("NumJury", getIntent().getExtras().getInt("NumJury"));
+                ArrayList<String> liste = getIntent().getExtras().getStringArrayList("nomProjet");
+                liste.set(0, "Caca");
+                i.putExtra("nomProjet", liste);
+                i.putExtra("heureD", getIntent().getExtras().getStringArrayList("heureD"));
+                i.putExtra("heureF", getIntent().getExtras().getStringArrayList("heureF"));
+                i.putExtra("NumGroupe", getIntent().getExtras().getIntegerArrayList("NumGroupe"));
                 finish();
+                startActivity(i);
             }
         });
     }
