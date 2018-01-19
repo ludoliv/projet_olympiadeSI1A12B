@@ -51,7 +51,7 @@ public class Envoi_Donnees extends Activity {
             DonneManager donneManager=new DonneManager(getApplicationContext());
 
             HashMap<String, ArrayList<HashMap<String, Object>>> dico_des_donnees=new HashMap<>();
-            Cursor cursornote=noteManager.getNote();
+            Cursor cursornote=noteManager.getNotes();
             ArrayList<HashMap<String,Object>> listeNotes=new ArrayList<>();
             while(cursornote.moveToNext()){
                 HashMap<String, Object> note=new HashMap<>();

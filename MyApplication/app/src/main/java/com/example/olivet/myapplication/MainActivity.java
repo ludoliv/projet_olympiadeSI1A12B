@@ -80,10 +80,10 @@ public class MainActivity extends Activity {
 
                 GroupeManager grpMan = new GroupeManager(view.getContext());
                 grpMan.open();
-                Groupe paul = new Groupe(1, "STMG", "Paul", "Claude de France a Romorantin", "bite.png");
-                Groupe fred = new Groupe(2, "STMG", "Fred", "Claude de France a Romorantin", "alcool.png");
-                Groupe herbert = new Groupe(3, "STMG", "Herbert", "Claude de France a Romorantin", "bite.png");
-                Groupe apresPause = new Groupe(4, "STMG", "Après-Pause", "Claude de France a Romorantin", "bite.png");
+                Groupe paul = new Groupe(1, "Paul", "Claude de France a Romorantin", "bite.png");
+                Groupe fred = new Groupe(2, "Fred", "Claude de France a Romorantin", "alcool.png");
+                Groupe herbert = new Groupe(3, "Herbert", "Claude de France a Romorantin", "bite.png");
+                Groupe apresPause = new Groupe(4, "Après-Pause", "Claude de France a Romorantin", "bite.png");
                 grpMan.addGroupe(paul);
                 grpMan.addGroupe(fred);
                 grpMan.addGroupe(herbert);
@@ -136,8 +136,8 @@ public class MainActivity extends Activity {
                 //A PLUS DELETE
 
 
-                //startActivity(new Intent(MainActivity.this,Page_connexion.class));
-                startActivity(new Intent(MainActivity.this,Recuperation_Envoi.class));
+                startActivity(new Intent(MainActivity.this,Page_connexion.class));
+                //startActivity(new Intent(MainActivity.this,Recuperation_Envoi.class));
             }
         });
     }
