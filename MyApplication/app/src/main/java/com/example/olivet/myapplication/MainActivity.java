@@ -67,7 +67,7 @@ public class MainActivity extends Activity {
         buttonConsulter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                view.getContext().deleteDatabase("db.sqlite");
+                view.getContext().deleteDatabase("/data/data/com.example.olivet.myapplication/databases/db.sqlite");
 
                 //A DELETE
                 JuryManager juryMan = new JuryManager(view.getContext());
@@ -83,11 +83,11 @@ public class MainActivity extends Activity {
                 Groupe paul = new Groupe(1, "STMG", "Paul", "Claude de France a Romorantin", "bite.png");
                 Groupe fred = new Groupe(2, "STMG", "Fred", "Claude de France a Romorantin", "alcool.png");
                 Groupe herbert = new Groupe(3, "STMG", "Herbert", "Claude de France a Romorantin", "bite.png");
-                Groupe apresPage = new Groupe(4, "STMG", "Après-Pause", "Claude de France a Romorantin", "bite.png");
+                Groupe apresPause = new Groupe(4, "STMG", "Après-Pause", "Claude de France a Romorantin", "bite.png");
                 grpMan.addGroupe(paul);
                 grpMan.addGroupe(fred);
                 grpMan.addGroupe(herbert);
-                grpMan.addGroupe(apresPage);
+                grpMan.addGroupe(apresPause);
                 grpMan.close();
 
                 HeureManager hMan = new HeureManager(view.getContext());
@@ -132,6 +132,7 @@ public class MainActivity extends Activity {
                 donMan.addDonne(donne1);
                 donMan.addDonne(donne2);
                 donMan.addDonne(donne3);
+                donMan.close();
                 //A PLUS DELETE
 
 
@@ -140,10 +141,4 @@ public class MainActivity extends Activity {
             }
         });
     }
-
-
-
-
-
-
 }

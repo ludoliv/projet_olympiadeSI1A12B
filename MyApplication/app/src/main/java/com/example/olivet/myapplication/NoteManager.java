@@ -84,6 +84,11 @@ public class NoteManager {
         return db.update(TABLE_NAME, values, where, whereArgs);
     }
 
+    public void modNoteHard(Note note) {
+        this.supNote(note);
+        this.addNote(note);
+    }
+
     public int supNote(Note note) {
         // suppression d'un enregistrement
         // valeur de retour : (int) nombre de lignes affectées par la clause WHERE, 0 sinon
@@ -95,7 +100,7 @@ public class NoteManager {
     }
 
     public Note getNote(int id) {
-        // Retourne l'animal dont l'id est passé en paramètre
+        // Retourne la note dont l'id est passé en paramètre
 
         Note n=new Note(0,0, 0, 0, 0, 0, 0);
 
@@ -114,7 +119,7 @@ public class NoteManager {
         return n;
     }
 
-    public Cursor getNote() {
+    public Cursor getNotes() {
         // sélection de tous les enregistrements de la table
         return db.rawQuery("SELECT * FROM "+TABLE_NAME, null);
     }
