@@ -25,11 +25,14 @@ public class Planning extends Activity {
     public static Activity planning;
 
     Integer sommeListeSansPre(ArrayList<Integer> liste){
-        int somme = 0;
+        Integer somme = 0;
         boolean pre = true;
         for (Integer elem : liste){
             if (pre){
                 pre = false;
+            }
+            else if (elem == null){
+                somme += 0;
             }
             else {
                 somme += elem;
@@ -209,6 +212,11 @@ public class Planning extends Activity {
                     }
                     else{
                         intent = new Intent(Planning.this, AjoutNote.class);
+                        ArrayList<Integer> listeNote = new ArrayList<Integer>();
+                        for (int j = 0; j < 6; j++){
+                            listeNote.add(null);
+                        }
+                        intent.putExtra("listeNote", listeNote);
                     }
                     intent.putExtra("NumJury", id);
                     intent.putExtra("NomProj", text);

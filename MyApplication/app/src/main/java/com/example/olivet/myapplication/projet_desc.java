@@ -35,12 +35,14 @@ public class projet_desc extends Activity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.projet_desc);
 
-        TextView tvNomProjet = (TextView) findViewById(R.id.textViewDescNomProjet);
+        final int id = getIntent().getExtras().getInt("NumJury");
         final String NomProj = getIntent().getExtras().getString("NomProj");
+
+        TextView tvNomProjet = (TextView) findViewById(R.id.textViewDescNomProjet);
         tvNomProjet.setText(tvNomProjet.getText().toString()+NomProj);
 
         TextView tvDescIdJury = (TextView) findViewById(R.id.textViewDescIdJury);
-        tvDescIdJury.setText(tvDescIdJury.getText().toString()+getIntent().getExtras().getInt("NumJury"));
+        tvDescIdJury.setText(tvDescIdJury.getText().toString()+id);
 
         Button buttonSupprNotes = (Button)findViewById(R.id.buttonSupprimer);
         buttonSupprNotes.setOnClickListener(new View.OnClickListener() {
@@ -51,7 +53,7 @@ public class projet_desc extends Activity {
                 final int idGp = gpMan.getNumGroupe(NomProj);
                 gpMan.close();
 
-                final int id = getIntent().getExtras().getInt("NumJury");
+
 
                 new AlertDialog.Builder(view.getContext())
                         .setIcon(android.R.drawable.ic_dialog_alert)
@@ -129,8 +131,12 @@ public class projet_desc extends Activity {
                     }
                     i.putExtra("listeNote", listeNote);
                 }
-
-
+                i.putExtra("NumJury", id);
+                i.putExtra("NomProj", NomProj);
+                i.putExtra("nomProjet", getIntent().getExtras().getStringArrayList("nomProjet"));
+                i.putExtra("heureD", getIntent().getExtras().getStringArrayList("heureD"));
+                i.putExtra("heureF", getIntent().getExtras().getStringArrayList("heureF"));
+                i.putExtra("NumGroupe", getIntent().getExtras().getIntegerArrayList("NumGroupe"));
                 startActivity(i);
             }
         });

@@ -47,7 +47,6 @@ public class AjoutNote extends Activity {
         adapterOri.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Apply the adapter to the spinner
         spinnerOri.setAdapter(adapterOri);
-        listeSpin.add(spinnerOri);
 
 
         final Spinner spinnerProto = (Spinner) findViewById(R.id.spinnerProto);
@@ -55,7 +54,6 @@ public class AjoutNote extends Activity {
                 R.array.notes_array, android.R.layout.simple_spinner_item);
         adapterProto.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerProto.setAdapter(adapterProto);
-        listeSpin.add(spinnerProto);
 
 
         final Spinner spinnerDem = (Spinner) findViewById(R.id.spinnerDemarche);
@@ -63,7 +61,6 @@ public class AjoutNote extends Activity {
                 R.array.notes_array, android.R.layout.simple_spinner_item);
         adapterDem.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerDem.setAdapter(adapterDem);
-        listeSpin.add(spinnerDem);
 
 
         final Spinner spinnerPluri = (Spinner) findViewById(R.id.spinnerPluri);
@@ -71,7 +68,6 @@ public class AjoutNote extends Activity {
                 R.array.notes_array, android.R.layout.simple_spinner_item);
         adapterPluri.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerPluri.setAdapter(adapterPluri);
-        listeSpin.add(spinnerPluri);
 
 
         final Spinner spinnerMait = (Spinner) findViewById(R.id.spinnerMaitrise);
@@ -79,7 +75,6 @@ public class AjoutNote extends Activity {
                 R.array.notes_array, android.R.layout.simple_spinner_item);
         adapterMait.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerMait.setAdapter(adapterMait);
-        listeSpin.add(spinnerMait);
 
 
         final Spinner spinnerDevDur = (Spinner) findViewById(R.id.spinnerDevDurable);
@@ -87,7 +82,13 @@ public class AjoutNote extends Activity {
                 R.array.notes_array, android.R.layout.simple_spinner_item);
         adapterDevDur.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerDevDur.setAdapter(adapterDevDur);
+
         listeSpin.add(spinnerDevDur);
+        listeSpin.add(spinnerMait);
+        listeSpin.add(spinnerPluri);
+        listeSpin.add(spinnerDem);
+        listeSpin.add(spinnerProto);
+        listeSpin.add(spinnerOri);
 
 
         //FAire les add au meme moment apres creation et verif le sens
@@ -142,26 +143,46 @@ public class AjoutNote extends Activity {
                 int idGp = gpMan.getNumGroupe(NomProj);
                 gpMan.close();
 
-                listeNote.add(idGp);
-                listeNote.add(Integer.parseInt((String)spinnerDevDur.getSelectedItem()));
-                listeNote.add(Integer.parseInt((String)spinnerMait.getSelectedItem()));
-                listeNote.add(Integer.parseInt((String)spinnerPluri.getSelectedItem()));
-                listeNote.add(Integer.parseInt((String)spinnerDem.getSelectedItem()));
-                listeNote.add(Integer.parseInt((String)spinnerProto.getSelectedItem()));
-                listeNote.add(Integer.parseInt((String)spinnerOri.getSelectedItem()));
-                Page_connexion.listeGrpNote.add(listeNote);
+                boolean trouve = false;
+                ArrayList<Integer> listeASuppr = new ArrayList<Integer>();
+                for (ArrayList<Integer> listeAux : Page_connexion.listeGrpNote){
+                    if (idGp == listeAux.get(0)){
+                        listeASuppr = listeAux;
+                        trouve = true;
+                    }
+                }
 
-                NoteManager noteMan = new NoteManager(view.getContext());
-                noteMan.open();
-                Note note = new Note(1, listeNote.get(1), listeNote.get(2), listeNote.get(3), listeNote.get(4), listeNote.get(5), listeNote.get(6));
-                noteMan.addNote(note);
-                noteMan.close();
+                if (trouve){
+                    Page_connexion.listeGrpNote.remove(listeASuppr);
+                }
+
+                listeNote.add(idGp);
+                for (Spinner spin : listeSpin) {
+
+                    if (("None").equals((String) spin.getSelectedItem())) {
+                        listeNote.add(null);
+                    } else {
+                        listeNote.add(Integer.parseInt((String) spin.getSelectedItem()));
+                    }
+                }
+                Page_connexion.listeGrpNote.add(listeNote);
 
                 DonneManager donMan = new DonneManager(view.getContext());
                 donMan.open();
-                Donne donne = new Donne(id, idGp, 1);
-                donMan.addDonne(donne);
+                Cursor c = donMan.getDonneIdNote(id, idGp);
+                int idNote = -1;
+                if (c.moveToFirst()){
+                    idNote = c.getInt(c.getColumnIndex("idNote"));
+                }
+                Donne donne = new Donne(id, idGp, idNote);
+                donMan.modDonne(donne);
                 donMan.close();
+
+                NoteManager noteMan = new NoteManager(view.getContext());
+                noteMan.open();
+                Note note = new Note(idNote, listeNote.get(1), listeNote.get(2), listeNote.get(3), listeNote.get(4), listeNote.get(5), listeNote.get(6));
+                noteMan.modNoteHard(note);
+                noteMan.close();
 
                 Planning.planning.finish();
                 Intent i = new Intent(AjoutNote.this,Planning.class);

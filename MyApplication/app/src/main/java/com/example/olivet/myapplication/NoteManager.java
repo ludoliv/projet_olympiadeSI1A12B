@@ -84,6 +84,11 @@ public class NoteManager {
         return db.update(TABLE_NAME, values, where, whereArgs);
     }
 
+    public void modNoteHard(Note note) {
+        this.supNote(note);
+        this.addNote(note);
+    }
+
     public int supNote(Note note) {
         // suppression d'un enregistrement
         // valeur de retour : (int) nombre de lignes affectées par la clause WHERE, 0 sinon
