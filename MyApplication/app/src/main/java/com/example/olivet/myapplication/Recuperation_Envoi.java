@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.lang.reflect.Array;
@@ -100,27 +101,25 @@ public class Recuperation_Envoi extends Activity{
 
                 JuryManager juryManager=new JuryManager(getApplicationContext());
                 juryManager.open();
-                ArrayList<JSONObject> jurydonnees=(ArrayList<JSONObject>) jObjResult.get("Jury");
-                for(int i=0;i<jurydonnees.size();i++){
-                    Jury jury=new Jury(jurydonnees.get(i).getInt("id"),jurydonnees.get(i).getString("Login"),jurydonnees.get(i).getString("pwd"));
-                    juryManager.addJury(jury);
-                }
+                JSONObject jurydonnees=(JSONObject) jObjResult.get("Jury");
+                Jury jury=new Jury(jurydonnees.getInt("id"),jurydonnees.getString("Login"),jurydonnees.getString("pwd"));
+                juryManager.addJury(jury);
                 juryManager.close();
 
                 HeureManager heureManager=new HeureManager(getApplicationContext());
                 heureManager.open();
-                ArrayList<JSONObject> heuredonnees=(ArrayList<JSONObject>) jObjResult.get("Heures");
-                for(int i=0;i<heuredonnees.size();i++){
-                    Heure heure=new Heure(heuredonnees.get(i).getInt("idHeure"),heuredonnees.get(i).getString("hDeb"),heuredonnees.get(i).getString("hFin"));
+                JSONArray heuredonnees=(JSONArray) jObjResult.get("Heures");
+                for(int i=0;i<heuredonnees.length();i++){
+                    Heure heure=new Heure(heuredonnees.getJSONObject(i).getInt("idHeure"),heuredonnees.getJSONObject(i).getString("hDeb"),heuredonnees.getJSONObject(i).getString("hFin"));
                     heureManager.addHeure(heure);
                 }
                 heureManager.close();
 
                 GroupeManager groupeManager=new GroupeManager(getApplicationContext());
                 groupeManager.open();
-                ArrayList<JSONObject> groupedonnees=(ArrayList<JSONObject>) jObjResult.get("Groupe");
-                for(int i=0;i<groupedonnees.size();i++){
-                    JSONObject groupeD=groupedonnees.get(i);
+                JSONArray groupedonnees=(JSONArray) jObjResult.get("Groupe");
+                for(int i=0;i<groupedonnees.length();i++){
+                    JSONObject groupeD=groupedonnees.getJSONObject(i);
                     Groupe groupe=new Groupe(groupeD.getInt("NumGroupe"),groupeD.getString("NomProj"),groupeD.getString("Lycee"),groupeD.getString("image_Projet"));
                     groupeManager.addGroupe(groupe);
                 }
@@ -128,9 +127,9 @@ public class Recuperation_Envoi extends Activity{
 
                 JugeManager jugeManager=new JugeManager(getApplicationContext());
                 jugeManager.open();
-                ArrayList<JSONObject> jugedonnees=(ArrayList<JSONObject>) jObjResult.get("relation");
-                for(int i=0;i<jugedonnees.size();i++){
-                    JSONObject jugeD=jugedonnees.get(i);
+                JSONArray jugedonnees=(JSONArray) jObjResult.get("relation");
+                for(int i=0;i<jugedonnees.length();i++){
+                    JSONObject jugeD=jugedonnees.getJSONObject(i);
                     Juge juge=new Juge(jugeD.getInt("NumJury"),jugeD.getInt("NumGroupe"),jugeD.getInt("idHeure"));
                     jugeManager.addJuge(juge);
                 }
@@ -140,6 +139,8 @@ public class Recuperation_Envoi extends Activity{
 
                 return jObjResult.getInt("result");
             } catch (Exception e) {
+                e.printStackTrace();
+                System.out.println("oui");
                 return Donnees_BD.RESULT_ERROR;
             }
         }
