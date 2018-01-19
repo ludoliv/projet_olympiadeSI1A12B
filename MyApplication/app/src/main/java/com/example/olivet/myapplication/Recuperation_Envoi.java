@@ -203,7 +203,6 @@ public class Recuperation_Envoi extends Activity{
                         listeAux.add(donnes.getInt(donnes.getColumnIndex("pluriDisciplinarite")));
                         listeAux.add(donnes.getInt(donnes.getColumnIndex("maitrise")));
                         listeAux.add(donnes.getInt(donnes.getColumnIndex("devDurable")));
-                        listeGrpNote.add(listeAux);
                     }
                 }
                 donnes.close();
