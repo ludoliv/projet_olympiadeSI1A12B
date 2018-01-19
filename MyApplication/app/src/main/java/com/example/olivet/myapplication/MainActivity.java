@@ -135,7 +135,8 @@ public class MainActivity extends Activity {
                 //A PLUS DELETE
 
 
-                startActivity(new Intent(MainActivity.this,Page_connexion.class));
+                //startActivity(new Intent(MainActivity.this,Page_connexion.class));
+                startActivity(new Intent(MainActivity.this,Recuperation_Envoi.class));
             }
         });
     }

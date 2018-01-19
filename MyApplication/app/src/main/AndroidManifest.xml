@@ -3,6 +3,7 @@
     package="com.example.olivet.myapplication">
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
     <uses-sdk android:minSdkVersion="19"
               android:targetSdkVersion="19" />
 
@@ -44,6 +45,9 @@
         <activity android:name=".PopOk"
                   android:screenOrientation="userLandscape"
                   android:theme="@style/AppTheme.CustomTheme"/>
+
+        <activity android:name=".Recuperation_Envoi"
+            android:screenOrientation="userLandscape"/>
     </application>
 
 

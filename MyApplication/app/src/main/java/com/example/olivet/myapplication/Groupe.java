@@ -6,14 +6,12 @@ package com.example.olivet.myapplication;
 
 public class Groupe {
     private int id_groupe;
-    private String filiere;
     private String nom_projet;
     private String lycee;
     private String image;
 
-    Groupe(int id,String filiere, String nom_projet, String lycee, String image){
+    Groupe(int id, String nom_projet, String lycee, String image){
         this.id_groupe=id;
-        this.filiere=filiere;
         this.nom_projet=nom_projet;
         this.lycee=lycee;
         this.image=image;
@@ -22,10 +20,6 @@ public class Groupe {
 
     public int getId_groupe() {
         return id_groupe;
-    }
-
-    public String getFiliere() {
-        return filiere;
     }
 
     public String getNom_projet() {
@@ -44,10 +38,6 @@ public class Groupe {
 
     public void setId_groupe(int id_groupe) {
         this.id_groupe = id_groupe;
-    }
-
-    public void setFiliere(String filiere) {
-        this.filiere = filiere;
     }
 
     public void setNom_projet(String nom_projet) {
