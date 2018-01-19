@@ -24,7 +24,7 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
         buttonEnvoie = (Button)findViewById(R.id.buttonEnvoie);
         buttonConsulter = (Button)findViewById(R.id.buttonConsulter);
-        File f=new File("/data/data/com.example.olivet.myapplication/databases/db.sqlite");
+        final File f=new File("/data/data/com.example.olivet.myapplication/databases/db.sqlite");
 
         buttonEnvoie.setEnabled(false);
         buttonEnvoie.setBackgroundColor(Color.WHITE);
@@ -67,9 +67,9 @@ public class MainActivity extends Activity {
         buttonConsulter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                view.getContext().deleteDatabase("/data/data/com.example.olivet.myapplication/databases/db.sqlite");
+                /*view.getContext().deleteDatabase("/data/data/com.example.olivet.myapplication/databases/db.sqlite");
 
-                //A DELETE
+
                 JuryManager juryMan = new JuryManager(view.getContext());
                 juryMan.open();
                 Jury jury12 = new Jury(12, "Martin", "banane");
@@ -133,11 +133,16 @@ public class MainActivity extends Activity {
                 donMan.addDonne(donne2);
                 donMan.addDonne(donne3);
                 donMan.close();
-                //A PLUS DELETE
+                //A PLUS DELETE*/
+
+                if(f.exists() && !f.isDirectory()){
+                    startActivity(new Intent(MainActivity.this,Page_connexion.class));
+                }
+                else{
+                    startActivity(new Intent(MainActivity.this,Recuperation_Envoi.class));
+                }
 
 
-                startActivity(new Intent(MainActivity.this,Page_connexion.class));
-                //startActivity(new Intent(MainActivity.this,Recuperation_Envoi.class));
             }
         });
     }

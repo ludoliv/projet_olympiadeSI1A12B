@@ -2,8 +2,10 @@ package com.example.olivet.myapplication;
 
 
 import android.app.Activity;
+import android.app.Application;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -19,6 +21,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.example.olivet.myapplication.JuryManager.KEY_LOGIN_;
+import static com.example.olivet.myapplication.JuryManager.KEY_NUMJURY;
+import static com.example.olivet.myapplication.JuryManager.KEY_PASSWORD_;
+
 /**
  * Created by olivet on 17/01/18.
  */
@@ -29,6 +35,7 @@ public class Recuperation_Envoi extends Activity{
     private Button buttonCo;
     private AccessServiceAPI m_ServiceAccess;
     private ProgressDialog m_ProgressDialog;
+    static ArrayList<ArrayList<Integer>> listeGrpNote;
 
 
     @Override
@@ -129,6 +136,8 @@ public class Recuperation_Envoi extends Activity{
                 }
                 jugeManager.close();
 
+
+
                 return jObjResult.getInt("result");
             } catch (Exception e) {
                 return Donnees_BD.RESULT_ERROR;
@@ -143,7 +152,62 @@ public class Recuperation_Envoi extends Activity{
             if (Donnees_BD.RESULT_SUCCESS==res){
                 Toast.makeText(getApplicationContext(), "Login Success", Toast.LENGTH_LONG).show();
 
-                Intent i=new Intent(getApplicationContext(),MainActivity.class);
+                Intent i = new Intent(getApplicationContext(),Planning.class);
+                JuryManager juryMan = new JuryManager(getApplicationContext());
+                juryMan.open();
+                Cursor jurys = juryMan.getJurys();
+                int id = 0;
+                while (jurys.moveToNext()) {
+                    if (jurys.getString(jurys.getColumnIndex(KEY_LOGIN_)).equals(txtUsername.getText().toString()) && jurys.getString(jurys.getColumnIndex(KEY_PASSWORD_)).equals(txtPassword.getText().toString()) ) {
+                        id = jurys.getInt(jurys.getColumnIndex(KEY_NUMJURY));
+                    }
+                }
+                jurys.close();
+                juryMan.close();
+                i.putExtra("NumJury", id);
+
+                JugeManager jugeMan = new JugeManager(getApplicationContext());
+                jugeMan.open();
+                Cursor juges = jugeMan.getNaturalJoinJuge();
+                ArrayList<String> nomProjet = new ArrayList<String>();
+                ArrayList<String> heureD = new ArrayList<String>();
+                ArrayList<String> heureF = new ArrayList<String>();
+                ArrayList<Integer> numGrp = new ArrayList<Integer>();
+                while (juges.moveToNext()) {
+                    if (juges.getString(juges.getColumnIndex(KEY_NUMJURY)).equals(id+"")){
+                        nomProjet.add(juges.getString(juges.getColumnIndex("NomProj")));
+                        heureD.add(juges.getString(juges.getColumnIndex("hDeb")));
+                        heureF.add(juges.getString(juges.getColumnIndex("hFin")));
+                        numGrp.add(juges.getInt(juges.getColumnIndex("NumGroupe")));
+                    }
+                }
+                juges.close();
+                jugeMan.close();
+                i.putExtra("nomProjet", nomProjet);
+                i.putExtra("heureD", heureD);
+                i.putExtra("heureF", heureF);
+                i.putExtra("NumGroupe", numGrp);
+
+                DonneManager donMan = new DonneManager(getApplicationContext());
+                donMan.open();
+                Cursor donnes = donMan.getDonneNJNote();
+                listeGrpNote = new ArrayList<ArrayList<Integer>>();
+                while (donnes.moveToNext()){
+                    if (donnes.getString(donnes.getColumnIndex(KEY_NUMJURY)).equals(id+"")) {
+                        ArrayList<Integer> listeAux = new ArrayList<Integer>();
+                        listeAux.add(donnes.getInt(donnes.getColumnIndex("NumGroupe")));
+                        listeAux.add(donnes.getInt(donnes.getColumnIndex("prototype")));
+                        listeAux.add(donnes.getInt(donnes.getColumnIndex("originalite")));
+                        listeAux.add(donnes.getInt(donnes.getColumnIndex("demarcheSI")));
+                        listeAux.add(donnes.getInt(donnes.getColumnIndex("pluriDisciplinarite")));
+                        listeAux.add(donnes.getInt(donnes.getColumnIndex("maitrise")));
+                        listeAux.add(donnes.getInt(donnes.getColumnIndex("devDurable")));
+                        listeGrpNote.add(listeAux);
+                    }
+                }
+                donnes.close();
+                donMan.close();
+                finish();
                 startActivity(i);
             }
             else{
