@@ -21,7 +21,7 @@ import java.util.ArrayList;
 
 public class Planning extends Activity {
 
-    ArrayList<ArrayList<Integer>> listeGrpNote = Page_connexion.listeGrpNote;
+    ArrayList<ArrayList<Integer>> listeGrpNote = Recuperation_Envoi.listeGrpNote;
     public static Activity planning;
 
     Integer sommeListeSansPre(ArrayList<Integer> liste){
@@ -151,9 +151,11 @@ public class Planning extends Activity {
                     GroupeManager gpMan = new GroupeManager(view.getContext());
                     gpMan.open();
                     int idGp = gpMan.getNumGroupe(text);
+                    System.out.println(idGp);
                     gpMan.close();
                     boolean test = true;
                     int indice = 0;
+                    System.out.println(listeGrpNote.toString());
                     while (indice<listeGrpNote.size() && test){
                         ArrayList<Integer> listeNote = listeGrpNote.get(indice);
                         indice += 1;
@@ -176,6 +178,9 @@ public class Planning extends Activity {
                             couleur = "#df1d1d";//Rouge
                         }
                         view.setBackgroundColor(Color.parseColor(couleur));
+                    }
+                    if (listeGrpNote.size()==0){
+                        view.setBackgroundColor((Color.parseColor("#df1d1d")));
                     }
                 }
                 return view;

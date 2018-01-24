@@ -21,7 +21,7 @@ import static com.example.olivet.myapplication.JuryManager.KEY_PASSWORD_;
 
 public class Page_connexion extends Activity {
 
-    static ArrayList<ArrayList<Integer>> listeGrpNote;
+    static ArrayList<ArrayList<Integer>> listeGrpNote = Recuperation_Envoi.listeGrpNote;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,7 +75,7 @@ public class Page_connexion extends Activity {
                 i.putExtra("heureD", heureD);
                 i.putExtra("heureF", heureF);
                 i.putExtra("NumGroupe", numGrp);
-
+/*
                 DonneManager donMan = new DonneManager(view.getContext());
                 donMan.open();
                 Cursor donnes = donMan.getDonneNJNote();
@@ -94,7 +94,7 @@ public class Page_connexion extends Activity {
                     }
                 }
                 donnes.close();
-                donMan.close();
+                donMan.close();*/
                 finish();
                 startActivity(i);
             }
