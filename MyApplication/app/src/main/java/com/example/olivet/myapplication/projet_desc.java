@@ -88,7 +88,6 @@ public class projet_desc extends Activity {
                                 noteMan.addNote(note);
                                 noteMan.close();
 
-                                Planning.planning.finish();
                                 Intent i = new Intent(projet_desc.this,Planning.class);
                                 i.putExtra("NumJury", getIntent().getExtras().getInt("NumJury"));
                                 i.putExtra("nomProjet", getIntent().getExtras().getStringArrayList("nomProjet"));

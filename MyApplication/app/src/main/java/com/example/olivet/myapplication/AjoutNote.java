@@ -184,7 +184,6 @@ public class AjoutNote extends Activity {
                 noteMan.modNoteHard(note);
                 noteMan.close();
 
-                Planning.planning.finish();
                 Intent i = new Intent(AjoutNote.this,Planning.class);
                 i.putExtra("NumJury", getIntent().getExtras().getInt("NumJury"));
                 i.putExtra("nomProjet", getIntent().getExtras().getStringArrayList("nomProjet"));
