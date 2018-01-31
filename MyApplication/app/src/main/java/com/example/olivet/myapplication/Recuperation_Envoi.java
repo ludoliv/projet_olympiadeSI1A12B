@@ -57,11 +57,11 @@ public class Recuperation_Envoi extends Activity{
 
     public void btnLog(View v){
         if("".equals(txtUsername.getText().toString())){
-            txtUsername.setError("Username is required!");
+            txtUsername.setError("Identifiant requis");
             return;
         }
         if("".equals(txtPassword.getText().toString())){
-            txtPassword.setError("Password is required!");
+            txtPassword.setError("Mot de passe requis");
             return;
         }
         /* TODO AsyncTask a appeler */
@@ -140,7 +140,6 @@ public class Recuperation_Envoi extends Activity{
                 return jObjResult.getInt("result");
             } catch (Exception e) {
                 e.printStackTrace();
-                System.out.println("oui");
                 return Donnees_BD.RESULT_ERROR;
             }
         }
@@ -151,7 +150,7 @@ public class Recuperation_Envoi extends Activity{
             m_ProgressDialog.dismiss();
 
             if (Donnees_BD.RESULT_SUCCESS==res){
-                Toast.makeText(getApplicationContext(), "Login Success", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Authentification réussie", Toast.LENGTH_LONG).show();
 
                 Intent i = new Intent(getApplicationContext(),Planning.class);
                 JuryManager juryMan = new JuryManager(getApplicationContext());
@@ -211,7 +210,7 @@ public class Recuperation_Envoi extends Activity{
                 startActivity(i);
             }
             else{
-                Toast.makeText(getApplicationContext(),"Login Failed", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),"Echec de l'authentification", Toast.LENGTH_LONG).show();
             }
 
         }

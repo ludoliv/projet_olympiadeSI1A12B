@@ -151,11 +151,9 @@ public class Planning extends Activity {
                     GroupeManager gpMan = new GroupeManager(view.getContext());
                     gpMan.open();
                     int idGp = gpMan.getNumGroupe(text);
-                    System.out.println(idGp);
                     gpMan.close();
                     boolean test = true;
                     int indice = 0;
-                    System.out.println(listeGrpNote.toString());
                     while (indice<listeGrpNote.size() && test){
                         ArrayList<Integer> listeNote = listeGrpNote.get(indice);
                         indice += 1;
@@ -254,10 +252,10 @@ public class Planning extends Activity {
                 .show();
     }
 
-    /*@Override
+    @Override
     public void onPause(){
         super.onPause();
         finish();
 
-    }*/
+    }
 }

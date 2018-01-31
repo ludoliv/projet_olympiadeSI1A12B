@@ -36,7 +36,6 @@ public class MainActivity extends Activity {
         WifiManager wifiManager = (WifiManager)getApplicationContext().getSystemService(Context.WIFI_SERVICE);
         WifiInfo wifiInfo = wifiManager.getConnectionInfo();
         String ssid = wifiInfo.getSSID();
-        System.out.println(ssid);
         if(mWifi.isConnected() && ssid.equals("\"MSI 1103\"")){
             buttonConsulter.setEnabled(true);
             buttonConsulter.setBackgroundColor(Color.GRAY);
