@@ -36,7 +36,7 @@ public class Recuperation_Envoi extends Activity{
     private Button buttonCo;
     private AccessServiceAPI m_ServiceAccess;
     private ProgressDialog m_ProgressDialog;
-    static ArrayList<ArrayList<Integer>> listeGrpNote;
+    static ArrayList<ArrayList<Integer>> listeGrpNote = new ArrayList<ArrayList<Integer>>();
 
 
     @Override
@@ -191,7 +191,6 @@ public class Recuperation_Envoi extends Activity{
                 DonneManager donMan = new DonneManager(getApplicationContext());
                 donMan.open();
                 Cursor donnes = donMan.getDonneNJNote();
-                listeGrpNote = new ArrayList<ArrayList<Integer>>();
                 while (donnes.moveToNext()){
                     if (donnes.getString(donnes.getColumnIndex(KEY_NUMJURY)).equals(id+"")) {
                         ArrayList<Integer> listeAux = new ArrayList<Integer>();

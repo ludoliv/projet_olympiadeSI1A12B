@@ -197,6 +197,18 @@ public class AjoutNote extends Activity {
     }
 
     @Override
+    public void onBackPressed(){
+        Intent i = new Intent(AjoutNote.this,Planning.class);
+        i.putExtra("NumJury", getIntent().getExtras().getInt("NumJury"));
+        i.putExtra("nomProjet", getIntent().getExtras().getStringArrayList("nomProjet"));
+        i.putExtra("heureD", getIntent().getExtras().getStringArrayList("heureD"));
+        i.putExtra("heureF", getIntent().getExtras().getStringArrayList("heureF"));
+        i.putExtra("NumGroupe", getIntent().getExtras().getIntegerArrayList("NumGroupe"));
+        finish();
+        startActivity(i);
+    }
+
+    @Override
     public void onPause(){
         super.onPause();
         finish();

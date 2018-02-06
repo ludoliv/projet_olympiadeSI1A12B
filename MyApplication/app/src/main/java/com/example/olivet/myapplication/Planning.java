@@ -102,26 +102,26 @@ public class Planning extends Activity {
             if (i == 0){
                 matrixCursor.addRow(new Object[] { k,
                         getIntent().getExtras().getStringArrayList("nomProjet").get(0),
-                        getIntent().getExtras().getStringArrayList("heureD").get(0)+" - "
-                        + getIntent().getExtras().getStringArrayList("heureF").get(0) });
+                        getIntent().getExtras().getStringArrayList("heureD").get(0).substring(0,5)+" - "
+                        + getIntent().getExtras().getStringArrayList("heureF").get(0).substring(0,5) });
                 k += 1;
             }
             else if (getIntent().getExtras().getStringArrayList("heureF").get(i-1).equals(getIntent().getExtras().getStringArrayList("heureD").get(i))){
                 matrixCursor.addRow(new Object[] { k,
                         getIntent().getExtras().getStringArrayList("nomProjet").get(i),
-                        getIntent().getExtras().getStringArrayList("heureD").get(i)+" - "
-                                + getIntent().getExtras().getStringArrayList("heureF").get(i) });
+                        getIntent().getExtras().getStringArrayList("heureD").get(i).substring(0,5)+" - "
+                                + getIntent().getExtras().getStringArrayList("heureF").get(i).substring(0,5) });
                 k += 1;
             }
             else {
                 matrixCursor.addRow(new Object[] { k,"Pause",
-                        getIntent().getExtras().getStringArrayList("heureF").get(i-1)+" - "
-                                +getIntent().getExtras().getStringArrayList("heureD").get(i)});
+                        getIntent().getExtras().getStringArrayList("heureF").get(i-1).substring(0,5)+" - "
+                                +getIntent().getExtras().getStringArrayList("heureD").get(i).substring(0,5)});
                 k += 1;
                 matrixCursor.addRow(new Object[] { k,
                         getIntent().getExtras().getStringArrayList("nomProjet").get(i),
-                        getIntent().getExtras().getStringArrayList("heureD").get(i)+" - "
-                                + getIntent().getExtras().getStringArrayList("heureF").get(i) });
+                        getIntent().getExtras().getStringArrayList("heureD").get(i).substring(0,5)+" - "
+                                + getIntent().getExtras().getStringArrayList("heureF").get(i).substring(0,5) });
                 k += 1;
             }
         }
