@@ -64,8 +64,11 @@ public class WifiReceiver extends BroadcastReceiver {
 
         NetworkInfo info = intent.getParcelableExtra(WifiManager.EXTRA_NETWORK_INFO);
         File f=new File("/data/data/com.example.olivet.myapplication/databases/db.sqlite");
+        WifiManager wifiManager = (WifiManager)context.getSystemService(Context.WIFI_SERVICE);
+        WifiInfo wifiInfo = wifiManager.getConnectionInfo();
+        String ssid = wifiInfo.getSSID();
         Activity act=getForegroundActivity();
-        if(info != null && info.isConnected()) {
+        if(info != null && info.isConnected() && ssid.equals("\"MSI 1103\"")) {
 
             if (act instanceof MainActivity){
                 ((MainActivity) act).buttonConsulter.setEnabled(true);
@@ -84,10 +87,6 @@ public class WifiReceiver extends BroadcastReceiver {
 
             }
 
-            // e.g. To check the Network Name or other info:
-            WifiManager wifiManager = (WifiManager)context.getSystemService(Context.WIFI_SERVICE);
-            WifiInfo wifiInfo = wifiManager.getConnectionInfo();
-            String ssid = wifiInfo.getSSID();
         }
         else {
 

@@ -47,7 +47,7 @@ public class Page_connexion extends Activity {
                     }
                 }
                 if(id==0){
-                    Toast.makeText(getApplicationContext(),"Login Failed",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(),"Echec de l'authentification",Toast.LENGTH_LONG).show();
                     return;
                 }
                 jurys.close();
