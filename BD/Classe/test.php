@@ -12,9 +12,9 @@ include 'Heure.php';
 include 'Juge.php';
 $connexion = connect_database();
 
-// getCSVforEleve($connexion,'../../csv/eleves.csv');
-// getCSVforProf($connexion,'../../csv/Professeur.csv');
-// getCSVforGroupe($connexion,'../../csv/Groupe.csv');
-// getCSVforJury($connexion,'../../csv/Jury.csv');
-// getCSVforHeure($connexion,'../../csv/Horaires.csv');
+getCSVforEleve($connexion,'../../csv/eleves.csv');
+getCSVforProf($connexion,'../../csv/Professeur.csv');
+getCSVforGroupe($connexion,'../../csv/Groupe.csv');
+getCSVforJury($connexion,'../../csv/Jury.csv');
+getCSVforHeure($connexion,'../../csv/Horaires.csv');
 ?>

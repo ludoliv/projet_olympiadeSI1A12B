@@ -2,7 +2,7 @@
 /**
  *
  */
-class Juge
+class Donne
 {
 
   private $_NumJury;
