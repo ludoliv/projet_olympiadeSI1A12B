@@ -2,7 +2,7 @@
 <head>
   <link rel="stylesheet" href="../../css/index.css"/>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 </head>
 
 <body>
@@ -94,7 +94,7 @@
               if ($inter != 10){
               ?>
               <center>
-                <select id = <?php echo "select".$cpt; ?> name=<?php echo "select".$cpt; $cpt+=1; ?>>
+                <select onclick="majPlanning(id)" id = <?php echo $cpt; ?> name=<?php echo "select".$cpt; $cpt+=1; ?>  >
                   <option value="none"></option>
                   <?php
                     foreach ($all_grp as $num) {
@@ -120,19 +120,78 @@
       </table>
       <input type="submit" class="btn btn-dark">
     </form>
-    <button onclick="ok2()">click me</button>
-    <p id="demo"></p>
   </div>
+  <div id="commentaires"> </div>
 
-<script>
-  function ok(){
-    document.getElementById("demo").innerHTML = $('select').length;
-  };
 
-  function ok2(){
-    $("select#select4 option[value='1']").remove(); 
-  }
-</script>
+  <script>
+
+    // $("#select0").click(function(){
+    //
+    //   $.ajax({
+    //                  url : 'test.php',
+    //                  type : 'POST',
+    //                  data : {select: $('#select0').val(),
+    //                         grp: $('#allgrp').val()},
+    //                  dataType : 'html',
+    //                  success : function(code_html, statut){
+    //                    for(var i=1; i<$('select').length;++i){
+    //                      if(i%($('select').length/($('th').length-1))  == 0){
+    //                        $("#select"+i).empty();
+    //                        $(code_html).appendTo("#select"+i);
+    //                      }
+    //                     }
+    //
+    //                     for(var j=1; j<$('th').length;j++){
+    //                       $("#select"+j).empty();
+    //                       $(code_html).appendTo("#select"+j);
+    //                     }
+    //                  },
+    //
+    //                  error : function(resultat, statut, erreur){
+    //                    alert(resultat);
+    //                  },
+    //
+    //
+    //                });
+    // });
+
+    function majPlanning(id){
+      $.ajax({
+                       url : 'test.php',
+                       type : 'POST',
+                       data : {select: $('#'+id).val(),
+                              grp: $('#allgrp').val()},
+                       dataType : 'html',
+                       success : function(code_html, statut){
+                         for(var i=1; i<$('select').length;++i){
+                           if(i%($('th').length-1)  == id%($('th').length-1)){
+                             $("#"+i).empty();
+                             $(code_html).appendTo("#"+i);
+                           }
+                          }
+
+                          for(var j=1; j<$('th').length;j++){
+                            $("#"+j).empty();
+                            $(code_html).appendTo("#"+j);
+                          }
+                       },
+
+                       error : function(resultat, statut, erreur){
+                         alert(resultat);
+                       },
+
+
+                     });
+
+
+    }
+
+
+
+  </script>
+
+
 </body>
 
 </html>

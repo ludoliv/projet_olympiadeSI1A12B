@@ -38,7 +38,7 @@
         <div class="col-md-12 mb-3">
           <label for="validationCustom02">Mot de passe</label>
           <input type="password" class="form-control" id="validationCustom02" placeholder="Mot de passe" name="mdp" required>
-          <div class="invalid-feedback">
+          <div id="erreurMDP" class="invalid-feedback">
             Veuillez renseigner un mot de passe.
           </div>
         </div>
@@ -63,6 +63,7 @@
       }, false);
     }, false);
   })();
+
   </script>
 </body>
 </html>
