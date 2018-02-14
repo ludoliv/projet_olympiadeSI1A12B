@@ -16,8 +16,10 @@ create table GROUPE(
     NumGroupe int,
     NomProjet varchar(30),
     Lycee varchar(100),
+    numSalle int,
     image_Projet varchar(100),
-    PRIMARY key(NumGroupe)
+    PRIMARY key(NumGroupe),
+    CONSTRAINT Salle UNIQUE(numSalle)
 );
 
 create table PROFESSEUR(
@@ -67,10 +69,16 @@ create table JUGE(
     idHeure int,
     NumJury int,
     NumGroupe int,
+    numSalle int,
     FOREIGN KEY(NumJury) REFERENCES JURY(NumJury),
     FOREIGN KEY(NumGroupe) REFERENCES GROUPE(NumGroupe),
+    FOREIGN KEY(numSalle) REFERENCES GROUPE(numSalle),
     FOREIGN KEY(idHeure) REFERENCES HEURE(idHeure),
-    CONSTRAINT Pk_JUGE PRIMARY KEY(NumJury,NumGroupe,idHeure)
+    CONSTRAINT Pk_JUGE PRIMARY KEY(NumJury,NumGroupe,idHeure),
+    CONSTRAINT Pk_Jury_groupe UNIQUE (NumJury,NumGroupe),
+    CONSTRAINT PK_Heure_Salle UNIQUE (idHeure,numSalle),
+    CONSTRAINT Pk_Groupe_Heure UNIQUE (NumGroupe,idHeure),
+    CONSTRAINT Pk_Jury_Heure UNIQUE (NumJury,idHeure)
 );
 
 create table DONNE(
@@ -80,7 +88,8 @@ create table DONNE(
     FOREIGN KEY(NumJury) REFERENCES JURY(NumJury),
     FOREIGN KEY(NumGroupe) REFERENCES GROUPE(NumGroupe),
     FOREIGN KEY(idNote) REFERENCES NOTE(idNote),
-    CONSTRAINT Pk_DONNE PRIMARY KEY(NumJury,NumGroupe,idNote)
+    CONSTRAINT Pk_DONNE PRIMARY KEY(NumJury,NumGroupe,idNote),
+    CONSTRAINT Pk_Jury_groupe_Note UNIQUE (NumJury,NumGroupe)
 );
 
 create table ADMINISTRATEUR(
