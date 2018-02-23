@@ -14,7 +14,6 @@ if(!isset($_SESSION['loginOK'])){
 }?>
 <div style="display:flex">
   <?php include 'menu_admin.php'; ?>
-
   <nav class="navbar navbar-expand-lg navbar-light navbar-right" style="margin-left: 11%">
 
     <div class="collapse navbar-collapse" id="navbar">
@@ -63,3 +62,64 @@ if(!isset($_SESSION['loginOK'])){
 
   </nav>
 </div>
+
+<?php
+  include '../Interactions/Connexion.php';
+
+  $db = connect_database();
+  $grp = array();
+
+  try{
+    $stmt = $db->prepare("SELECT NumGroupe FROM GROUPE where NumGroupe != 0");
+    $stmt->execute();
+    while($row = $stmt->fetch()){
+      array_push($grp, $row["NumGroupe"]);
+    }
+  }
+  catch(Exception $e){}
+
+?>
+
+<form name="AjoutEleve" method="POST" style="padding-top: 2%">
+  <h4>Formulaire d'ajout d'un élève :</h4>
+  <table>
+    <tr>
+      <td style="width: 300px">
+        <label style="padding-left: 2% ; padding-right: 2% ; padding-top: 2%">Nom de l'élève :</label>
+      </td>
+      <td>
+        <input type="text"></input>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <label style="padding-left: 2% ; padding-right: 2% ; padding-top: 2%">Prénom de l'élève :</label>
+      </td>
+      <td>
+        <input type="input"></input>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <label style="padding-left: 2% ; padding-right: 2% ; padding-top: 2%">Filière de l'élève :</label>
+      </td>
+      <td>
+        <input type="input"></input>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <label style="padding-left: 2% ; padding-right: 2% ; padding-top: 2%"> Numéro de groupe : </label>
+      </td>
+      <td>
+        <select style="width: 50px">
+          <?php
+          foreach($grp as $g){
+            echo "<option>".$g."</option>";
+          }
+          ?>
+        </select>
+      </td>
+    </tr>
+</form>
+</body>

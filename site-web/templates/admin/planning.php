@@ -94,7 +94,7 @@
               if ($inter != 10){
               ?>
               <center>
-                <select id = <?php echo "select".$cpt; ?> name=<?php echo "select".$cpt; $cpt+=1; ?>>
+                <select onclick="majPlanning(id)" id = <?php echo $cpt; ?> name=<?php echo "select".$cpt; $cpt+=1; ?>  >
                   <option value="none"></option>
                   <?php
                     foreach ($all_grp as $num) {
@@ -120,27 +120,78 @@
       </table>
       <input type="submit" class="btn btn-dark">
     </form>
-    <button id="test">click me</button>
-    <p id="demo"></p>
   </div>
+  <div id="commentaires"> </div>
 
-<script>
 
-  var totalSelect = $('select').length;
-  var totalJury = document.getElementById("demo").innerHTML = $('th').length;
-  var arr = new Array();
-  for (var i = 0; i < totalSelect; i++) {
-    $("#select"+i).change(function(){
-      for(var j = 0; j< totalSelect; j++){
-        if(j%totalSelect == 0){
-          $("#selectBox option[value='option1']").remove();
-          $("#select"+j).remove($("#select"+i).val())
-        }
-      }
-    });
-    break;
-  }
-</script>
+  <script>
+
+    // $("#select0").click(function(){
+    //
+    //   $.ajax({
+    //                  url : 'test.php',
+    //                  type : 'POST',
+    //                  data : {select: $('#select0').val(),
+    //                         grp: $('#allgrp').val()},
+    //                  dataType : 'html',
+    //                  success : function(code_html, statut){
+    //                    for(var i=1; i<$('select').length;++i){
+    //                      if(i%($('select').length/($('th').length-1))  == 0){
+    //                        $("#select"+i).empty();
+    //                        $(code_html).appendTo("#select"+i);
+    //                      }
+    //                     }
+    //
+    //                     for(var j=1; j<$('th').length;j++){
+    //                       $("#select"+j).empty();
+    //                       $(code_html).appendTo("#select"+j);
+    //                     }
+    //                  },
+    //
+    //                  error : function(resultat, statut, erreur){
+    //                    alert(resultat);
+    //                  },
+    //
+    //
+    //                });
+    // });
+
+    function majPlanning(id){
+      $.ajax({
+                       url : 'test.php',
+                       type : 'POST',
+                       data : {select: $('#'+id).val(),
+                              grp: $('#allgrp').val()},
+                       dataType : 'html',
+                       success : function(code_html, statut){
+                         for(var i=1; i<$('select').length;++i){
+                           if(i%($('th').length-1)  == id%($('th').length-1)){
+                             $("#"+i).empty();
+                             $(code_html).appendTo("#"+i);
+                           }
+                          }
+
+                          for(var j=1; j<$('th').length;j++){
+                            $("#"+j).empty();
+                            $(code_html).appendTo("#"+j);
+                          }
+                       },
+
+                       error : function(resultat, statut, erreur){
+                         alert(resultat);
+                       },
+
+
+                     });
+
+
+    }
+
+
+
+  </script>
+
+
 </body>
 
 </html>
