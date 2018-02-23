@@ -2,7 +2,7 @@
 <head>
   <link rel="stylesheet" href="../../css/index.css"/>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 </head>
 
 <body>
@@ -120,17 +120,25 @@
       </table>
       <input type="submit" class="btn btn-dark">
     </form>
-    <button onclick="ok2()">click me</button>
+    <button id="test">click me</button>
     <p id="demo"></p>
   </div>
 
 <script>
-  function ok(){
-    document.getElementById("demo").innerHTML = $('select').length;
-  };
 
-  function ok2(){
-    $("select#select4 option[value='1']").remove(); 
+  var totalSelect = $('select').length;
+  var totalJury = document.getElementById("demo").innerHTML = $('th').length;
+  var arr = new Array();
+  for (var i = 0; i < totalSelect; i++) {
+    $("#select"+i).change(function(){
+      for(var j = 0; j< totalSelect; j++){
+        if(j%totalSelect == 0){
+          $("#selectBox option[value='option1']").remove();
+          $("#select"+j).remove($("#select"+i).val())
+        }
+      }
+    });
+    break;
   }
 </script>
 </body>
