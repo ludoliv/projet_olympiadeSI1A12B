@@ -50,10 +50,10 @@ create table NOTE(
     idNote int,
     prototype int,
     originalite int,
-    demarcheSI int,
+    DémarcheScientifique int,
     pluriDisciplinarite int,
-    maitrise int,
-    devDurable int,
+    MaitriseScientifique  int,
+    Communication int,
     PRIMARY key(idNote)
 );
 
@@ -62,7 +62,7 @@ create table RECOMPENSE(
     idGroupe int,
     NomCategorie varchar(30),
     FOREIGN KEY(idGroupe) REFERENCES GROUPE(NumGroupe),
-    CONSTRAINT Pk_RECOMPENSE PRIMARY KEY(idRecompense,idGroupe)
+    CONSTRAINT Pk_RECOMPENSE UNIQUE(idRecompense,idGroupe)
 );
 
 create table JUGE(
