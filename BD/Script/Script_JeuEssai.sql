@@ -34,4 +34,12 @@ insert into RECOMPENSE values(4,0,"Maitrise");
 insert into RECOMPENSE values(5,0,"devDurable");
 insert into RECOMPENSE values(6,0,"Moyenne");
 
--- insert into HEURE values(1,'9:00','9:20');
+insert into HEURE values(1,'9:00','9:20');
+insert into HEURE values(2,'9:20','9:40');
+insert into HEURE values(3,'9:40','10:00');
+insert into HEURE values(4,'10:00','10:20');
+insert into HEURE values(5,'10:20','10:40');
+insert into HEURE values(6,'10:40','11:00');
+insert into HEURE values(7,'11:00','11:20');
+insert into HEURE values(8,'11:20','11:40');
+insert into HEURE values(9,'11:40','12:00');
