@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.database.MatrixCursor;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -22,21 +21,38 @@ import java.util.ArrayList;
 
 public class Planning extends Activity {
 
+    ArrayList<ArrayList<Integer>> listeGrpNote = Recuperation_Envoi.listeGrpNote;
+    public static Activity planning;
+
     Integer sommeListeSansPre(ArrayList<Integer> liste){
-        int somme = 0;
+        Integer somme = 0;
         boolean pre = true;
         for (Integer elem : liste){
             if (pre){
                 pre = false;
             }
-            somme+=elem;
+            else if (elem == null){
+                somme += 0;
+            }
+            else {
+                somme += elem;
+            }
         }
         return somme;
+    }
+
+    ArrayList<Integer> listeID(ArrayList<ArrayList<Integer>> liste){
+        ArrayList<Integer> listeRes = new ArrayList<Integer>();
+        for (ArrayList<Integer> listeAux : liste){
+            listeRes.add(listeAux.get(0));
+        }
+        return listeRes;
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        planning = this;
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.planning);
 
@@ -86,26 +102,26 @@ public class Planning extends Activity {
             if (i == 0){
                 matrixCursor.addRow(new Object[] { k,
                         getIntent().getExtras().getStringArrayList("nomProjet").get(0),
-                        getIntent().getExtras().getStringArrayList("heureD").get(0)+" - "
-                        + getIntent().getExtras().getStringArrayList("heureF").get(0) });
+                        getIntent().getExtras().getStringArrayList("heureD").get(0).substring(0,5)+" - "
+                        + getIntent().getExtras().getStringArrayList("heureF").get(0).substring(0,5) });
                 k += 1;
             }
             else if (getIntent().getExtras().getStringArrayList("heureF").get(i-1).equals(getIntent().getExtras().getStringArrayList("heureD").get(i))){
                 matrixCursor.addRow(new Object[] { k,
                         getIntent().getExtras().getStringArrayList("nomProjet").get(i),
-                        getIntent().getExtras().getStringArrayList("heureD").get(i)+" - "
-                                + getIntent().getExtras().getStringArrayList("heureF").get(i) });
+                        getIntent().getExtras().getStringArrayList("heureD").get(i).substring(0,5)+" - "
+                                + getIntent().getExtras().getStringArrayList("heureF").get(i).substring(0,5) });
                 k += 1;
             }
             else {
                 matrixCursor.addRow(new Object[] { k,"Pause",
-                        getIntent().getExtras().getStringArrayList("heureF").get(i-1)+" - "
-                                +getIntent().getExtras().getStringArrayList("heureD").get(i)});
+                        getIntent().getExtras().getStringArrayList("heureF").get(i-1).substring(0,5)+" - "
+                                +getIntent().getExtras().getStringArrayList("heureD").get(i).substring(0,5)});
                 k += 1;
                 matrixCursor.addRow(new Object[] { k,
                         getIntent().getExtras().getStringArrayList("nomProjet").get(i),
-                        getIntent().getExtras().getStringArrayList("heureD").get(i)+" - "
-                                + getIntent().getExtras().getStringArrayList("heureF").get(i) });
+                        getIntent().getExtras().getStringArrayList("heureD").get(i).substring(0,5)+" - "
+                                + getIntent().getExtras().getStringArrayList("heureF").get(i).substring(0,5) });
                 k += 1;
             }
         }
@@ -129,31 +145,40 @@ public class Planning extends Activity {
             public View getView(int position, View convertView, ViewGroup parent){
                 // Get the current item from ListView
                 View view = super.getView(position,convertView,parent);
-                ArrayList<ArrayList<Integer>> listeGrpNote = Page_connexion.listeGrpNote;
-                //for (ArrayList<Integer> listeNote : (ArrayList<ArrayList<Integer>>)getIntent().getExtras().getParcelableArrayList("listeGrpNote"))
-                System.out.println(listeGrpNote.toString());
-                System.out.println(getIntent().getExtras().getIntegerArrayList("NumGroupe").toString());
-                for (ArrayList<Integer> listeNote : listeGrpNote) {
-                    System.out.println("boucle groupe " + listeNote.get(0));
-                    for (Integer numGrp : getIntent().getExtras().getIntegerArrayList("NumGroupe")){
-                        System.out.println("boucle planning " + numGrp);
-                        if (numGrp == listeNote.get(0)){
+                TextView tv = view.findViewById(R.id.textViewCol1);
+                String text = tv.getText().toString();
+                if (position != 0 && text != "Pause"){
+                    GroupeManager gpMan = new GroupeManager(view.getContext());
+                    gpMan.open();
+                    int idGp = gpMan.getNumGroupe(text);
+                    gpMan.close();
+                    boolean test = true;
+                    int indice = 0;
+                    while (indice<listeGrpNote.size() && test){
+                        ArrayList<Integer> listeNote = listeGrpNote.get(indice);
+                        indice += 1;
+                        String couleur = "#389f38";//Vert
+                        if (idGp == listeNote.get(0)) {
                             int fin = 0;
-                            String couleur = "#389f38";//Vert
                             while (fin < listeNote.size() && couleur.equals("#389f38")) {
-                                System.out.println(listeNote);
                                 if (sommeListeSansPre(listeNote) == 0) {
                                     // Set a background color for ListView regular row/item
                                     couleur = "#dddf1d";//Jaune
-                                }
-                                else if (listeNote.get(fin)==null) {
+                                } else if (listeNote.get(fin) == null) {
                                     // Set the background color for alternate row/item
                                     couleur = "#df1d1d";//Rouge
                                 }
                                 fin += 1;
+                                test = false;
                             }
-                            view.setBackgroundColor(Color.parseColor(couleur));
                         }
+                        else{
+                            couleur = "#df1d1d";//Rouge
+                        }
+                        view.setBackgroundColor(Color.parseColor(couleur));
+                    }
+                    if (listeGrpNote.size()==0){
+                        view.setBackgroundColor((Color.parseColor("#df1d1d")));
                     }
                 }
                 return view;
@@ -165,13 +190,44 @@ public class Planning extends Activity {
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                if(i == 1) {
-                    Intent intent = new Intent(Planning.this, projet_desc.class);
+                TextView tv = view.findViewById(R.id.textViewCol1);
+                String text = tv.getText().toString();
+                if (i != 0 && text != "Pause") {
+                    GroupeManager gpMan = new GroupeManager(view.getContext());
+                    gpMan.open();
+                    int idGp = gpMan.getNumGroupe(text);
+                    gpMan.close();
+                    Intent intent;
+                    if (listeID(listeGrpNote).contains(idGp)){
+                        ArrayList<Integer> listeNote = new ArrayList<Integer>();
+                        int indice = 0;
+                        boolean trouve = false;
+                        while (!trouve && indice < listeGrpNote.size()){
+                            if (idGp == listeGrpNote.get(indice).get(0)){
+                                listeNote = listeGrpNote.get(indice);
+                                trouve = true;
+                            }
+                            indice += 1;
+                        }
+                        intent = new Intent(Planning.this, projet_desc.class);
+                        intent.putExtra("listeNote", listeNote);
+
+                    }
+                    else{
+                        intent = new Intent(Planning.this, AjoutNote.class);
+                        ArrayList<Integer> listeNote = new ArrayList<Integer>();
+                        for (int j = 0; j < 6; j++){
+                            listeNote.add(null);
+                        }
+                        intent.putExtra("listeNote", listeNote);
+                    }
                     intent.putExtra("NumJury", id);
+                    intent.putExtra("NomProj", text);
+                    intent.putExtra("nomProjet", getIntent().getExtras().getStringArrayList("nomProjet"));
+                    intent.putExtra("heureD", getIntent().getExtras().getStringArrayList("heureD"));
+                    intent.putExtra("heureF", getIntent().getExtras().getStringArrayList("heureF"));
+                    intent.putExtra("NumGroupe", getIntent().getExtras().getIntegerArrayList("NumGroupe"));
                     startActivity(intent);
-                }
-                if(i==5 || i==7){
-                    startActivity(new Intent(Planning.this, AjoutNote.class));
                 }
             }
         });

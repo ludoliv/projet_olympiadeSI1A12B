@@ -22,7 +22,7 @@
   <center><h1>Résultats finaux</h1></center>
 
   <div>
-    <div style="padding-top: 1% ; padding-left: 5% ; padding-right: 5% ; padding-bottom: 2%">
+    <div style="padding-top: 1% ; padding-left: 5% ; padding-right: 5%">
       <table class="table table-striped" style="text-align: center;">
         <thead class="thead-dark">
           <tr>
@@ -38,9 +38,24 @@
         </thead>
         <?php
         $all_grp = array();
+        $all_recompense = array();
         try{
           $stmt = $db->prepare("SELECT NumGroupe FROM GROUPE where NumGroupe != 0");
           $stmt->execute();
+          $stmt2 = $db->prepare("SELECT idGroupe, idRecompense FROM RECOMPENSE");
+          $stmt2->execute();
+
+          while($row = $stmt2->fetch()){
+            $all_recompense[$row["idRecompense"]] = $row["idGroupe"];
+          }
+
+          $rec0 = 0;
+          $rec1 = 0;
+          $rec2 = 0;
+          $rec3 = 0;
+          $rec4 = 0;
+          $rec5 = 0;
+          $rec6 = 0;
 
           while($row = $stmt->fetch()){
             array_push($all_grp,$row['NumGroupe']);
@@ -49,34 +64,131 @@
             echo "<td>".$row['NumGroupe']."</td>";
 
             if(is_nan($liste['Originalite'])){
-              echo "<td>". "/" ."</td>";
+              $rec0+=1;
+              if ($rec0 != $all_recompense["0"]){
+                echo "<td>". "/" ."</td>";
+              }
+              else{
+                echo "<td bgcolor='#FFE469'>". "/" ."</td>";
+              }
             }
+
             if(is_nan($liste['Prototype'])){
-              echo "<td>". "/" ."</td>";
+              $rec1+=1;
+              if ($rec1 != $all_recompense["1"]){
+                echo "<td>". "/" ."</td>";
+              }
+              else{
+                echo "<td bgcolor='#FFE469'>". "/" ."</td>";
+              }
             }
+
             if(is_nan($liste['DemarcheSI'])){
-              echo "<td>". "/" ."</td>";
+              $rec2+=1;
+              if ($rec2 != $all_recompense["2"]){
+                echo "<td>". "/" ."</td>";
+              }
+              else{
+                echo "<td bgcolor='#FFE469'>". "/" ."</td>";
+              }
             }
+
             if(is_nan($liste['pluriDisciplinarite'])){
-              echo "<td>". "/" ."</td>";
+              $rec3+=1;
+              if ($rec3 != $all_recompense["3"]){
+                echo "<td>". "/" ."</td>";
+              }
+              else{
+                echo "<td bgcolor='#FFE469'>". "/" ."</td>";
+              }
             }
+
             if(is_nan($liste['Maitrise'])){
-              echo "<td>". "/" ."</td>";
+              $rec4+=1;
+              if ($rec4 != $all_recompense["4"]){
+                echo "<td>". "/" ."</td>";
+              }
+              else{
+                echo "<td bgcolor='#FFE469'>". "/" ."</td>";
+              }
             }
+
             if(is_nan($liste['devDurable'])){
-              echo "<td>". "/" ."</td>";
+              $rec5+=1;
+              if ($rec5 != $all_recompense["5"]){
+                echo "<td>". "/" ."</td>";
+              }
+              else{
+                echo "<td bgcolor='#FFE469'>". "/" ."</td>";
+              }
             }
+
             if(is_nan($liste['Originalite']) OR is_nan($liste['Prototype']) OR is_nan($liste['DemarcheSI']) OR is_nan($liste['pluriDisciplinarite']) OR is_nan($liste['Maitrise']) OR is_nan($liste['devDurable'])){
-              echo "<td>". "/" ."</td>";
+              $rec6+=1;
+              if ($rec6 != $all_recompense["6"]){
+                echo "<td>". "/" ."</td>";
+              }
+              else{
+                echo "<td bgcolor='#FFE469'>". "/" ."</td>";
+              }
             }
+
             else{
-              echo "<td>".$liste['Originalite']."</td>";
-              echo "<td>".$liste['Prototype']."</td>";
-              echo "<td>".$liste['DemarcheSI']."</td>";
-              echo "<td>".$liste['pluriDisciplinarite']."</td>";
-              echo "<td>".$liste['Maitrise']."</td>";
-              echo "<td>".$liste['devDurable']."</td>";
-              echo "<td>".($liste['Originalite'] + $liste['Prototype'] + $liste['DemarcheSI'] + $liste['pluriDisciplinarite'] + $liste['Maitrise'] + $liste['devDurable'])/7 ."</td>";
+              $rec0+=1;
+              if ($rec0 != $all_recompense["0"]){
+                echo "<td>".$liste['Originalite']."</td>";
+              }
+              else{
+                echo "<td bgcolor='#FFE469'>".$liste['Originalite']."</td>";
+              }
+
+              $rec1+=1;
+              if ($rec1 != $all_recompense["1"]){
+                echo "<td>".$liste['Prototype']."</td>";
+              }
+              else{
+                echo "<td bgcolor='#FFE469'>".$liste['Prototype']."</td>";
+              }
+
+              $rec2+=1;
+              if ($rec2 != $all_recompense["2"]){
+                echo "<td>".$liste['DemarcheSI']."</td>";
+              }
+              else{
+                echo "<td bgcolor='#FFE469'>".$liste['DemarcheSI']."</td>";
+              }
+
+              $rec3+=1;
+              if ($rec3 != $all_recompense["3"]){
+                echo "<td>".$liste['pluriDisciplinarite']."</td>";
+              }
+              else{
+                echo "<td bgcolor='#FFE469'>".$liste['pluriDisciplinarite']."</td>";
+              }
+
+              $rec4+=1;
+              if ($rec4 != $all_recompense["4"]){
+                echo "<td>".$liste['Maitrise']."</td>";
+              }
+              else{
+                echo "<td bgcolor='#FFE469'>".$liste['Maitrise']."</td>";
+              }
+
+              $rec5+=1;
+              if ($rec5 != $all_recompense["5"]){
+                echo "<td>".$liste['devDurable']."</td>";
+              }
+              else{
+                echo "<td bgcolor='#FFE469'>".$liste['devDurable']."</td>";
+              }
+
+              $rec6+=1;
+              if ($rec6 != $all_recompense["6"]){
+                echo "<td>".($liste['Originalite'] + $liste['Prototype'] + $liste['DemarcheSI'] + $liste['pluriDisciplinarite'] + $liste['Maitrise'] + $liste['devDurable'])/7 ."</td>";
+              }
+              else{
+                echo "<td bgcolor='#FFE469'>".($liste['Originalite'] + $liste['Prototype'] + $liste['DemarcheSI'] + $liste['pluriDisciplinarite'] + $liste['Maitrise'] + $liste['devDurable'])/7 ."</td>";
+              }
             }
 
             echo "</tr>";
@@ -89,7 +201,12 @@
       </table>
     </div>
 
-    <div style="padding-left: 5% ; padding-right: 5%">
+    <div style:"display: flex">
+      <div style="background-color: #FFE469 ; height: 25px ; width: 30px ; float: left ; margin-left: 5%"> </div>
+      <label style="padding-left: 1%">Attribution actuelle des prix</label>
+    </div>
+
+    <div style="padding-left: 5% ; padding-right: 5% ; padding-top: 5%">
       <h3>Attribution des prix :</h3>
       <form method="post" action="insert_res.php">
         <table class="table">
@@ -100,7 +217,12 @@
                 <option value="none"></option>
                 <?php
                   foreach ($all_grp as $num) {
-                    echo "<option value='".$num."'>Groupe ".$num."</option>";
+                    if ($all_recompense["0"]==$num){
+                      echo "<option value='".$num."' selected='selected'>Groupe ".$num."</option>";
+                    }
+                    else{
+                      echo "<option value='".$num."'>Groupe ".$num."</option>";
+                    }
                   }?>
               </select>
             </td>
@@ -109,7 +231,12 @@
               <select name="prototype">
                 <option value="none"></option>
                 <?php foreach ($all_grp as $num) {
-                  echo "<option value='".$num."'>Groupe ".$num."</option>";
+                  if ($all_recompense["1"]==$num){
+                    echo "<option value='".$num."' selected='selected'>Groupe ".$num."</option>";
+                  }
+                  else{
+                    echo "<option value='".$num."'>Groupe ".$num."</option>";
+                  }
                 } ?>
               </select>
             </td>
@@ -118,7 +245,12 @@
               <select name="demarche_si">
                 <option value="none"></option>
                 <?php foreach ($all_grp as $num) {
-                  echo "<option value='".$num."'>Groupe ".$num."</option>";
+                  if ($all_recompense["2"]==$num){
+                    echo "<option value='".$num."' selected='selected'>Groupe ".$num."</option>";
+                  }
+                  else{
+                    echo "<option value='".$num."'>Groupe ".$num."</option>";
+                  }
                 } ?>
               </select>
             </td>
@@ -130,7 +262,12 @@
               <select name="pluridisciplinarite">
                 <option value="none"></option>
                 <?php foreach ($all_grp as $num) {
-                  echo "<option value='".$num."'>Groupe ".$num."</option>";
+                  if ($all_recompense["3"]==$num){
+                    echo "<option value='".$num."' selected='selected'>Groupe ".$num."</option>";
+                  }
+                  else{
+                    echo "<option value='".$num."'>Groupe ".$num."</option>";
+                  }
                 } ?>
               </select>
             </td>
@@ -139,7 +276,12 @@
               <select name="maitrise">
                 <option value="none"></option>
                 <?php foreach ($all_grp as $num) {
-                  echo "<option value='".$num."'>Groupe ".$num."</option>";
+                  if ($all_recompense["4"]==$num){
+                    echo "<option value='".$num."' selected='selected'>Groupe ".$num."</option>";
+                  }
+                  else{
+                    echo "<option value='".$num."'>Groupe ".$num."</option>";
+                  }
                 } ?>
               </select>
             </td>
@@ -148,7 +290,12 @@
               <select name="developpement_durable">
                 <option value="none"></option>
                 <?php foreach ($all_grp as $num) {
-                  echo "<option value='".$num."'>Groupe ".$num."</option>";
+                  if ($all_recompense["5"]==$num){
+                    echo "<option value='".$num."' selected='selected'>Groupe ".$num."</option>";
+                  }
+                  else{
+                    echo "<option value='".$num."'>Groupe ".$num."</option>";
+                  }
                 } ?>
               </select>
             </td>
@@ -160,7 +307,12 @@
               <select name="moyenne">
                 <option value="none"></option>
                 <?php foreach ($all_grp as $num) {
-                  echo "<option value='".$num."'>Groupe ".$num."</option>";
+                  if ($all_recompense["6"]==$num){
+                    echo "<option value='".$num."' selected='selected'>Groupe ".$num."</option>";
+                  }
+                  else{
+                    echo "<option value='".$num."'>Groupe ".$num."</option>";
+                  }
                 } ?>
               </select>
             </td>
@@ -169,7 +321,6 @@
         <center>
           <div>
             <input class="btn btn-dark" type="submit" value="Attribuer"/>
-            <input class="btn btn-dark" type="reset" value="Réinitialiser"/>
           </div>
         </center>
       </form>

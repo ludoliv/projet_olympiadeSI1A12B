@@ -1,10 +1,12 @@
 package com.example.olivet.myapplication;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.util.Log;
@@ -24,14 +26,17 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
         buttonEnvoie = (Button)findViewById(R.id.buttonEnvoie);
         buttonConsulter = (Button)findViewById(R.id.buttonConsulter);
-        File f=new File("/data/data/com.example.olivet.myapplication/databases/db.sqlite");
+        final File f=new File("/data/data/com.example.olivet.myapplication/databases/db.sqlite");
 
         buttonEnvoie.setEnabled(false);
         buttonEnvoie.setBackgroundColor(Color.WHITE);
         buttonEnvoie.setTextColor(Color.GRAY);
         ConnectivityManager connManager = (ConnectivityManager) getSystemService(this.CONNECTIVITY_SERVICE);
         NetworkInfo mWifi = connManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
-        if(mWifi.isConnected()){
+        WifiManager wifiManager = (WifiManager)getApplicationContext().getSystemService(Context.WIFI_SERVICE);
+        WifiInfo wifiInfo = wifiManager.getConnectionInfo();
+        String ssid = wifiInfo.getSSID();
+        if(mWifi.isConnected() && ssid.equals("\"MSI 1103\"")){
             buttonConsulter.setEnabled(true);
             buttonConsulter.setBackgroundColor(Color.GRAY);
             buttonConsulter.setTextColor(Color.BLACK);
@@ -67,9 +72,9 @@ public class MainActivity extends Activity {
         buttonConsulter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                view.getContext().deleteDatabase("db.sqlite");
+                /*view.getContext().deleteDatabase("/data/data/com.example.olivet.myapplication/databases/db.sqlite");
 
-                //A DELETE
+
                 JuryManager juryMan = new JuryManager(view.getContext());
                 juryMan.open();
                 Jury jury12 = new Jury(12, "Martin", "banane");
@@ -80,14 +85,14 @@ public class MainActivity extends Activity {
 
                 GroupeManager grpMan = new GroupeManager(view.getContext());
                 grpMan.open();
-                Groupe paul = new Groupe(1, "STMG", "Paul", "Claude de France a Romorantin", "bite.png");
-                Groupe fred = new Groupe(2, "STMG", "Fred", "Claude de France a Romorantin", "alcool.png");
-                Groupe herbert = new Groupe(3, "STMG", "Herbert", "Claude de France a Romorantin", "bite.png");
-                Groupe apresPage = new Groupe(4, "STMG", "Après-Pause", "Claude de France a Romorantin", "bite.png");
+                Groupe paul = new Groupe(1, "Paul", "Claude de France a Romorantin", "bite.png");
+                Groupe fred = new Groupe(2, "Fred", "Claude de France a Romorantin", "alcool.png");
+                Groupe herbert = new Groupe(3, "Herbert", "Claude de France a Romorantin", "bite.png");
+                Groupe apresPause = new Groupe(4, "Après-Pause", "Claude de France a Romorantin", "bite.png");
                 grpMan.addGroupe(paul);
                 grpMan.addGroupe(fred);
                 grpMan.addGroupe(herbert);
-                grpMan.addGroupe(apresPage);
+                grpMan.addGroupe(apresPause);
                 grpMan.close();
 
                 HeureManager hMan = new HeureManager(view.getContext());
@@ -132,17 +137,18 @@ public class MainActivity extends Activity {
                 donMan.addDonne(donne1);
                 donMan.addDonne(donne2);
                 donMan.addDonne(donne3);
-                //A PLUS DELETE
+                donMan.close();
+                //A PLUS DELETE*/
+
+                if(f.exists() && !f.isDirectory()){
+                    startActivity(new Intent(MainActivity.this,Page_connexion.class));
+                }
+                else{
+                    startActivity(new Intent(MainActivity.this,Recuperation_Envoi.class));
+                }
 
 
-                startActivity(new Intent(MainActivity.this,Page_connexion.class));
             }
         });
     }
-
-
-
-
-
-
 }

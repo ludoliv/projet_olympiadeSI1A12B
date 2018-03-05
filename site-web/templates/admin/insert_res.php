@@ -29,9 +29,19 @@ function insertion($connexion, $originalite, $prototype, $demarche_si, $pluridis
       $stmt->bindValue(2,0);
       $stmt->execute();
     }
+    else{
+      $stmt->bindValue(1,0);
+      $stmt->bindValue(2,0);
+      $stmt->execute();
+    }
 
     if($prototype != "none"){
       $stmt->bindParam(1,$prototype);
+      $stmt->bindValue(2,1);
+      $stmt->execute();
+    }
+    else{
+      $stmt->bindValue(1,0);
       $stmt->bindValue(2,1);
       $stmt->execute();
     }
@@ -41,9 +51,19 @@ function insertion($connexion, $originalite, $prototype, $demarche_si, $pluridis
       $stmt->bindValue(2,2);
       $stmt->execute();
     }
+    else{
+      $stmt->bindValue(1,0);
+      $stmt->bindValue(2,2);
+      $stmt->execute();
+    }
 
     if($pluridisciplinarite != "none"){
       $stmt->bindParam(1,$pluridisciplinarite);
+      $stmt->bindValue(2,3);
+      $stmt->execute();
+    }
+    else{
+      $stmt->bindValue(1,0);
       $stmt->bindValue(2,3);
       $stmt->execute();
     }
@@ -51,7 +71,11 @@ function insertion($connexion, $originalite, $prototype, $demarche_si, $pluridis
     if($maitrise != "none"){
       $stmt->bindParam(1,$maitrise);
       $stmt->bindValue(2,4);
-
+      $stmt->execute();
+    }
+    else{
+      $stmt->bindValue(1,0);
+      $stmt->bindValue(2,4);
       $stmt->execute();
     }
 
@@ -60,9 +84,19 @@ function insertion($connexion, $originalite, $prototype, $demarche_si, $pluridis
       $stmt->bindValue(2,5);
       $stmt->execute();
     }
+    else{
+      $stmt->bindValue(1,0);
+      $stmt->bindValue(2,5);
+      $stmt->execute();
+    }
 
     if($moyenne != "none"){
       $stmt->bindParam(1,$moyenne);
+      $stmt->bindValue(2,6);
+      $stmt->execute();
+    }
+    else{
+      $stmt->bindValue(1,0);
       $stmt->bindValue(2,6);
       $stmt->execute();
     }
@@ -73,5 +107,5 @@ function insertion($connexion, $originalite, $prototype, $demarche_si, $pluridis
 }
 
 insertion($database, $originalite, $prototype, $demarche_si, $pluridisciplinarite, $maitrise, $dev_dur, $moyenne);
-header('Location: accueil_admin.php');
+header('Location: resultats_admin.php');
 ?>
