@@ -66,7 +66,9 @@ document.addEventListener("DOMContentLoaded", function(){
     let grp = document.getElementById('grp').value;
     let date = (document.getElementById('date').value).split('-');
     let hours =  document.getElementById('hours').value;
-    date = date[0]+"-"+date[2]+"-"+date[1];
+    date = date[0]+"-"+date[1]+"-"+date[2];
+    document.getElementById("deb-H").value = hours.split(" ")[0];
+    document.getElementById("fin-H").value = hours.split(" ")[2];
     let task =
     {
       'id': $('#planning').fullCalendar('clientEvents').length,

@@ -107,7 +107,7 @@
               <div class="form-group form-row">
                 <label for="date" class="col-1 col-sm-2 col-md-1 col-lg-1 col-form-label">Date</label>
                 <div class="col-12 col-sm-10 col-md-12 col-lg-12">
-                  <input type="date" pattern="yyyy-mm-dd" id="date" class="form-control"></input>
+                  <input type="date" pattern="dd-mm-yyyy" id="date" class="form-control" placeholder="dd-mm-yyyy" required></input>
                 </div>
               </div>
 
@@ -123,6 +123,8 @@
                      ?>
                   </select>
                 </div>
+                <input type="hidden" name="deb-H" id="deb-H"/>
+                <input type="hidden" name="fin-H" id="fin-H"/>
               </div>
 
               <div class="form-row justify-content-center">
