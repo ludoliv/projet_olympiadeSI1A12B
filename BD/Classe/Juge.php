@@ -8,12 +8,14 @@ class Juge
   private $_NumJury;
   private $_NumGroupe;
   private $_IdHeure;
+  private $_salle;
 
-  function __construct($NumJury,$NumGroupe,$idHeure)
+  function __construct($NumJury,$NumGroupe,$idHeure,$salle)
   {
     $this->_NumJury = $NumJury;
     $this->_NumGroupe = $NumGroupe;
     $this->_IdHeure = $idHeure;
+    $this->_salle = $salle;
   }
 
   public function get_NumJury(){
@@ -26,6 +28,14 @@ class Juge
 
   public function get_idHeure(){
     return $this->_IdHeure;
+  }
+
+  public function getSalle(){
+    return $this->_salle;
+  }
+
+  public function setSalle($newSalle){
+    $this->_salle = $newSalle;
   }
 
   public function setIdHeure($id)

@@ -195,12 +195,13 @@
          */
         try{
 
-            $statement = $connexion->prepare("INSERT INTO GROUPE (NumGroupe,NomProjet,Lycee,image_Projet) VALUES (:Num,:Nom,:Lycee,:img)");
+            $statement = $connexion->prepare("INSERT INTO GROUPE (NumGroupe,NomProjet,Lycee,numSalle,image_Projet) VALUES (:Num,:Nom,:Lycee,:salle,:img)");
 
             $statement->bindParam(':Num',$Num);
             $statement->bindParam(':Nom',$Nom);
             $statement->bindParam(':Lycee',$Lycee);
             $statement->bindParam(':img',$img);
+            $statement->bindParam(':salle',$salle);
 
             for($i = 0;$i < count($ListeGroupe);$i++)
             {
@@ -208,6 +209,7 @@
                 $Num = $ListeGroupe[$i]->getNumGroupe();
                 $Nom = $ListeGroupe[$i]->getNomProj();
                 $Lycee = $ListeGroupe[$i]->getLycee();
+                $salle = $ListeGroupe[$i]->getSalle();
                 $img = $ListeGroupe[$i]->getImageProjet();
 
                 // Execute the insertion
@@ -305,11 +307,12 @@
          */
         try{
 
-            $statement = $connexion->prepare("INSERT INTO JUGE (NumJury,NumGroupe,idHeure) VALUES (:NumJury,:NumGroupe,:id)");
+            $statement = $connexion->prepare("INSERT INTO JUGE (NumJury,NumGroupe,idHeure,numSalle) VALUES (:NumJury,:NumGroupe,:id,:NumSalle)");
 
             $statement->bindParam(':NumJury',$NumJury);
             $statement->bindParam(':NumGroupe',$NumGroupe);
             $statement->bindParam(':id',$id);
+            $statement->bindParam(':NumSalle',$Salle);
 
             for($i = 0;$i < count($ListeJuge);$i++)
             {
@@ -317,6 +320,7 @@
                 $NumJury = $ListeJuge[$i]->get_NumJury();
                 $NumGroupe = $ListeJuge[$i]->get_NumGroupe();
                 $id = $ListeJuge[$i]->get_idHeure();
+                $Salle = $ListeJuge[$i]->getSalle();
 
                 // Execute the insertion
                 $statement->execute();
