@@ -25,8 +25,8 @@
   <div class="container h-100">
     <div class="row justify-content-center h-100">
       <div class="row align-items-center">
-        <div class="jumbotron bg-dark">
-          <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+          <div class="jumbotron bg-dark">
             <form id="needs-validation" class="" method="POST" action="connect.php" novalidate>
               <h1 class="text-center text-white display-4">Authentification</h1>
               <div class="form-row">
@@ -54,6 +54,7 @@
       </div>
     </div>
   </div>
+  <img id="logo" />
   <script>
   (function() {
     'use strict';

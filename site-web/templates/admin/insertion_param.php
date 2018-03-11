@@ -4,5 +4,12 @@ $date = $_POST['date'];
 $sponsors = $_POST['sponsors'];
 $illu = $_POST['illustration'];
 
-echo $edition . " " . $date . " " . $sponsors . " " . $illu ;
+function insertParam($edition, $date, $sponsors, $illu){
+  echo $edition;
+  echo $date;
+  echo $sponsors;
+  echo $illu;
+}
+
+insertParam($edition, $date, $sponsors, $illu);
 ?>
