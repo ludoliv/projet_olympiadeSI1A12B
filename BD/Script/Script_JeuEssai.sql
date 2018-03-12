@@ -25,5 +25,11 @@ insert into DONNE values(2,1,2);
 
 insert into ADMINISTRATEUR values("Log","Passwd");
 
+insert into RECOMPENSE values (1,NULL,"Originalite");
+insert into RECOMPENSE values (2,NULL,"Prototype");
+insert into RECOMPENSE values (3,NULL,"DemarcheScientifique");
+insert into RECOMPENSE values (4,NULL,"pluriDisciplinarite");
+insert into RECOMPENSE values (5,NULL,"MaitriseScientifique");
+insert into RECOMPENSE values (6,NULL,"Communication");
 
 -- insert into HEURE values(1,'9:00','9:20');
