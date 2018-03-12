@@ -8,7 +8,8 @@ function insertParam($edition, $date, $sponsors, $illu){
   echo $edition;
   echo $date;
   echo $sponsors;
-  echo $illu;
+  $handle = fopen($_FILES["illustration"]["name"], 'r');
+  echo $handle;
 }
 
 insertParam($edition, $date, $sponsors, $illu);
