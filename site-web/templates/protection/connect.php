@@ -31,19 +31,3 @@ else {
   ";
 }
 ?>
-
-<!--
-<script>
-function afficherEr(){
-  $.ajax({
-                   url : 'connect.php',
-                   type : 'POST',
-                   dataType : 'html',
-                   success : function(code_html, statut){
-                     code_html = "<p> Erreur de mot de passe </p>";
-                     $(code_html).appendTo("#erreur");
-                   }
-                 });
-
-
-} -->
