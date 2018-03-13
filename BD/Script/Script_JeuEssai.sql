@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 insert into PERSONNE values(0,"BOUNY","Quentin");
 insert into PERSONNE values(1,"COUCKE","Maxime");
 insert into PERSONNE values(2,"CAMA","Thang-Long");
@@ -32,4 +33,3 @@ insert into RECOMPENSE values (4,NULL,"pluriDisciplinarite");
 insert into RECOMPENSE values (5,NULL,"MaitriseScientifique");
 insert into RECOMPENSE values (6,NULL,"Communication");
 
--- insert into HEURE values(1,'9:00','9:20');
