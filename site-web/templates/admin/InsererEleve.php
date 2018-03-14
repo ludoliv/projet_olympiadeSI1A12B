@@ -13,7 +13,9 @@ if(!isset($_SESSION['loginOK'])){
   header('Location: ../protection/connexion.php');
 }?>
 <div style="display:flex">
-  <?php include 'menu_admin.php'; ?>
+  <?php include 'menu_admin.php';
+        include '../InteractionsBD/InteractionsBD.php';
+  ?>
   <nav class="navbar navbar-expand-lg navbar-light navbar-right" style="margin-left: 11%">
 
     <div class="collapse navbar-collapse" id="navbar">
@@ -80,7 +82,7 @@ if(!isset($_SESSION['loginOK'])){
 
 ?>
 
-<form name="AjoutEleve" method="POST" style="padding-top: 2%">
+<form name="AjoutEleve" method="POST" style="padding-top: 2%" action="insertion_eleve.php">
   <h4>Formulaire d'ajout d'un élève :</h4>
   <table>
     <tr>
@@ -88,7 +90,7 @@ if(!isset($_SESSION['loginOK'])){
         <label style="padding-left: 2% ; padding-right: 2% ; padding-top: 2%">Nom de l'élève :</label>
       </td>
       <td>
-        <input type="text"></input>
+        <input type="text" name="Name" required></input>
       </td>
     </tr>
     <tr>
@@ -96,7 +98,7 @@ if(!isset($_SESSION['loginOK'])){
         <label style="padding-left: 2% ; padding-right: 2% ; padding-top: 2%">Prénom de l'élève :</label>
       </td>
       <td>
-        <input type="input"></input>
+        <input type="input" name="LastName" required></input>
       </td>
     </tr>
     <tr>
@@ -104,7 +106,7 @@ if(!isset($_SESSION['loginOK'])){
         <label style="padding-left: 2% ; padding-right: 2% ; padding-top: 2%">Filière de l'élève :</label>
       </td>
       <td>
-        <input type="input"></input>
+        <input type="input" name="Filiere" required></input>
       </td>
     </tr>
     <tr>
@@ -112,14 +114,16 @@ if(!isset($_SESSION['loginOK'])){
         <label style="padding-left: 2% ; padding-right: 2% ; padding-top: 2%"> Numéro de groupe : </label>
       </td>
       <td>
-        <select style="width: 50px">
+        <select style="width: 50px" name="Groupe" required>
           <?php
           foreach($grp as $g){
-            echo "<option>".$g."</option>";
+            echo  "<option>".$g."</option>";
           }
           ?>
         </select>
       </td>
     </tr>
+    </table> 
+    <input type="submit" value="Ajouter Eleves">
 </form>
 </body>

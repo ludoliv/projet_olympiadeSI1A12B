@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 insert into PERSONNE values(0,"BOUNY","Quentin");
 insert into PERSONNE values(1,"COUCKE","Maxime");
 insert into PERSONNE values(2,"CAMA","Thang-Long");
