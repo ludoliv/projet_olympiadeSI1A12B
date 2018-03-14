@@ -79,6 +79,26 @@
         }
     }
 
+    function getMaxIDNote($connexion)
+    {
+        // Writing the request
+        $request = "SELECT max(idNote) as max from NOTE";
+
+        // Getting the result after the query
+        $result = $connexion->query($request);
+
+        // Fetch the result in var $max
+        $max = $result->fetch();
+
+        // Testing the value of $max
+        if($max['max'] > 0){
+            return $max['max'];
+        }
+        else{
+            return 0;
+        }
+    }
+
 
     function insertPersonne($connexion,$ListePersonne)
     {
@@ -175,12 +195,13 @@
          */
         try{
 
-            $statement = $connexion->prepare("INSERT INTO GROUPE (NumGroupe,NomProjet,Lycee,image_Projet) VALUES (:Num,:Nom,:Lycee,:img)");
+            $statement = $connexion->prepare("INSERT INTO GROUPE (NumGroupe,NomProjet,Lycee,numSalle,image_Projet) VALUES (:Num,:Nom,:Lycee,:salle,:img)");
 
             $statement->bindParam(':Num',$Num);
             $statement->bindParam(':Nom',$Nom);
             $statement->bindParam(':Lycee',$Lycee);
             $statement->bindParam(':img',$img);
+            $statement->bindParam(':salle',$salle);
 
             for($i = 0;$i < count($ListeGroupe);$i++)
             {
@@ -188,6 +209,7 @@
                 $Num = $ListeGroupe[$i]->getNumGroupe();
                 $Nom = $ListeGroupe[$i]->getNomProj();
                 $Lycee = $ListeGroupe[$i]->getLycee();
+                $salle = $ListeGroupe[$i]->getSalle();
                 $img = $ListeGroupe[$i]->getImageProjet();
 
                 // Execute the insertion
@@ -285,11 +307,12 @@
          */
         try{
 
-            $statement = $connexion->prepare("INSERT INTO JUGE (NumJury,NumGroupe,idHeure) VALUES (:NumJury,:NumGroupe,:id)");
+            $statement = $connexion->prepare("INSERT INTO JUGE (NumJury,NumGroupe,idHeure,numSalle) VALUES (:NumJury,:NumGroupe,:id,:NumSalle)");
 
             $statement->bindParam(':NumJury',$NumJury);
             $statement->bindParam(':NumGroupe',$NumGroupe);
             $statement->bindParam(':id',$id);
+            $statement->bindParam(':NumSalle',$Salle);
 
             for($i = 0;$i < count($ListeJuge);$i++)
             {
@@ -297,6 +320,7 @@
                 $NumJury = $ListeJuge[$i]->get_NumJury();
                 $NumGroupe = $ListeJuge[$i]->get_NumGroupe();
                 $id = $ListeJuge[$i]->get_idHeure();
+                $Salle = $ListeJuge[$i]->getSalle();
 
                 // Execute the insertion
                 $statement->execute();
@@ -307,6 +331,87 @@
             echo $e->getMessage();
         }
     }
+
+    function insertNote($connexion,$ListeNote)
+    {
+        /**
+         * This function is inserting the Juge values 
+         * in the database
+         * 
+         * @author Quentin Bouny
+         * 
+         * @param PDO $connexion link with the Database
+         * @param array $ListeHeure list of the Heure that need to be inserted
+         */
+        try{
+            
+            $statement = $connexion->prepare("INSERT INTO NOTE (idNote,prototype,originalite,demarcheSI,pluriDisciplinarite,maitrise,devDurable) VALUES (:id,:proto,:ori,:demarche,:pluri,:maitrise,:DD)");
+
+            $statement->bindParam(':id',$id);
+            $statement->bindParam(':proto',$proto);
+            $statement->bindParam(':ori',$ori);
+            $statement->bindParam(':demarche',$demarche);
+            $statement->bindParam(':pluri',$pluri);
+            $statement->bindParam(':maitrise',$maitrise);
+            $statement->bindParam(':DD',$DD);
+
+            for($i = 0;$i < count($ListeJuge);$i++)
+            {
+                // Passing the value to the parameter
+                $id = $ListeNote[$i]->getID();
+                $proto = $ListeNote[$i]->getProto();
+                $ori = $ListeNote[$i]->getOrigin();
+                $pluri = $ListeNote[$i]->getPluriDiscipline();
+                $maitrise = $ListeNote[$i]->getMaitrise();
+                $DD = $ListeNote[$i]->getDurable();
+
+                // Execute the insertion
+                $statement->execute();
+            }
+        }
+        catch(Exception $e)
+        {
+            echo $e->getMessage();
+        }  
+    }
+
+    function insertDonne($connexion,$ListeDonne)
+    {
+        /**
+         * This function is inserting the Juge values 
+         * in the database
+         * 
+         * @author Quentin Bouny
+         * 
+         * @param PDO $connexion link with the Database
+         * @param array $ListeHeure list of the Heure that need to be inserted
+         */
+        try{
+
+            $statement = $connexion->prepare("INSERT INTO DONNE (NumJury,NumGroupe,idNote) VALUES (:NumJury,:NumGroupe,:id)");
+
+            $statement->bindParam(':NumJury',$NumJury);
+            $statement->bindParam(':NumGroupe',$NumGroupe);
+            $statement->bindParam(':id',$id);
+
+            for($i = 0;$i < count($ListeJuge);$i++)
+            {
+                // Passing the value to the parameter
+                $NumJury = $ListeJuge[$i]->get_NumJury();
+                $NumGroupe = $ListeJuge[$i]->get_NumGroupe();
+                $id = $ListeJuge[$i]->get_IdNote();
+
+                // Execute the insertion
+                $statement->execute();
+            }
+        }
+        catch(Exception $e)
+        {
+            echo $e->getMessage();
+        }
+    }
+
+
 
     function getPersonneFromGroupe($connexion,$idGroupe)
     {

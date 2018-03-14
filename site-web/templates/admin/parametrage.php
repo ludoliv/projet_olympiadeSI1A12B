@@ -1,9 +1,11 @@
-<html>
+<html >
 <head>
   <link rel="stylesheet" href="../../css/index.css"/>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 </head>
 
-<body>
+<body >
   <?php session_start();
   $_SESSION['connect']=0;
   if(!isset($_SESSION['loginOK'])){
@@ -12,43 +14,83 @@
 
   <?php include 'menu_admin.php'; ?>
 
-  <center><h1>Paramétrage du site</h1></center>
-  <h4>Renseignez les champs à mettre à jour :</h4>
-  <center>
-  <div style="background-color: #72eab4 ; padding: 2%">
-    <form method="post" action="insertion_param.php">
-    <label for="edition">Édition des Olympiades</label>
-    <input type="number" min="1" name="edition"/>
+  <h1 class="h1 text-center">Paramétrage du site</h1>
+  <div class="container">
+    <div class="jumbotron bg-dark text-white">
+      <h4 class="h4">Renseignez les champs à mettre à jour :</h4>
 
-    <br/>
+      <form method="POST" action="insertion_param.php" enctype=multipart/form-data>
+        <div class="form-group row">
+          <label for="edition" class="col-8 col-sm-8 col-md-8 col-lg-8 col-form-label">Édition des Olympiades</label>
+          <div class="col-sm-4">
+            <input id="edition" type="number" class="form-control" min="1" name="edition"/>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="date" class="col-8 col-sm-8 col-md-8 col-lg-8 col-form-label">Date</label>
+          <div class="col-sm-4">
+            <input id="date" name="date" type="date"/>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="sponsors" class="col-8 col-sm-8 col-md-8 col-lg-8 col-form-label">Logo Sponsors</label>
+          <div class="col-sm-4">
+            <input id="sponsors" name="sponsors" type="file" value="none"/>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="illustration" class="col-8 col-sm-8 col-md-8 col-lg-8 col-form-label">Logo Olympiades</label>
+          <div class="col-sm-4">
+            <input id="illu" name="illustration" type="file" value="none"/>
+          </div>
+        </div>
 
-    <label for="date">Date</label>
-    <input name="date" type="date"/>
-
-    <br/>
-
-    <label for="sponsors">Logo Sponsors</label>
-    <input name="sponsors" type="file"/>
-
-    <br/>
-
-    <label for="illustration">Logo Olympiades</label>
-    <input name="illustration" type="file"/>
-
-    <br/>
-
-    <input type="submit"/>
-    <button id="annuler" type="reset">Annuler</button>
-    </form>
+        <div class="text-center">
+          <button id="enr" class="btn btn-light">Enregistrer</button>
+          <button class="btn btn-light" type="reset">Effacer</button>
+        </div>
+      </form>
+      
+      <div id="err"></div>
+    </div>
   </div>
 
-  </center>
-
-  <script>
-    var btn = document.getElementById('annuler');
-    btn.onclick = function(){
-      document.location.href = "accueil_admin.php";
-    };
-  </script>
+<script>
+  let btn = document.getElementById("enr");
+  btn.onclick = function(e){
+    while(document.getElementById("err").firstChild){
+      document.getElementById("err").removeChild(document.getElementById("err").firstChild);
+    }
+    $("#err").append("<ul id='list-err'></ul>");
+    if(document.getElementById("edition").value == ""){
+      e.preventDefault();
+      $('#list-err').append('\
+        <li>Veuillez mettre un numéro d\'édition.</li>\
+      ');
+      $("#err").addClass("jumbotron bg-danger");
+    }
+    if(document.getElementById("date").valueAsDate == null){
+      e.preventDefault();
+      $('#list-err').append('\
+        <li>Veuillez mettre une date.</li>\
+      ');
+      $("#err").addClass("jumbotron bg-danger");
+    }
+    if(document.getElementById("sponsors").value == ""){
+      e.preventDefault();
+      $('#list-err').append('\
+        <li>Veuillez mettre un logo de sponsors.</li>\
+      ');
+      $("#err").addClass("jumbotron bg-danger");
+    }
+    if(document.getElementById("illu").value == ""){
+      e.preventDefault();
+      $('#list-err').append('\
+        <li>Veuillez mettre le logo de l\'événement.</li>\
+      ');
+      $("#err").addClass("jumbotron bg-danger");
+    }
+  }
+</script>
 </body>
 </html>

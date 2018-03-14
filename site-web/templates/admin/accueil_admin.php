@@ -14,31 +14,7 @@ if(!isset($_SESSION['loginOK'])){
 }?>
 <?php include 'menu_admin.php'; ?>
 
-<center><h1 class="vignets">Bienvenue, administrateur</h1></center>
-<center>
-  <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" style="width: 75% ; margin-top: 5%">
-    <div class="carousel-inner">
-      <div class="carousel-item active">
-        <img class="d-block w-100" src="http://www.unesourisetmoi.info/wall31/images/fonds-ecran-paysage_10.jpg" alt="First slide">
-      </div>
-      <div class="carousel-item">
-        <img class="d-block w-100" src="http://www.unesourisetmoi.info/wall31/images/fonds-ecran-paysage_05.jpg" alt="Second slide">
-      </div>
-      <div class="carousel-item">
-        <img class="d-block w-100" src="http://iwallpapers2.free.fr/images/Paysages/Hiver/Magnifique_fond_ecran_HD_-_Hiver.jpg" alt="Third slide">
-      </div>
-
-    </div>
-    <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="sr-only">Previous</span>
-    </a>
-    <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="sr-only">Next</span>
-    </a>
-  </div>
-</center>
+<h1 class="vignets text-center">Bienvenue, administrateur</h1>
 
 <script>
 

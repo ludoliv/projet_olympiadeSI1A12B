@@ -3,7 +3,7 @@
 <head>
 <link rel="stylesheet" href="../../css/index.css"/>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
 </head>
 <body>
@@ -12,13 +12,54 @@ $_SESSION['connect']=0;
 if(!isset($_SESSION['loginOK'])){
   header('Location: ../protection/connexion.php');
 }?>
-<?php include 'menu_admin.php'; ?>
+<div style="display:flex">
+  <?php include 'menu_admin.php'; ?>
 
-<div>
-  <nav class="nav nav-pills nav-justified">
-    <a class="nav-item nav-link active" href="">Active</a>
-    <a class="nav-item nav-link" href="#">Link</a>
-    <a class="nav-item nav-link" href="#">Link</a>
-    <a class="nav-item nav-link disabled" href="#">Disabled</a>
+  <nav class="navbar navbar-expand-lg navbar-light navbar-right" style="margin-left: 11%">
+
+    <div class="collapse navbar-collapse" id="navbar">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Élèves
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="#">Import CSV</a>
+            <a class="dropdown-item" href="InsererEleve.php">Créer</a>
+          </div>
+        </li>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Professeurs
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="#">Import CSV</a>
+            <a class="dropdown-item" href="#">Créer</a>
+          </div>
+        </li>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Groupes
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="#">Import CSV</a>
+            <a class="dropdown-item" href="#">Créer</a>
+          </div>
+        </li>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Jurys
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="#">Import CSV</a>
+            <a class="dropdown-item" href="#">Créer</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+
   </nav>
 </div>

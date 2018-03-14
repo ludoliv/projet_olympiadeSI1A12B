@@ -102,26 +102,26 @@ public class Planning extends Activity {
             if (i == 0){
                 matrixCursor.addRow(new Object[] { k,
                         getIntent().getExtras().getStringArrayList("nomProjet").get(0),
-                        getIntent().getExtras().getStringArrayList("heureD").get(0)+" - "
-                        + getIntent().getExtras().getStringArrayList("heureF").get(0) });
+                        getIntent().getExtras().getStringArrayList("heureD").get(0).substring(0,5)+" - "
+                        + getIntent().getExtras().getStringArrayList("heureF").get(0).substring(0,5) });
                 k += 1;
             }
             else if (getIntent().getExtras().getStringArrayList("heureF").get(i-1).equals(getIntent().getExtras().getStringArrayList("heureD").get(i))){
                 matrixCursor.addRow(new Object[] { k,
                         getIntent().getExtras().getStringArrayList("nomProjet").get(i),
-                        getIntent().getExtras().getStringArrayList("heureD").get(i)+" - "
-                                + getIntent().getExtras().getStringArrayList("heureF").get(i) });
+                        getIntent().getExtras().getStringArrayList("heureD").get(i).substring(0,5)+" - "
+                                + getIntent().getExtras().getStringArrayList("heureF").get(i).substring(0,5) });
                 k += 1;
             }
             else {
                 matrixCursor.addRow(new Object[] { k,"Pause",
-                        getIntent().getExtras().getStringArrayList("heureF").get(i-1)+" - "
-                                +getIntent().getExtras().getStringArrayList("heureD").get(i)});
+                        getIntent().getExtras().getStringArrayList("heureF").get(i-1).substring(0,5)+" - "
+                                +getIntent().getExtras().getStringArrayList("heureD").get(i).substring(0,5)});
                 k += 1;
                 matrixCursor.addRow(new Object[] { k,
                         getIntent().getExtras().getStringArrayList("nomProjet").get(i),
-                        getIntent().getExtras().getStringArrayList("heureD").get(i)+" - "
-                                + getIntent().getExtras().getStringArrayList("heureF").get(i) });
+                        getIntent().getExtras().getStringArrayList("heureD").get(i).substring(0,5)+" - "
+                                + getIntent().getExtras().getStringArrayList("heureF").get(i).substring(0,5) });
                 k += 1;
             }
         }
@@ -151,11 +151,9 @@ public class Planning extends Activity {
                     GroupeManager gpMan = new GroupeManager(view.getContext());
                     gpMan.open();
                     int idGp = gpMan.getNumGroupe(text);
-                    System.out.println(idGp);
                     gpMan.close();
                     boolean test = true;
                     int indice = 0;
-                    System.out.println(listeGrpNote.toString());
                     while (indice<listeGrpNote.size() && test){
                         ArrayList<Integer> listeNote = listeGrpNote.get(indice);
                         indice += 1;
@@ -254,10 +252,10 @@ public class Planning extends Activity {
                 .show();
     }
 
-    /*@Override
+    @Override
     public void onPause(){
         super.onPause();
         finish();
 
-    }*/
+    }
 }

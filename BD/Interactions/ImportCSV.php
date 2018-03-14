@@ -78,9 +78,10 @@ function getCSVforGroupe($connexion,$filename)
     {
         $Nom = $data[0];
         $Lycee = $data[1];
-        $chemin = $data[2];
+        $salle = $data[2];
+        $chemin = $data[3];
 
-        $g = new Groupe($id,$Nom,$Lycee,$chemin);
+        $g = new Groupe($id,$Nom,$Lycee,$salle,$chemin);
 
         if (!testPInListeG($tabGroupe,$g->getNumGroupe())) {
             array_push($tabGroupe,$g);
@@ -150,9 +151,10 @@ function getCSVforHeure($connexion,$filename)
         $Hfin = $data[1];
         $NumGroupe = $data[2];
         $NumJury = $data[3];
+        $Salle = $data[4];
         
         $Heure = new Heure($id,$Hdeb,$Hfin);
-        $Juge = new Juge($NumJury,$NumGroupe,$id);
+        $Juge = new Juge($NumJury,$NumGroupe,$id,$Salle);
 
         $resTest = testPInListeH($tabHeure,$Heure);
         if(!$resTest)
