@@ -13,8 +13,9 @@ if(!isset($_SESSION['loginOK'])){
   header('Location: ../protection/connexion.php');
 }?>
 <div style="display:flex">
-  <?php include 'menu_admin.php'; ?>
-
+  <?php include 'menu_admin.php';
+        include '../InteractionsBD/InteractionsBD.php';
+  ?>
   <nav class="navbar navbar-expand-lg navbar-light navbar-right" style="margin-left: 11%">
 
     <div class="collapse navbar-collapse" id="navbar">
@@ -54,7 +55,7 @@ if(!isset($_SESSION['loginOK'])){
             Jurys
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="#">Import CSV</a>
+            <a class="dropdown-item" href="insererJuryCSV.php">Import CSV</a>
             <a class="dropdown-item" href="insererJury.php">Créer</a>
           </div>
         </li>
@@ -63,3 +64,21 @@ if(!isset($_SESSION['loginOK'])){
 
   </nav>
 </div>
+
+<form name="AjoutEleve" method="POST" style="padding-top: 2%" action="insertion_jury.php" enctype="multipart/form-data">
+  <h4>Formulaire d'ajout d'un jury :</h4>
+  <table>
+    <tr>
+      <td style="width: 300px">
+        <label style="padding-left: 2% ; padding-right: 2% ; padding-top: 2%">Fichier CSV</label>
+      </td>
+      <td>
+        <input id="filename" type="text" name="file" required></input>
+        <input id="path" type="hidden" name="path"/>
+      </td>
+    </tr>
+    </table>
+    <input type="submit" value="Ajouter jury">
+</form>
+
+</body>
