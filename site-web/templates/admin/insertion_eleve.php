@@ -10,6 +10,9 @@
         $Prenom = $_POST["LastName"];
         $Filiere = $_POST["Filiere"];
         $Grp = $_POST["Groupe"];
+
+        echo $ID;
+        echo $Nom;
     
         $stmt1 = $db->prepare("insert into PERSONNE (ID,Nom,Prenom)values (?,?,?);");
         $stmt2 = $db->prepare("insert into ELEVE (IDEleve,Filiere,NumGroupe) values (?,?,?);");
@@ -29,5 +32,5 @@
         echo $e->getMessage();
     }
 
-    header('Location:InsererEleve.php');
+    //header('Location:InsererEleve.php');
 ?>
