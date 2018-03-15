@@ -36,7 +36,7 @@ if(!isset($_SESSION['loginOK'])){
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" href="#">Import CSV</a>
-            <a class="dropdown-item" href="InsererProfesseur.php">Créer</a>
+            <a class="dropdown-item" href="insererProfesseur.php">Créer</a>
           </div>
         </li>
 
