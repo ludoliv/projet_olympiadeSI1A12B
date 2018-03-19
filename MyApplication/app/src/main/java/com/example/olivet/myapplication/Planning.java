@@ -68,6 +68,9 @@ public class Planning extends Activity {
                         {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
+                                MainActivity.mainActivity.finish();
+                                Intent intent = new Intent(Planning.this, MainActivity.class);
+                                startActivity(intent);
                                 finish();
                             }
 
@@ -250,6 +253,9 @@ public class Planning extends Activity {
                 {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        MainActivity.mainActivity.finish();
+                        Intent intent = new Intent(Planning.this, MainActivity.class);
+                        startActivity(intent);
                         finish();
                     }
 
