@@ -13,18 +13,18 @@
 
         echo $ID;
         echo $Nom;
-    
+
         $stmt1 = $db->prepare("insert into PERSONNE (ID,Nom,Prenom)values (?,?,?);");
         $stmt2 = $db->prepare("insert into ELEVE (IDEleve,Filiere,NumGroupe) values (?,?,?);");
-    
+
         $stmt1->bindParam(1,$ID);
         $stmt1->bindParam(2,$Nom);
         $stmt1->bindParam(3,$Prenom);
-    
+
         $stmt2->bindParam(1,$ID);
         $stmt2->bindParam(2,$Filiere);
         $stmt2->bindParam(3,$Grp);
-    
+
         $stmt1->execute();
         $stmt2->execute();
     }
