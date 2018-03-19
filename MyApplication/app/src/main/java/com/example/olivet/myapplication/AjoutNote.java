@@ -13,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -24,7 +25,6 @@ public class AjoutNote extends Activity {
 
     ArrayList<Spinner> listeSpin = new ArrayList<Spinner>();
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -92,22 +92,6 @@ public class AjoutNote extends Activity {
         listeSpin.add(spinnerDem);
         listeSpin.add(spinnerProto);
         listeSpin.add(spinnerOri);
-
-
-        //Ajout des tooltips
-        TextView proto = (TextView) findViewById(R.id.txtproto);
-        proto.setTooltipText("Le prototype est fonctionnel, innovant et le travail réalisé est conséquent");
-        TextView ori = (TextView) findViewById(R.id.txtori);
-        ori.setTooltipText("Le projet est original et innovant. « Vous seriez prêt à l’acquérir »");
-        TextView dem = (TextView) findViewById(R.id.txtdem);
-        dem.setTooltipText("Le projet s’appui su des expérimentations, de la simulation théorique et numérique avec une comparaison entre le réel et le modèle et une optimisation.");
-        TextView mait = (TextView) findViewById(R.id.txtmait);
-        mait.setTooltipText("Le développement théorique est conséquent et bien maitrisé.");
-        TextView pluri = (TextView) findViewById(R.id.txtpluri);
-        pluri.setTooltipText("Le projet mobilise plusieurs discipline (SI, Math, Phy, …) et plusieurs technologies (Transfert d’énergie, traitement de l’information, mécanique, …)");
-        TextView com = (TextView) findViewById(R.id.txtcom);
-        com.setTooltipText("La présentation est claire, structurée, dynamique. Elle valorise le travail d’équipe. Les réponses aux questions sont pertinentes.");
-
 
 
         //FAire les add au meme moment apres creation et verif le sens
@@ -213,6 +197,29 @@ public class AjoutNote extends Activity {
                 startActivity(i);
             }
         });
+    }
+    public void onClickProto(View v){
+        Toast.makeText(getApplicationContext(),"Le prototype est fonctionnel, innovant et le travail réalisé est conséquent",Toast.LENGTH_LONG).show();
+    }
+
+    public void onClickOri(View v){
+        Toast.makeText(getApplicationContext(),"Le projet est original et innovant. « Vous seriez prêt à l’acquérir »",Toast.LENGTH_LONG).show();
+    }
+
+    public void onClickMait(View v){
+        Toast.makeText(getApplicationContext(),"Le développement théorique est conséquent et bien maitrisé.",Toast.LENGTH_LONG).show();
+    }
+
+    public void onClickDem(View v){
+        Toast.makeText(getApplicationContext(),"Le projet s’appui su des expérimentations, de la simulation théorique et numérique avec une comparaison entre le réel et le modèle et une optimisation.",Toast.LENGTH_LONG).show();
+    }
+
+    public void onClickPluri(View v){
+        Toast.makeText(getApplicationContext(),"Le projet mobilise plusieurs discipline (SI, Math, Phy, …) et plusieurs technologies (Transfert d’énergie, traitement de l’information, mécanique, …)",Toast.LENGTH_LONG).show();
+    }
+
+    public void onClickCom(View v){
+        Toast.makeText(getApplicationContext(),"La présentation est claire, structurée, dynamique. Elle valorise le travail d’équipe. Les réponses aux questions sont pertinentes.",Toast.LENGTH_LONG).show();
     }
 
     @Override

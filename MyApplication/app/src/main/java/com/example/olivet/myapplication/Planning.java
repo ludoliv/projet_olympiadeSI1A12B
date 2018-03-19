@@ -100,6 +100,7 @@ public class Planning extends Activity {
         k += 1;
         for (int i = 0; i < getIntent().getExtras().getStringArrayList("nomProjet").size(); i++){
             if (i == 0){
+                //System.out.println(getIntent().getExtras().getStringArrayList("heureD").get(0));
                 matrixCursor.addRow(new Object[] { k,
                         getIntent().getExtras().getStringArrayList("nomProjet").get(0),
                         getIntent().getExtras().getStringArrayList("heureD").get(0).substring(0,5)+" - "
@@ -159,15 +160,19 @@ public class Planning extends Activity {
                         indice += 1;
                         String couleur = "#389f38";//Vert
                         if (idGp == listeNote.get(0)) {
-                            int fin = 0;
+                            int fin = 1;
                             while (fin < listeNote.size() && couleur.equals("#389f38")) {
                                 if (sommeListeSansPre(listeNote) == 0) {
                                     // Set a background color for ListView regular row/item
                                     couleur = "#dddf1d";//Jaune
-                                } else if (listeNote.get(fin) == null) {
+                                    System.out.println("Jaune: " + sommeListeSansPre(listeNote));
+                                }
+                                if (listeNote.get(fin) == null) {
                                     // Set the background color for alternate row/item
                                     couleur = "#df1d1d";//Rouge
+                                    System.out.println("Rouge 1: " + listeNote.get(fin));
                                 }
+                                System.out.println("Rouge 1: " + listeNote.get(fin));
                                 fin += 1;
                                 test = false;
                             }

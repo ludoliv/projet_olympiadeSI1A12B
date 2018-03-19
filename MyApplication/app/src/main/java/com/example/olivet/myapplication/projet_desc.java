@@ -19,6 +19,7 @@ import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -173,27 +174,57 @@ public class projet_desc extends Activity {
             public View getView(int position, View convertView, ViewGroup parent){
                 // Get the current item from ListView
                 View view = super.getView(position,convertView,parent);
-                switch(position) {
-                    case 0:
-                        view.setTooltipText("Le projet est original et innovant. « Vous seriez prêt à l’acquérir »"); break;
-                    case 1:
-                        view.setTooltipText("Le prototype est fonctionnel, innovant et le travail réalisé est conséquent"); break;
-                    case 2:
-                        view.setTooltipText("Le projet s’appui su des expérimentations, de la simulation théorique et numérique avec une comparaison entre le réel et le modèle et une optimisation."); break;
-                    case 3:
-                        view.setTooltipText("Le projet mobilise plusieurs discipline (SI, Math, Phy, …) et plusieurs technologies (Transfert d’énergie, traitement de l’information, mécanique, …)"); break;
-                    case 4:
-                        view.setTooltipText("Le développement théorique est conséquent et bien maitrisé."); break;
-                    case 5:
-                        view.setTooltipText("La présentation est claire, structurée, dynamique. Elle valorise le travail d’équipe. Les réponses aux questions sont pertinentes."); break;
-                }
                 return view;
             }
         };
 
 // ...qui va remplir l'objet ListView
         ListView lv = (ListView) findViewById(R.id.lv);
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                      @Override
+                                      public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                                          TextView tv = view.findViewById(R.id.textViewCol1);
+                                          switch(i) {
+                                              case 0:
+                                                  onClickOri(); break;
+                                              case 1:
+                                                  onClickProto(); break;
+                                              case 2:
+                                                  onClickDem(); break;
+                                              case 3:
+                                                  onClickPluri(); break;
+                                              case 4:
+                                                  onClickMait(); break;
+                                              case 5:
+                                                  onClickCom(); break;
+                                          }
+                                      }
+                                  });
         lv.setAdapter(adapter);
+    }
+
+    public void onClickProto(){
+        Toast.makeText(getApplicationContext(),"Le prototype est fonctionnel, innovant et le travail réalisé est conséquent",Toast.LENGTH_LONG).show();
+    }
+
+    public void onClickOri(){
+        Toast.makeText(getApplicationContext(),"Le projet est original et innovant. « Vous seriez prêt à l’acquérir »",Toast.LENGTH_LONG).show();
+    }
+
+    public void onClickMait(){
+        Toast.makeText(getApplicationContext(),"Le développement théorique est conséquent et bien maitrisé.",Toast.LENGTH_LONG).show();
+    }
+
+    public void onClickDem(){
+        Toast.makeText(getApplicationContext(),"Le projet s’appui su des expérimentations, de la simulation théorique et numérique avec une comparaison entre le réel et le modèle et une optimisation.",Toast.LENGTH_LONG).show();
+    }
+
+    public void onClickPluri(){
+        Toast.makeText(getApplicationContext(),"Le projet mobilise plusieurs discipline (SI, Math, Phy, …) et plusieurs technologies (Transfert d’énergie, traitement de l’information, mécanique, …)",Toast.LENGTH_LONG).show();
+    }
+
+    public void onClickCom(){
+        Toast.makeText(getApplicationContext(),"La présentation est claire, structurée, dynamique. Elle valorise le travail d’équipe. Les réponses aux questions sont pertinentes.",Toast.LENGTH_LONG).show();
     }
 
     @Override
