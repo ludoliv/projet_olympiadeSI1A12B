@@ -44,13 +44,31 @@
             <input id="illu" name="illustration" type="file" value="none"/>
           </div>
         </div>
+        <div class="form-group row">
+          <label for="upsti" class="col-8 col-sm-8 col-md-8 col-lg-8 col-form-label">Logo UPSTI</label>
+          <div class="col-sm-4">
+            <input id="upsti" name="upsti" type="file" value="none"/>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="bandeau" class="col-8 col-sm-8 col-md-8 col-lg-8 col-form-label">Bandeau partenaires</label>
+          <div class="col-sm-4">
+            <input id="bandeau" name="bandeau" type="file" value="none"/>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="iut" class="col-8 col-sm-8 col-md-8 col-lg-8 col-form-label">Logo IUT</label>
+          <div class="col-sm-4">
+            <input id="iut" name="iut" type="file" value="none"/>
+          </div>
+        </div>
 
         <div class="text-center">
           <button id="enr" class="btn btn-light">Enregistrer</button>
           <button class="btn btn-light" type="reset">Effacer</button>
         </div>
       </form>
-      
+
       <div id="err"></div>
     </div>
   </div>
