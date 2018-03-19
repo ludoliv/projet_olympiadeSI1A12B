@@ -4,12 +4,14 @@ class Groupe{
     private $_NomProj;
     private $_Lycee;
     private $_ImageProjet;
+    private $_Salle;
 
-    public function __construct($groupe,$Proj,$Lycee,$img)
+    public function __construct($groupe,$Proj,$Lycee,$Salle,$img)
     {
         $this->_NumGroupe = $groupe;
         $this->_NomProj = $Proj;
         $this->_Lycee = $Lycee;
+        $this->_Salle = $Salle;
         $this->_ImageProjet = $img;
     }
 
@@ -23,6 +25,14 @@ class Groupe{
 
     public function getLycee(){
         return $this->_Lycee;
+    }
+
+    public function getSalle(){
+        return $this->_Salle;
+    }
+
+    public function setSalle($newSalle){
+        $this->_Salle = $newSalle;
     }
 
     public function getImageProjet(){

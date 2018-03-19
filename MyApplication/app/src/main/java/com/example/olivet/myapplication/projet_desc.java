@@ -7,7 +7,9 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.MatrixCursor;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -153,10 +155,10 @@ public class projet_desc extends Activity {
         startManagingCursor(matrixCursor);
         matrixCursor.addRow(new Object[] { 1,"Originalité",getIntent().getExtras().getIntegerArrayList("listeNote").get(1)});
         matrixCursor.addRow(new Object[] { 2,"Prototype",getIntent().getExtras().getIntegerArrayList("listeNote").get(2) });
-        matrixCursor.addRow(new Object[] { 3,"Démarche SI",getIntent().getExtras().getIntegerArrayList("listeNote").get(3) });
+        matrixCursor.addRow(new Object[] { 3,"Démarche Scientifique",getIntent().getExtras().getIntegerArrayList("listeNote").get(3) });
         matrixCursor.addRow(new Object[] { 4,"Pluridisciplinarité",getIntent().getExtras().getIntegerArrayList("listeNote").get(4) });
-        matrixCursor.addRow(new Object[] { 5,"Maîtrise",getIntent().getExtras().getIntegerArrayList("listeNote").get(5) });
-        matrixCursor.addRow(new Object[] { 6,"Développement Durable",getIntent().getExtras().getIntegerArrayList("listeNote").get(6) });
+        matrixCursor.addRow(new Object[] { 5,"Maîtrise Scientifique",getIntent().getExtras().getIntegerArrayList("listeNote").get(5) });
+        matrixCursor.addRow(new Object[] { 6,"Communication",getIntent().getExtras().getIntegerArrayList("listeNote").get(6) });
 
 // on prendra les données des colonnes 1 et 2...
         String[] from = new String[] {"col1", "col2"};
@@ -166,10 +168,25 @@ public class projet_desc extends Activity {
 
 // création de l'objet SimpleCursorAdapter...
         SimpleCursorAdapter adapter = new SimpleCursorAdapter(this, R.layout.row_item, matrixCursor, from, to, 0){
+            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public View getView(int position, View convertView, ViewGroup parent){
                 // Get the current item from ListView
                 View view = super.getView(position,convertView,parent);
+                switch(position) {
+                    case 0:
+                        view.setTooltipText("Le projet est original et innovant. « Vous seriez prêt à l’acquérir »"); break;
+                    case 1:
+                        view.setTooltipText("Le prototype est fonctionnel, innovant et le travail réalisé est conséquent"); break;
+                    case 2:
+                        view.setTooltipText("Le projet s’appui su des expérimentations, de la simulation théorique et numérique avec une comparaison entre le réel et le modèle et une optimisation."); break;
+                    case 3:
+                        view.setTooltipText("Le projet mobilise plusieurs discipline (SI, Math, Phy, …) et plusieurs technologies (Transfert d’énergie, traitement de l’information, mécanique, …)"); break;
+                    case 4:
+                        view.setTooltipText("Le développement théorique est conséquent et bien maitrisé."); break;
+                    case 5:
+                        view.setTooltipText("La présentation est claire, structurée, dynamique. Elle valorise le travail d’équipe. Les réponses aux questions sont pertinentes."); break;
+                }
                 return view;
             }
         };

@@ -12,15 +12,15 @@
         $img = $_POST["img"];
 
         echo $num;
-    
+
         $stmt1 = $db->prepare("insert into GROUPE (NumGroupe,NomProjet,Lycee,numSalle,image_Projet) values (?,?,?,?,?);");
-    
+
         $stmt1->bindParam(1,$ID);
         $stmt1->bindParam(2,$Nom);
         $stmt1->bindParam(3,$Lycee);
         $stmt1->bindParam(4,$num);
         $stmt1->bindParam(5,$img);
-    
+
         $stmt1->execute();
     }
     catch(Exception $e){

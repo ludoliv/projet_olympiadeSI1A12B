@@ -35,11 +35,11 @@ if(isset($action))
 
 				while  ($row = $res->fetch()) {
 
-					array_push($listeGrp, array('NumGroupe'=>$row[2],"NomProj"=>$row[3],"Lycee"=>$row[4],"image_Projet"=>$row[5]));
+					array_push($listeGrp, array('NumGroupe'=>$row[2],"NomProj"=>$row[4],"Lycee"=>$row[5],"image_Projet"=>$row[6]));
 
-					array_push($relation, array('NumJury'=>$row[1],'NumGroupe'=>$row[2],'idHeure'=>$row[00]));
+					array_push($relation, array('NumJury'=>$row[1],'NumGroupe'=>$row[2],'idHeure'=>$row0]));
 
-					array_push($listeHeure, array('idHeure'=>$row[0],'hDeb'=>$row[8],'hFin'=>$row[9]));
+					array_push($listeHeure, array('idHeure'=>$row[0],'hDeb'=>$row[9],'hFin'=>$row[10]));
 				}
 			}
 			catch(PDOException $e)
