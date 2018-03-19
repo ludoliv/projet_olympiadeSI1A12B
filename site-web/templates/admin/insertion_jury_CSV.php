@@ -1,7 +1,7 @@
 <?php
-    require '../Interactions/Connexion.php';
-    require '../Interactions/InteractionsBD.php';
-    require '../Interactions/ImportCSV.php';
+    require '../../../BD/Interactions/Connexion.php';
+    require '../../../BD/Interactions/InteractionsBD.php';
+    require '../../../BD/Interactions/ImportCSV.php';
 
     try{
         $db = connect_database();

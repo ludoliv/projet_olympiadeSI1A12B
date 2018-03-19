@@ -35,7 +35,7 @@ if(!isset($_SESSION['loginOK'])){
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" href="#">Import CSV</a>
-            <a class="dropdown-item" href="#">Créer</a>
+            <a class="dropdown-item" href="InsererProfesseur.php">Créer</a>
           </div>
         </li>
 
@@ -54,7 +54,7 @@ if(!isset($_SESSION['loginOK'])){
             Jurys
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="#">Import CSV</a>
+            <a class="dropdown-item" href="insererJuryCSV.php">Import CSV</a>
             <a class="dropdown-item" href="insererJury.php">Créer</a>
           </div>
         </li>

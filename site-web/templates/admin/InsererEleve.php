@@ -14,7 +14,7 @@ if(!isset($_SESSION['loginOK'])){
 }?>
 <div style="display:flex">
   <?php include 'menu_admin.php';
-        include '../InteractionsBD/InteractionsBD.php';
+        include '../../../BD/Interactions/InteractionsBD.php';
   ?>
   <nav class="navbar navbar-expand-lg navbar-light navbar-right" style="margin-left: 11%">
 
@@ -66,7 +66,7 @@ if(!isset($_SESSION['loginOK'])){
 </div>
 
 <?php
-  include '../Interactions/Connexion.php';
+  include '../../../BD/Interactions/Connexion.php';
 
   $db = connect_database();
   $grp = array();
@@ -123,7 +123,7 @@ if(!isset($_SESSION['loginOK'])){
         </select>
       </td>
     </tr>
-    </table> 
+    </table>
     <input type="submit" value="Ajouter Eleves">
 </form>
 </body>

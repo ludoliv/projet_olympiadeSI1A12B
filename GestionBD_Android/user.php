@@ -15,11 +15,11 @@ $jury=array();
 
 if(isset($action))
 {
-	// $username = $_POST["username"];
-	// $pwd = $_POST["password"];
-	$username='Login';
-	$pwd='password';
-	
+	$username = $_POST["username"];
+	$pwd = $_POST["password"];
+	// $username='Login';
+	// $pwd='password';
+
 	if($action==ACTION_LOGIN) //Action login
 	{
 		if(login($cnn, $username, $pwd))
@@ -35,18 +35,18 @@ if(isset($action))
 
 				while  ($row = $res->fetch()) {
 
-					array_push($listeGrp, array('NumGroupe'=>$row[2],"NomProj"=>$row[3],"Lycee"=>$row[4],"image_Projet"=>$row[5]));
+					array_push($listeGrp, array('NumGroupe'=>$row[2],"NomProj"=>$row[4],"Lycee"=>$row[5],"image_Projet"=>$row[6],"numSalle"=>$row[3]));
 
-					array_push($relation, array('NumJury'=>$row[1],'NumGroupe'=>$row[2],'idHeure'=>$row[00]));
+					array_push($relation, array('NumJury'=>$row[1],'NumGroupe'=>$row[2],'idHeure'=>$row[0]));
 
-					array_push($listeHeure, array('idHeure'=>$row[0],'hDeb'=>$row[8],'hFin'=>$row[9]));
+					array_push($listeHeure, array('idHeure'=>$row[0],'hDeb'=>$row[9],'hFin'=>$row[10]));
 				}
 			}
 			catch(PDOException $e)
 			{
 				echo $e->getMessage();
 			}
-		
+
 		}
 		else
 		{
@@ -55,8 +55,8 @@ if(isset($action))
 		}
 	}
 }
-//Print result as json	
-echo json_encode(array('result' => $result,"Jury"=>$jury,"Groupe"=>$listeGrp,"Heures"=>$listeHeure,"relation"=>$relation));	
+//Print result as json
+echo json_encode(array('result' => $result,"Jury"=>$jury,"Groupe"=>$listeGrp,"Heures"=>$listeHeure,"relation"=>$relation));
 
 function insertUser($cnn, $username, $pwd)
 {
