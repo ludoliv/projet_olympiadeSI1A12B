@@ -13,8 +13,8 @@
 
   <?php
     include 'menu_admin.php';
-    include '../Interactions/InteractionsBD.php';
-    include '../Interactions/Connexion.php';
+    include '../../../BD/Interactions/InteractionsBD.php';
+    include '../../../BD/Interactions/Connexion.php';
 
     $db = connect_database();
   ?>
@@ -49,13 +49,13 @@
             $all_recompense[$row["idRecompense"]] = $row["idGroupe"];
           }
 
-          $rec0 = 0;
-          $rec1 = 0;
-          $rec2 = 0;
-          $rec3 = 0;
-          $rec4 = 0;
-          $rec5 = 0;
-          $rec6 = 0;
+          $rec0 = NULL;
+          $rec1 = NULL;
+          $rec2 = NULL;
+          $rec3 = NULL;
+          $rec4 = NULL;
+          $rec5 = NULL;
+          $rec6 = NULL;
 
           while($row = $stmt->fetch()){
             array_push($all_grp,$row['NumGroupe']);
@@ -65,7 +65,7 @@
 
             if(is_nan($liste['Originalite'])){
               $rec0+=1;
-              if ($rec0 != $all_recompense["0"]){
+              if ($rec0 != $all_recompense["NULL"]){
                 echo "<td>". "/" ."</td>";
               }
               else{
@@ -135,7 +135,7 @@
 
             else{
               $rec0+=1;
-              if ($rec0 != $all_recompense["0"]){
+              if ($rec0 != $all_recompense["NULL"]){
                 echo "<td>".$liste['Originalite']."</td>";
               }
               else{
@@ -184,10 +184,10 @@
 
               $rec6+=1;
               if ($rec6 != $all_recompense["6"]){
-                echo "<td>".($liste['Originalite'] + $liste['Prototype'] + $liste['DemarcheSI'] + $liste['pluriDisciplinarite'] + $liste['Maitrise'] + $liste['devDurable'])/7 ."</td>";
+                echo "<td>".round(($liste['Originalite'] + $liste['Prototype'] + $liste['DemarcheSI'] + $liste['pluriDisciplinarite'] + $liste['Maitrise'] + $liste['devDurable'])/6, 2) ."</td>";
               }
               else{
-                echo "<td bgcolor='#FFE469'>".($liste['Originalite'] + $liste['Prototype'] + $liste['DemarcheSI'] + $liste['pluriDisciplinarite'] + $liste['Maitrise'] + $liste['devDurable'])/7 ."</td>";
+                echo "<td bgcolor='#FFE469'>".round(($liste['Originalite'] + $liste['Prototype'] + $liste['DemarcheSI'] + $liste['pluriDisciplinarite'] + $liste['Maitrise'] + $liste['devDurable'])/6, 2) ."</td>";
               }
             }
 
@@ -217,7 +217,7 @@
                 <option value="none"></option>
                 <?php
                   foreach ($all_grp as $num) {
-                    if ($all_recompense["0"]==$num){
+                    if ($all_recompense["NULL"]==$num){
                       echo "<option value='".$num."' selected='selected'>Groupe ".$num."</option>";
                     }
                     else{

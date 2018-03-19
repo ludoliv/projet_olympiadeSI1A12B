@@ -6,7 +6,6 @@
   <a href="resultats_admin.php">Résultats</a>
   <a href="parametrage.php">Paramétrage</a>
   <a href="planning.php">Planning</a>
-  <a href="jury.php">Jury</a>
   <a href="../protection/deconnexion.php">Déconnexion</a>
 </div>
 

@@ -1,6 +1,6 @@
 <?php
 
-require '../Interactions/Connexion.php';
+require '../../../BD/Interactions/Connexion.php';
 
 $database = connect_database();
 
@@ -30,7 +30,7 @@ function insertion($connexion, $originalite, $prototype, $demarche_si, $pluridis
       $stmt->execute();
     }
     else{
-      $stmt->bindValue(1,0);
+      $stmt->bindValue(1,NULL);
       $stmt->bindValue(2,0);
       $stmt->execute();
     }
@@ -41,7 +41,7 @@ function insertion($connexion, $originalite, $prototype, $demarche_si, $pluridis
       $stmt->execute();
     }
     else{
-      $stmt->bindValue(1,0);
+      $stmt->bindValue(1,NULL);
       $stmt->bindValue(2,1);
       $stmt->execute();
     }
@@ -52,7 +52,7 @@ function insertion($connexion, $originalite, $prototype, $demarche_si, $pluridis
       $stmt->execute();
     }
     else{
-      $stmt->bindValue(1,0);
+      $stmt->bindValue(1,NULL);
       $stmt->bindValue(2,2);
       $stmt->execute();
     }
@@ -63,7 +63,7 @@ function insertion($connexion, $originalite, $prototype, $demarche_si, $pluridis
       $stmt->execute();
     }
     else{
-      $stmt->bindValue(1,0);
+      $stmt->bindValue(1,NULL);
       $stmt->bindValue(2,3);
       $stmt->execute();
     }
@@ -74,7 +74,7 @@ function insertion($connexion, $originalite, $prototype, $demarche_si, $pluridis
       $stmt->execute();
     }
     else{
-      $stmt->bindValue(1,0);
+      $stmt->bindValue(1,NULL);
       $stmt->bindValue(2,4);
       $stmt->execute();
     }
@@ -85,7 +85,7 @@ function insertion($connexion, $originalite, $prototype, $demarche_si, $pluridis
       $stmt->execute();
     }
     else{
-      $stmt->bindValue(1,0);
+      $stmt->bindValue(1,NULL);
       $stmt->bindValue(2,5);
       $stmt->execute();
     }
@@ -96,7 +96,7 @@ function insertion($connexion, $originalite, $prototype, $demarche_si, $pluridis
       $stmt->execute();
     }
     else{
-      $stmt->bindValue(1,0);
+      $stmt->bindValue(1,NULL);
       $stmt->bindValue(2,6);
       $stmt->execute();
     }

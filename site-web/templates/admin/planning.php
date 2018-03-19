@@ -18,8 +18,8 @@
 
   <?php
     include 'menu_admin.php';
-    include '../Interactions/InteractionsBD.php';
-    include '../Interactions/Connexion.php';
+    include '../../../BD/Interactions/InteractionsBD.php';
+    include '../../../BD/Interactions/Connexion.php';
 
     $db = connect_database();
     $all_grp = array();
@@ -74,12 +74,12 @@
       <div id="outils" class="row">
         <div id="ajout" class="col-12 col-sm-12 col-md-12 col-lg-12">
           <div>
-            <form id="add-task-form" class="jumbotron bg-dark text-white">
+            <form id="add-task-form" class="jumbotron bg-dark text-white" action="insert-plan.php">
               <h1 class="h1 text-center">Nouvelle tâche</h1>
               <div class="form-group form-row">
                 <label for="jury" class="col-1 col-sm-2 col-md-1 col-lg-1 col-form-label">Jury</label>
                 <div class="col-12 col-sm-10 col-md-12 col-lg-12">
-                  <select id="jury" class="form-control">
+                  <select id="jury" class="form-control" name="jury_val">
                     <option value="-1"></option>
                     <?php
                     for($i = 0; $i<sizeof($all_jury); $i++){

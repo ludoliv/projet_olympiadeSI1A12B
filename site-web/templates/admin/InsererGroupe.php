@@ -13,8 +13,9 @@ if(!isset($_SESSION['loginOK'])){
   header('Location: ../protection/connexion.php');
 }?>
 <div style="display:flex">
-  <?php include 'menu_admin.php'; ?>
-
+  <?php include 'menu_admin.php';
+        include '../../../BD/Interactions/InteractionsBD.php';
+  ?>
   <nav class="navbar navbar-expand-lg navbar-light navbar-right" style="margin-left: 11%">
 
     <div class="collapse navbar-collapse" id="navbar">
@@ -35,7 +36,7 @@ if(!isset($_SESSION['loginOK'])){
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" href="#">Import CSV</a>
-            <a class="dropdown-item" href="#">Créer</a>
+            <a class="dropdown-item" href="InsererProfesseur.php">Créer</a>
           </div>
         </li>
 
@@ -45,7 +46,7 @@ if(!isset($_SESSION['loginOK'])){
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" href="#">Import CSV</a>
-            <a class="dropdown-item" href="#">Créer</a>
+            <a class="dropdown-item" href="InsererGroupe.php">Créer</a>
           </div>
         </li>
 
@@ -63,3 +64,43 @@ if(!isset($_SESSION['loginOK'])){
 
   </nav>
 </div>
+
+<form name="AjoutEleve" method="POST" style="padding-top: 2%" action="insertion_groupe.php">
+  <h4>Formulaire d'ajout d'un groupe :</h4>
+  <table>
+    <tr>
+      <td style="width: 300px">
+        <label style="padding-left: 2% ; padding-right: 2% ; padding-top: 2%">Nom du projet :</label>
+      </td>
+      <td>
+        <input type="text" name="Name" required></input>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <label style="padding-left: 2% ; padding-right: 2% ; padding-top: 2%">Lycée :</label>
+      </td>
+      <td>
+        <input type="input" name="lycee" required></input>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <label style="padding-left: 2% ; padding-right: 2% ; padding-top: 2%">Numéro de salle :</label>
+      </td>
+      <td>
+        <input type="input" name="num" required></input>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <label style="padding-left: 2% ; padding-right: 2% ; padding-top: 2%">Chemin de l'image du projet :</label>
+      </td>
+      <td>
+        <input type="input" name="img" required></input>
+      </td>
+    </tr>
+    </table>
+    <input type="submit" value="Ajouter Groupe">
+</form>
+</body>

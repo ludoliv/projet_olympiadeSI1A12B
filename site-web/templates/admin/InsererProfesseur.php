@@ -36,7 +36,7 @@ if(!isset($_SESSION['loginOK'])){
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" href="#">Import CSV</a>
-            <a class="dropdown-item" href="InsererProfesseur.php">Créer</a>
+            <a class="dropdown-item" href="insererProfesseur.php">Créer</a>
           </div>
         </li>
 
@@ -72,22 +72,22 @@ if(!isset($_SESSION['loginOK'])){
   $grp = array();
 
   try{
-    $stmt = $db->prepare("SELECT NumGroupe FROM GROUPE where NumGroupe != 0");
+    $stmt = $db->prepare("SELECT NumJury FROM JURY");
     $stmt->execute();
     while($row = $stmt->fetch()){
-      array_push($grp, $row["NumGroupe"]);
+      array_push($grp, $row["NumJury"]);
     }
   }
   catch(Exception $e){}
 
 ?>
 
-<form name="AjoutEleve" method="POST" style="padding-top: 2%" action="insertion_eleve.php">
-  <h4>Formulaire d'ajout d'un élève :</h4>
+<form name="AjoutProfesseur" method="POST" style="padding-top: 2%" action="insertion_professeur.php">
+  <h4>Formulaire d'ajout d'un professeur :</h4>
   <table>
     <tr>
       <td style="width: 300px">
-        <label style="padding-left: 2% ; padding-right: 2% ; padding-top: 2%">Nom de l'élève :</label>
+        <label style="padding-left: 2% ; padding-right: 2% ; padding-top: 2%">Nom du professeur :</label>
       </td>
       <td>
         <input type="text" name="Name" required></input>
@@ -95,7 +95,7 @@ if(!isset($_SESSION['loginOK'])){
     </tr>
     <tr>
       <td>
-        <label style="padding-left: 2% ; padding-right: 2% ; padding-top: 2%">Prénom de l'élève :</label>
+        <label style="padding-left: 2% ; padding-right: 2% ; padding-top: 2%">Prénom du professeur:</label>
       </td>
       <td>
         <input type="input" name="LastName" required></input>
@@ -103,18 +103,10 @@ if(!isset($_SESSION['loginOK'])){
     </tr>
     <tr>
       <td>
-        <label style="padding-left: 2% ; padding-right: 2% ; padding-top: 2%">Filière de l'élève :</label>
+        <label style="padding-left: 2% ; padding-right: 2% ; padding-top: 2%"> Numéro de jury : </label>
       </td>
       <td>
-        <input type="input" name="Filiere" required></input>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <label style="padding-left: 2% ; padding-right: 2% ; padding-top: 2%"> Numéro de groupe : </label>
-      </td>
-      <td>
-        <select style="width: 50px" name="Groupe" required>
+        <select style="width: 50px" name="Jury" required>
           <?php
           foreach($grp as $g){
             echo  "<option>".$g."</option>";
@@ -124,6 +116,6 @@ if(!isset($_SESSION['loginOK'])){
       </td>
     </tr>
     </table>
-    <input type="submit" value="Ajouter Eleves">
+    <input type="submit" value="Ajouter professeur">
 </form>
 </body>

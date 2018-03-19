@@ -18,6 +18,7 @@
   <div class="container">
     <div class="jumbotron bg-dark text-white">
       <h4 class="h4">Renseignez les champs à mettre à jour :</h4>
+
       <form method="POST" action="insertion_param.php" enctype=multipart/form-data>
         <div class="form-group row">
           <label for="edition" class="col-8 col-sm-8 col-md-8 col-lg-8 col-form-label">Édition des Olympiades</label>
@@ -49,6 +50,7 @@
           <button class="btn btn-light" type="reset">Effacer</button>
         </div>
       </form>
+      
       <div id="err"></div>
     </div>
   </div>
