@@ -5,12 +5,7 @@
   <a href="insererDonnees.php">Ajout</a>
   <a href="resultats_admin.php">Résultats</a>
   <a href="parametrage.php">Paramétrage</a>
-<<<<<<< HEAD
   <a href="planning.php">Planning</a>
-  <a href="jury.php">Jury</a>
-=======
-  <a href="planning.php">Planning</a>
->>>>>>> Thang/master
   <a href="../protection/deconnexion.php">Déconnexion</a>
 </div>
 
