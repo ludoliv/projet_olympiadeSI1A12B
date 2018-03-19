@@ -68,7 +68,6 @@ public class Page_connexion extends Activity {
                         heureD.add(juges.getString(juges.getColumnIndex("hDeb")));
                         heureF.add(juges.getString(juges.getColumnIndex("hFin")));
                         numGrp.add(juges.getInt(juges.getColumnIndex("NumGroupe")));
-                        System.out.println("sex : "+juges.getString(juges.getColumnIndex("numSalle")));
                         numSalles.add(juges.getString(juges.getColumnIndex("numSalle")));
                     }
                 }

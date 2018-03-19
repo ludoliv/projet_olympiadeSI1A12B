@@ -99,7 +99,6 @@ public class Planning extends Activity {
         matrixCursor.addRow(new Object[] { k,"Nom évenement","Horaire", "Salle" });
         k += 1;
         for (int i = 0; i < getIntent().getExtras().getStringArrayList("nomProjet").size(); i++){
-           // System.out.println(getIntent().getExtras().getStringArrayList("numSalle").get(i));
             if (i == 0){
                 matrixCursor.addRow(new Object[] { k,
                         getIntent().getExtras().getStringArrayList("nomProjet").get(0),
@@ -169,14 +168,11 @@ public class Planning extends Activity {
                                 if (sommeListeSansPre(listeNote) == 0) {
                                     // Set a background color for ListView regular row/item
                                     couleur = "#dddf1d";//Jaune
-                                    System.out.println("Jaune: " + sommeListeSansPre(listeNote));
                                 }
                                 if (listeNote.get(fin) == null) {
                                     // Set the background color for alternate row/item
                                     couleur = "#df1d1d";//Rouge
-                                    System.out.println("Rouge 1: " + listeNote.get(fin));
                                 }
-                                System.out.println("Rouge 1: " + listeNote.get(fin));
                                 fin += 1;
                                 test = false;
                             }
