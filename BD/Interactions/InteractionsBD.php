@@ -185,11 +185,11 @@
     function insertGroupe($connexion,$ListeGroupe)
     {
         /**
-         * This function is inserting the groups 
+         * This function is inserting the groups
          * in the database
-         * 
+         *
          * @author Quentin Bouny
-         * 
+         *
          * @param PDO $connexion link with the Database
          * @param array $ListeGroupe list of the groups that need to be inserted
          */
@@ -225,11 +225,11 @@
     function insertJury($connexion,$ListeJury)
     {
         /**
-         * This function is inserting the jury 
+         * This function is inserting the jury
          * in the database
-         * 
+         *
          * @author Quentin Bouny
-         * 
+         *
          * @param PDO $connexion link with the Database
          * @param array $ListeJury list of the jury that need to be inserted
          */
@@ -261,11 +261,11 @@
     function insertHeure($connexion,$ListeHeure)
     {
         /**
-         * This function is inserting the Heure 
+         * This function is inserting the Heure
          * in the database
-         * 
+         *
          * @author Quentin Bouny
-         * 
+         *
          * @param PDO $connexion link with the Database
          * @param array $ListeHeure list of the Heure that need to be inserted
          */
@@ -297,11 +297,11 @@
     function insertJuge($connexion,$ListeJuge)
     {
         /**
-         * This function is inserting the Juge values 
+         * This function is inserting the Juge values
          * in the database
-         * 
+         *
          * @author Quentin Bouny
-         * 
+         *
          * @param PDO $connexion link with the Database
          * @param array $ListeHeure list of the Heure that need to be inserted
          */
@@ -335,16 +335,16 @@
     function insertNote($connexion,$ListeNote)
     {
         /**
-         * This function is inserting the Juge values 
+         * This function is inserting the Juge values
          * in the database
-         * 
+         *
          * @author Quentin Bouny
-         * 
+         *
          * @param PDO $connexion link with the Database
          * @param array $ListeHeure list of the Heure that need to be inserted
          */
         try{
-            
+
             $statement = $connexion->prepare("INSERT INTO NOTE (idNote,prototype,originalite,demarcheSI,pluriDisciplinarite,maitrise,devDurable) VALUES (:id,:proto,:ori,:demarche,:pluri,:maitrise,:DD)");
 
             $statement->bindParam(':id',$id);
@@ -372,17 +372,17 @@
         catch(Exception $e)
         {
             echo $e->getMessage();
-        }  
+        }
     }
 
     function insertDonne($connexion,$ListeDonne)
     {
         /**
-         * This function is inserting the Juge values 
+         * This function is inserting the Juge values
          * in the database
-         * 
+         *
          * @author Quentin Bouny
-         * 
+         *
          * @param PDO $connexion link with the Database
          * @param array $ListeHeure list of the Heure that need to be inserted
          */
@@ -418,9 +418,9 @@
         /**
          * This function is getting the Personne that are in
          * the groupe specified with the parameter $idGroupe
-         * 
+         *
          * @author Quentin Bouny
-         * 
+         *
          * @param PDO $connexion link with the Database
          * @param int $idGroupe id of the groupe we're searching members
          */
@@ -454,9 +454,9 @@
         /**
          * This function is getting the Personne that are in
          * the ELEVE table
-         * 
+         *
          * @author Quentin Bouny
-         * 
+         *
          * @param PDO $connexion link with the Database
          */
         try{
@@ -486,7 +486,7 @@
     {
         /**
          * @author Quentin Bouny
-         * 
+         *
          * @param PDO:$connexion link with the Database
          * @param int:$numGroupe number of the group we want to get the notes
          */
@@ -501,22 +501,22 @@
             {
                 $id = $donnees['idNote'];
                 $req = "select * from NOTE where idNote = $id";
-                
+
                 $data = $connexion->query($req);
                 $rep = $data->fetch();
-                
+
                 $Liste["Prototype"] += $rep['prototype'];
                 $Liste["Originalite"] += $rep['originalite'];
-                $Liste["DemarcheSI"] += $rep['demarcheSI'];
+                $Liste["DemarcheSI"] += $rep['DemarcheScientifique'];
                 $Liste["pluriDisciplinarite"] += $rep['pluriDisciplinarite'];
-                $Liste["Maitrise"] += $rep['maitrise'];
-                $Liste["devDurable"] += $rep['devDurable'];
+                $Liste["Maitrise"] += $rep['MaitriseScientifique'];
+                $Liste["devDurable"] += $rep['Communication'];
             }
             $NB = $reponse->rowCount();
 
             if ($NB == 0)
             {
-                return array("Prototype"=>0,"Originalite"=> 0,"DemarcheSI"=>0,"pluriDisciplinarite"=>0,"Maitrise"=>0,"devDurable"=>0);
+                return array("Prototype"=>-1,"Originalite"=>-1,"DemarcheSI"=>-1,"pluriDisciplinarite"=>-1,"Maitrise"=>-1,"devDurable"=>-1);
             }
             else
             {
@@ -541,11 +541,11 @@
     {
         /**
          * @author Quentin Bouny
-         * 
+         *
          * @param PDO $connexion Link to the database
          * @param String $Login the login that need to be checked
          * @param String $password the password that need to be checked
-         * 
+         *
          */
         try
         {
@@ -555,7 +555,7 @@
             $rep = $connexion->query($prep1);
 
             $test = $rep->fetch();
-            if ( ($test['login'] == $Login) && ($test['MotDePasse'] == $password) ) 
+            if ( ($test['login'] == $Login) && ($test['MotDePasse'] == $password) )
             {
                 return 'Admin';
             }
@@ -583,9 +583,9 @@
         /**
          * This function is getting the Personne that are in
          * the PROFESSEUR table
-         * 
+         *
          * @author Quentin Bouny
-         * 
+         *
          * @param PDO $connexion link with the Database
          */
         try{
@@ -616,9 +616,9 @@
        /**
          * This function is getting the heure that are in
          * the HEURE table
-         * 
+         *
          * @author Quentin Bouny
-         * 
+         *
          * @param PDO $connexion link with the Database
          */
         try{
@@ -641,7 +641,7 @@
         catch(PDOException $e)
         {
             echo $e.getMessage();
-        } 
+        }
     }
 
     function getGroupe($connexion)
@@ -649,9 +649,9 @@
        /**
          * This function is getting the groups that are in
          * the GROUPE table
-         * 
+         *
          * @author Quentin Bouny
-         * 
+         *
          * @param PDO $connexion link with the Database
          */
         try{
@@ -675,7 +675,7 @@
         catch(PDOException $e)
         {
             echo $e.getMessage();
-        } 
+        }
     }
 
     function getJury($connexion)
@@ -683,9 +683,9 @@
        /**
          * This function is getting the jurys that are in
          * the JURY table
-         * 
+         *
          * @author Quentin Bouny
-         * 
+         *
          * @param PDO $connexion link with the Database
          */
         try{
@@ -708,7 +708,7 @@
         catch(PDOException $e)
         {
             echo $e.getMessage();
-        } 
+        }
     }
 
 ?>

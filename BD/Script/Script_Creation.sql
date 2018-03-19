@@ -50,7 +50,7 @@ create table NOTE(
     idNote int,
     prototype int,
     originalite int,
-    DémarcheScientifique int,
+    DemarcheScientifique int,
     pluriDisciplinarite int,
     MaitriseScientifique  int,
     Communication int,
@@ -62,7 +62,7 @@ create table RECOMPENSE(
     idGroupe int,
     NomCategorie varchar(30),
     FOREIGN KEY(idGroupe) REFERENCES GROUPE(NumGroupe),
-    CONSTRAINT Pk_RECOMPENSE UNIQUE(idRecompense,idGroupe)
+    CONSTRAINT Pk_RECOMPENSE UNIQUE(idGroupe)
 );
 
 create table JUGE(

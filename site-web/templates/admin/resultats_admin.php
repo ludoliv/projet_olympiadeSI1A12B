@@ -49,13 +49,13 @@
             $all_recompense[$row["idRecompense"]] = $row["idGroupe"];
           }
 
-          $rec0 = NULL;
-          $rec1 = NULL;
-          $rec2 = NULL;
-          $rec3 = NULL;
-          $rec4 = NULL;
-          $rec5 = NULL;
-          $rec6 = NULL;
+          $rec0 = 0;
+          $rec1 = 0;
+          $rec2 = 0;
+          $rec3 = 0;
+          $rec4 = 0;
+          $rec5 = 0;
+          $rec6 = 0;
 
           while($row = $stmt->fetch()){
             array_push($all_grp,$row['NumGroupe']);
@@ -63,9 +63,10 @@
             echo "<tr>";
             echo "<td>".$row['NumGroupe']."</td>";
 
-            if(is_nan($liste['Originalite'])){
+            //echo $liste['Originalite'];
+            if($liste['Originalite']==-1){
               $rec0+=1;
-              if ($rec0 != $all_recompense["NULL"]){
+              if ($rec0 != $all_recompense["1"]){
                 echo "<td>". "/" ."</td>";
               }
               else{
@@ -73,9 +74,9 @@
               }
             }
 
-            if(is_nan($liste['Prototype'])){
+            if($liste['Prototype']==-1){
               $rec1+=1;
-              if ($rec1 != $all_recompense["1"]){
+              if ($rec1 != $all_recompense["2"]){
                 echo "<td>". "/" ."</td>";
               }
               else{
@@ -83,9 +84,9 @@
               }
             }
 
-            if(is_nan($liste['DemarcheSI'])){
+            if($liste['DemarcheSI']==-1){
               $rec2+=1;
-              if ($rec2 != $all_recompense["2"]){
+              if ($rec2 != $all_recompense["3"]){
                 echo "<td>". "/" ."</td>";
               }
               else{
@@ -93,9 +94,9 @@
               }
             }
 
-            if(is_nan($liste['pluriDisciplinarite'])){
+            if($liste['pluriDisciplinarite']==-1){
               $rec3+=1;
-              if ($rec3 != $all_recompense["3"]){
+              if ($rec3 != $all_recompense["4"]){
                 echo "<td>". "/" ."</td>";
               }
               else{
@@ -103,9 +104,9 @@
               }
             }
 
-            if(is_nan($liste['Maitrise'])){
+            if($liste['Maitrise']==-1){
               $rec4+=1;
-              if ($rec4 != $all_recompense["4"]){
+              if ($rec4 != $all_recompense["5"]){
                 echo "<td>". "/" ."</td>";
               }
               else{
@@ -113,9 +114,9 @@
               }
             }
 
-            if(is_nan($liste['devDurable'])){
+            if($liste['devDurable']==-1){
               $rec5+=1;
-              if ($rec5 != $all_recompense["5"]){
+              if ($rec5 != $all_recompense["6"]){
                 echo "<td>". "/" ."</td>";
               }
               else{
@@ -123,9 +124,9 @@
               }
             }
 
-            if(is_nan($liste['Originalite']) OR is_nan($liste['Prototype']) OR is_nan($liste['DemarcheSI']) OR is_nan($liste['pluriDisciplinarite']) OR is_nan($liste['Maitrise']) OR is_nan($liste['devDurable'])){
+            if($liste['Originalite']==-1 OR $liste['Prototype']==-1 OR $liste['DemarcheSI']==-1 OR $liste['pluriDisciplinarite']==-1 OR $liste['Maitrise']==-1 OR $liste['devDurable']==-1){
               $rec6+=1;
-              if ($rec6 != $all_recompense["6"]){
+              if ($rec6 != $all_recompense["7"]){
                 echo "<td>". "/" ."</td>";
               }
               else{
@@ -135,7 +136,7 @@
 
             else{
               $rec0+=1;
-              if ($rec0 != $all_recompense["NULL"]){
+              if ($rec0 != $all_recompense["1"]){
                 echo "<td>".$liste['Originalite']."</td>";
               }
               else{
@@ -143,7 +144,7 @@
               }
 
               $rec1+=1;
-              if ($rec1 != $all_recompense["1"]){
+              if ($rec1 != $all_recompense["2"]){
                 echo "<td>".$liste['Prototype']."</td>";
               }
               else{
@@ -151,7 +152,7 @@
               }
 
               $rec2+=1;
-              if ($rec2 != $all_recompense["2"]){
+              if ($rec2 != $all_recompense["3"]){
                 echo "<td>".$liste['DemarcheSI']."</td>";
               }
               else{
@@ -159,7 +160,7 @@
               }
 
               $rec3+=1;
-              if ($rec3 != $all_recompense["3"]){
+              if ($rec3 != $all_recompense["4"]){
                 echo "<td>".$liste['pluriDisciplinarite']."</td>";
               }
               else{
@@ -167,7 +168,7 @@
               }
 
               $rec4+=1;
-              if ($rec4 != $all_recompense["4"]){
+              if ($rec4 != $all_recompense["5"]){
                 echo "<td>".$liste['Maitrise']."</td>";
               }
               else{
@@ -175,7 +176,7 @@
               }
 
               $rec5+=1;
-              if ($rec5 != $all_recompense["5"]){
+              if ($rec5 != $all_recompense["6"]){
                 echo "<td>".$liste['devDurable']."</td>";
               }
               else{
@@ -183,7 +184,7 @@
               }
 
               $rec6+=1;
-              if ($rec6 != $all_recompense["6"]){
+              if ($rec6 != $all_recompense["7"]){
                 echo "<td>".round(($liste['Originalite'] + $liste['Prototype'] + $liste['DemarcheSI'] + $liste['pluriDisciplinarite'] + $liste['Maitrise'] + $liste['devDurable'])/6, 2) ."</td>";
               }
               else{
@@ -217,7 +218,7 @@
                 <option value="none"></option>
                 <?php
                   foreach ($all_grp as $num) {
-                    if ($all_recompense["NULL"]==$num){
+                    if ($all_recompense["1"]==$num){
                       echo "<option value='".$num."' selected='selected'>Groupe ".$num."</option>";
                     }
                     else{
@@ -231,7 +232,7 @@
               <select name="prototype">
                 <option value="none"></option>
                 <?php foreach ($all_grp as $num) {
-                  if ($all_recompense["1"]==$num){
+                  if ($all_recompense["2"]==$num){
                     echo "<option value='".$num."' selected='selected'>Groupe ".$num."</option>";
                   }
                   else{
@@ -245,7 +246,7 @@
               <select name="demarche_si">
                 <option value="none"></option>
                 <?php foreach ($all_grp as $num) {
-                  if ($all_recompense["2"]==$num){
+                  if ($all_recompense["3"]==$num){
                     echo "<option value='".$num."' selected='selected'>Groupe ".$num."</option>";
                   }
                   else{
@@ -262,7 +263,7 @@
               <select name="pluridisciplinarite">
                 <option value="none"></option>
                 <?php foreach ($all_grp as $num) {
-                  if ($all_recompense["3"]==$num){
+                  if ($all_recompense["4"]==$num){
                     echo "<option value='".$num."' selected='selected'>Groupe ".$num."</option>";
                   }
                   else{
@@ -276,7 +277,7 @@
               <select name="maitrise">
                 <option value="none"></option>
                 <?php foreach ($all_grp as $num) {
-                  if ($all_recompense["4"]==$num){
+                  if ($all_recompense["5"]==$num){
                     echo "<option value='".$num."' selected='selected'>Groupe ".$num."</option>";
                   }
                   else{
@@ -290,7 +291,7 @@
               <select name="developpement_durable">
                 <option value="none"></option>
                 <?php foreach ($all_grp as $num) {
-                  if ($all_recompense["5"]==$num){
+                  if ($all_recompense["6"]==$num){
                     echo "<option value='".$num."' selected='selected'>Groupe ".$num."</option>";
                   }
                   else{
@@ -307,7 +308,7 @@
               <select name="moyenne">
                 <option value="none"></option>
                 <?php foreach ($all_grp as $num) {
-                  if ($all_recompense["6"]==$num){
+                  if ($all_recompense["7"]==$num){
                     echo "<option value='".$num."' selected='selected'>Groupe ".$num."</option>";
                   }
                   else{
