@@ -5,4 +5,17 @@
   <a href="../protection/deconnexion.php">Déconnexion</a>
 </div>
 
+<<<<<<< HEAD
 <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; Menu</span>
+=======
+<span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; Menu</span>
+<script>
+function openNav() {
+    document.getElementById("mySidenav").style.width = "250px";
+}
+
+function closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
+}
+</script>
+>>>>>>> Thang/master

@@ -13,8 +13,8 @@
 
   <?php
     include 'menu_admin.php';
-    include '../Interactions/InteractionsBD.php';
-    include '../Interactions/Connexion.php';
+    include '../../../BD/Interactions/InteractionsBD.php';
+    include '../../../BD/Interactions/Connexion.php';
 
     $db = connect_database();
   ?>

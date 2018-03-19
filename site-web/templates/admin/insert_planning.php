@@ -1,6 +1,6 @@
 <?php
 
-require "../Interactions/Connexion.php";
+require "../../../BD/Interactions/Connexion.php";
 
 $database = connect_database();
 

@@ -1,6 +1,12 @@
 <?php
+<<<<<<< HEAD
     require '../Interactions/Connexion.php';
     require '../Interactions/InteractionsBD.php';
+=======
+
+    require '../../../BD/Interactions/Connexion.php';
+    require '../../../BD/Interactions/InteractionsBD.php';
+>>>>>>> Thang/master
 
     try{
         $db = connect_database();

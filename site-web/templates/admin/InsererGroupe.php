@@ -14,7 +14,7 @@ if(!isset($_SESSION['loginOK'])){
 }?>
 <div style="display:flex">
   <?php include 'menu_admin.php';
-        include '../InteractionsBD/InteractionsBD.php';
+        include '../../../BD/Interactions/InteractionsBD.php';
   ?>
   <nav class="navbar navbar-expand-lg navbar-light navbar-right" style="margin-left: 11%">
 
@@ -100,7 +100,7 @@ if(!isset($_SESSION['loginOK'])){
         <input type="input" name="img" required></input>
       </td>
     </tr>
-    </table> 
+    </table>
     <input type="submit" value="Ajouter Groupe">
 </form>
 </body>

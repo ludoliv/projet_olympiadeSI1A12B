@@ -1,8 +1,13 @@
 <?php
 $selected = $_POST['select'];
 // echo "<p>".$selected."</p>";
+<<<<<<< HEAD
 
 include '../Interactions/Connexion.php';
+=======
+
+include '../../../BD/Interactions/Connexion.php';
+>>>>>>> Thang/master
 
 $db = connect_database();
 $all_grp = array();
