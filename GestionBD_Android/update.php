@@ -21,7 +21,7 @@
       $stmt->bindParam(7, $data_decode['Notes'][$i][6]);
       $stmt->execute();
     }
-    return 0.5;
+    return 0;
   }
   function insererDonne($data){
     $query = "INSERT INTO table (NumJury, NumGroupe, idNote) VALUES (?, ?, ?) ON DUPLICATE KEY UPDATE id = id";
@@ -32,7 +32,7 @@
       $stmt->bindParam(3, $data_decode['Donne'][$i][2]);
       $stmt->execute();
     }
-    return 0.5;
+    return 0;
   }
   /* Donne INSERT INTO table (a, b, c)
     VALUES (1, 45, 6)
