@@ -3,7 +3,7 @@
   $data=$_POST['data'];
   $data_decode=json_decode($data,true);
   function insererDonne($data_decode, $cnn){
-    $query = "INSERT INTO DONNE (NumJury, NumGroupe, idNote) VALUES (?, ?, ?) ON DUPLICATE KEY UPDATE id = id";
+    $query = "INSERT INTO DONNE (NumJury, NumGroupe, idNote) VALUES (?, ?, ?) ON DUPLICATE KEY UPDATE idNote = idNote";
     for($i=0;$i<sizeof($data_decode['Donne']);$i++){
       try{
         $stmt = $cnn->prepare($query);
