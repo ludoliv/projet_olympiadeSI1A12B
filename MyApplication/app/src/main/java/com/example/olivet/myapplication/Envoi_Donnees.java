@@ -80,17 +80,19 @@ public class Envoi_Donnees extends Activity {
             donneManager.open();
             Cursor cursordonne=donneManager.getDonnes();
             JSONArray listeDonne=new JSONArray();
+            System.out.println("avant while");
             while(cursordonne.moveToNext()){
                 JSONObject donne=new JSONObject();
                 try {
-                    donne.put("NumJury",cursornote.getInt(cursordonne.getColumnIndex("NumJury")));
-                    donne.put("NumGroupe",cursornote.getInt(cursordonne.getColumnIndex("NumGroupe")));
-                    donne.put("idNote",cursornote.getInt(cursordonne.getColumnIndex("idNote")));
+                    donne.put("NumJury",cursordonne.getInt(cursordonne.getColumnIndex("NumJury")));
+                    donne.put("NumGroupe",cursordonne.getInt(cursordonne.getColumnIndex("NumGroupe")));
+                    donne.put("idNote",cursordonne.getInt(cursordonne.getColumnIndex("idNote")));
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
                 listeDonne.put(donne);
             }
+            System.out.println("fin while");
             try {
                 dico_des_donnees.put("Donne",listeDonne);
             } catch (JSONException e) {
@@ -101,7 +103,7 @@ public class Envoi_Donnees extends Activity {
             JSONObject jObjResult;
             HashMap<String,String> data=new HashMap<String,String>();
             data.put("data",dico_des_donnees.toString());
-            System.out.println(dico_des_donnees.toString());
+            System.out.println("dico :"+dico_des_donnees.toString());
             try {
                 jObjResult = m_ServiceAccess.convertJSONString2Obj(m_ServiceAccess.getJSONStringWithParam_POST(Donnees_BD.ENVOI_URL, data));
                 return jObjResult.getInt("resultat");
@@ -119,14 +121,18 @@ public class Envoi_Donnees extends Activity {
             if (Donnees_BD.RESULT_SUCCESS==res){
                 Toast.makeText(getApplicationContext(), "Données envoyés", Toast.LENGTH_LONG).show();
 
+                MainActivity.mainActivity.finish();
                 Intent i=new Intent(getApplicationContext(),MainActivity.class);
                 startActivity(i);
+                finish();
             }
             else{
-                Toast.makeText(getApplicationContext(),"Données Fail", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),"Echec de l'envoi des données", Toast.LENGTH_LONG).show();
 
+                MainActivity.mainActivity.finish();
                 Intent i=new Intent(getApplicationContext(),MainActivity.class);
                 startActivity(i);
+                finish();
             }
 
         }
