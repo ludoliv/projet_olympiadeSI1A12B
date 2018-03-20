@@ -64,7 +64,7 @@ function insertion($connexion, $originalite, $prototype, $demarche_si, $pluridis
     if($demarche_si != "none"){
       $stmt2->bindParam(1,$demarche_si);
       $stmt2->execute();
-      
+
       if(testNote($stmt2,$demarche_si,"DemarcheScientifique"))
       {
         $stmt->bindParam(1,$demarche_si);
@@ -81,7 +81,7 @@ function insertion($connexion, $originalite, $prototype, $demarche_si, $pluridis
     if($pluridisciplinarite != "none"){
       $stmt2->bindParam(1,$pluridisciplinarite);
       $stmt2->execute();
-      
+
       if(testNote($stmt2,$pluridisciplinarite,"pluriDisciplinarite"))
       {
         $stmt->bindParam(1,$pluridisciplinarite);
@@ -98,7 +98,7 @@ function insertion($connexion, $originalite, $prototype, $demarche_si, $pluridis
     if($maitrise != "none"){
       $stmt2->bindParam(1,$maitrise);
       $stmt2->execute();
-      
+
       if(testNote($stmt2,$maitrise,"MaitriseScientifique"))
       {
         $stmt->bindParam(1,$maitrise);
@@ -115,7 +115,7 @@ function insertion($connexion, $originalite, $prototype, $demarche_si, $pluridis
     if($dev_dur != "none"){
       $stmt2->bindParam(1,$dev_dur);
       $stmt2->execute();
-      
+
       if(testNote($stmt2,$dev_dur,"Communication"))
       {
         $stmt->bindParam(1,$dev_dur);
@@ -155,7 +155,7 @@ header('Location: resultats_admin.php');
 function testNote($statement,$note,$categorie){
   while($row = $statement->fetch())
   {
-    if($row[$categorie] == $note)
+    if($row[$categorie] != 0)
     {
       return true;
     }

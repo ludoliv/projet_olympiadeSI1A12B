@@ -10,7 +10,7 @@ $iut = $_POST['iut'];
 
 function insertParam($db, $edition, $date, $sponsors, $illu, $upsti, $bandeau, $iut){
   try{
-    $stmt = $db->prepare("UPDATE OLYMPIADES SET NumEdition = ?, LogOlympiades = ?, LogoSponsor = ?, LogoUPSTI = ?, datetimeOlymp = ?, BandeauPartenaires = ?, LogoIUT = ?");
+    $stmt = $db->prepare("UPDATE OLYMPIADES SET NumEdition = ?, LogOlympiades = ?, LogoSponsor = ?, LogoUPSTI = ?, datetimeOlymp = ?, BandeauPartenaires = ?, LogoIUT = ? where NumEdition = ? or NumEdition = ?");
     $stmt->bindValue(1,$edition);
     $stmt->bindParam(2,$illu);
     $stmt->bindParam(3,$sponsors);
@@ -18,6 +18,8 @@ function insertParam($db, $edition, $date, $sponsors, $illu, $upsti, $bandeau, $
     $stmt->bindParam(5,$date);
     $stmt->bindParam(6,$bandeau);
     $stmt->bindParam(7,$iut);
+    $stmt->bindValue(8,$edition-1);
+    $stmt->bindValue(9,$edition);
 
     $stmt->execute();
   }
