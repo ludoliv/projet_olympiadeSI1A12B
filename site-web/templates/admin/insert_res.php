@@ -174,6 +174,9 @@ insertion($database, $originalite, $prototype, $demarche_si, $pluridisciplinarit
 //header('Location: resultats_admin.php');
 
 function testNote($connexion,$statement,$grp,$categorie){
+  /**
+   * @author : Quentin Bouny
+   */
   try{
     $stmt = $connexion->prepare("SELECT Lycee FROM GROUPE WHERE NumGroupe in (SELECT idGroupe from RECOMPENSE)");
     while($row = $statement->fetch())
