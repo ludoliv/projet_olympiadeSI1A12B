@@ -130,7 +130,7 @@ function insertion($connexion, $originalite, $prototype, $demarche_si, $pluridis
   }
 }
 insertion($database, $originalite, $prototype, $demarche_si, $pluridisciplinarite, $maitrise, $dev_dur, $moyenne);
-header('Location: resultats_admin.php');
+header('Location: resultats_jury.php');
 function testNote($statement,$note,$categorie){
   while($row = $statement->fetch())
   {
