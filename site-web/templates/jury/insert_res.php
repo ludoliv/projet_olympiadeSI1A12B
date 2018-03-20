@@ -9,63 +9,14 @@ $pluridisciplinarite = $_POST['pluridisciplinarite'];
 $maitrise = $_POST['maitrise'];
 $dev_dur = $_POST['developpement_durable'];
 $moyenne = $_POST['moyenne'];
-
-/**
- * Cette fonction met à jour les groupe auxquels sont assignés
- * les récompenses en mettant leur valeurs à NULL.
- * 
- * @author Quentin Bouny
- * 
- * @param PDO $connexion Connexion avec la base de données.
- * 
- */
-function clear_assignement($connexion)
-{
-  /**
-   * 
-   * @var PDOStatement $stmt Résultat de la requête en base de données.
-   * @var PDOStatement $stmt2 Résultat de la requête en base de données.
-   */
-  try{
-    $stmt = $connexion->prepare("SELECT idRecompense from RECOMPENSE");
-    $stmt2 = $connexion->prepare("UPDATE RECOMPENSE SET idGroupe=NULL where idRecompense=?");
-
-    $stmt->execute();
-
-    while($row = $stmt->fetch())
-    {
-      $stmt2->bindParam(1,$row["idRecompense"]);
-      $stmt2->execute();
-    }
-  }
-  catch(Exception $e)
-  {
-    echo $e->getMessage();
-  }
-}
-
-/**
- * Cette fonction permet d'assigner au groupe choisi dans la page resultats_admin.php
- * une récompense.
- * 
- * @author Vincent Deschamps
- * 
- * @param PDO $connexion Connexion avec la base de données.
- * @param Integer $originalite ID du groupe auquel on veut assigner la récompense sur l'originalité.
- * @param Integer $prototype ID du groupe auquel on veut assigner la récompense sur le prototype.
- * @param Integer $demarche_si ID du groupe auquel on veut assigner la récompense sur la démarche SI.
- * @param Integer $pluridisciplinarite ID du groupe auquel on veut assigner la récompense sur la pluri-disciplinarité.
- * @param Integer $maitrise ID du groupe auquel on veut assigner la récompense sur la maitrise.
- * @param Integer $dev_dur ID du groupe auquel on veut assigner la récompense sur le développement durable.
- * @param Integer $moyenne ID du groupe auquel on veut assigner la récompense sur la moyenne générale.
- * 
- * 
- */
+echo $originalite;
+echo $prototype;
+echo $demarche_si;
+echo $pluridisciplinarite;
+echo $maitrise;
+echo $dev_dur;
+echo $moyenne;
 function insertion($connexion, $originalite, $prototype, $demarche_si, $pluridisciplinarite, $maitrise, $dev_dur, $moyenne){
-  /**
-   * @var PDOStatement $stmt Requête préparée à envoyer en base de donées.
-   * @var PDOStatement $stmt2 Requête préparée à envoyer en base de données.
-   */
   try{
     $stmt = $connexion->prepare("UPDATE RECOMPENSE SET idGroupe=? where idRecompense=?");
     $stmt2 = $connexion->prepare("select * from DONNE natural join NOTE where NumGroupe=?");
@@ -178,23 +129,16 @@ function insertion($connexion, $originalite, $prototype, $demarche_si, $pluridis
     echo $e.getMessage();
   }
 }
-clear_assignement($database);
 insertion($database, $originalite, $prototype, $demarche_si, $pluridisciplinarite, $maitrise, $dev_dur, $moyenne);
-header('Location: resultats_admin.php');
+header('Location: resultats_jury.php');
 function testNote($statement,$note,$categorie){
-  try
+  while($row = $statement->fetch())
   {
-    while($row = $statement->fetch())
+    if($row[$categorie] > 0)
     {
-      if($row[$categorie] > 0)
-      {
-        return true;
-      }
-      return false;
+      return true;
     }
   }
-  catch(Exception $e){
-    echo $e->getMessage();
-  }
+  return false;
 }
 ?>
