@@ -33,6 +33,7 @@ public class Envoi_Donnees extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.envoi_donnees);
+        m_ServiceAccess=new AccessServiceAPI();
 
         textProgress = (TextView) findViewById(R.id.textProgress);
         new TaskEnvoi().execute();
@@ -80,7 +81,6 @@ public class Envoi_Donnees extends Activity {
             donneManager.open();
             Cursor cursordonne=donneManager.getDonnes();
             JSONArray listeDonne=new JSONArray();
-            System.out.println("avant while");
             while(cursordonne.moveToNext()){
                 JSONObject donne=new JSONObject();
                 try {
@@ -92,7 +92,6 @@ public class Envoi_Donnees extends Activity {
                 }
                 listeDonne.put(donne);
             }
-            System.out.println("fin while");
             try {
                 dico_des_donnees.put("Donne",listeDonne);
             } catch (JSONException e) {
@@ -103,11 +102,11 @@ public class Envoi_Donnees extends Activity {
             JSONObject jObjResult;
             HashMap<String,String> data=new HashMap<String,String>();
             data.put("data",dico_des_donnees.toString());
-            System.out.println("dico :"+dico_des_donnees.toString());
             try {
                 jObjResult = m_ServiceAccess.convertJSONString2Obj(m_ServiceAccess.getJSONStringWithParam_POST(Donnees_BD.ENVOI_URL, data));
                 return jObjResult.getInt("resultat");
             } catch (Exception e){
+                e.printStackTrace();
                 return Donnees_BD.RESULT_ERROR;
             }
 
