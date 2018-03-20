@@ -21,8 +21,22 @@ $moyenne = $_POST['moyenne'];
 // echo $dev_dur;
 // echo $moyenne;
 
+/**
+ * Cette fonction met à jour les groupe auxquels sont assignés
+ * les récompenses en mettant leur valeurs à NULL.
+ * 
+ * @author Quentin Bouny
+ * 
+ * @param PDO $connexion Connexion avec la base de données.
+ * 
+ */
 function clear_assignement($connexion)
 {
+  /**
+   * 
+   * @var PDOStatement $stmt Résultat de la requête en base de données.
+   * @var PDOStatement $stmt2 Résultat de la requête en base de données.
+   */
   try{
     $stmt = $connexion->prepare("SELECT idRecompense from RECOMPENSE");
     $stmt2 = $connexion->prepare("UPDATE RECOMPENSE SET idGroupe=NULL where idRecompense=?");
@@ -41,7 +55,28 @@ function clear_assignement($connexion)
   }
 }
 
+/**
+ * Cette fonction permet d'assigner au groupe choisi dans la page resultats_admin.php
+ * une récompense.
+ * 
+ * @author Vincent Deschamps
+ * 
+ * @param PDO $connexion Connexion avec la base de données.
+ * @param Integer $originalite ID du groupe auquel on veut assigner la récompense sur l'originalité.
+ * @param Integer $prototype ID du groupe auquel on veut assigner la récompense sur le prototype.
+ * @param Integer $demarche_si ID du groupe auquel on veut assigner la récompense sur la démarche SI.
+ * @param Integer $pluridisciplinarite ID du groupe auquel on veut assigner la récompense sur la pluri-disciplinarité.
+ * @param Integer $maitrise ID du groupe auquel on veut assigner la récompense sur la maitrise.
+ * @param Integer $dev_dur ID du groupe auquel on veut assigner la récompense sur le développement durable.
+ * @param Integer $moyenne ID du groupe auquel on veut assigner la récompense sur la moyenne générale.
+ * 
+ * 
+ */
 function insertion($connexion, $originalite, $prototype, $demarche_si, $pluridisciplinarite, $maitrise, $dev_dur, $moyenne){
+  /**
+   * @var PDOStatement $stmt Requête préparée à envoyer en base de donées.
+   * @var PDOStatement $stmt2 Requête préparée à envoyer en base de données.
+   */
   try{
     $stmt = $connexion->prepare("UPDATE RECOMPENSE SET idGroupe=? where idRecompense=?");
 
@@ -171,11 +206,25 @@ function insertion($connexion, $originalite, $prototype, $demarche_si, $pluridis
 
 clear_assignement($database);
 insertion($database, $originalite, $prototype, $demarche_si, $pluridisciplinarite, $maitrise, $dev_dur, $moyenne);
-//header('Location: resultats_admin.php');
+header('Location: resultats_admin.php');
 
+
+/**
+ * Cette fonction test si le groupe passé en paramètre
+ * peut être assigné à une récompense suivant certain critères:
+ *  - Une seule récompense par groupe
+ *  - Deux récompenses par lycée
+ * 
+ * @author Quentin Bouny
+ * 
+ * @param PDO $connexion Connexion avec la base de données.
+ * @param PDOStatement $statement Résultat d'une requête réalisé dans la fonction insertion()
+ * @param Integer $grp Numéro du groupe auquel on veut assigner une récompense
+ * @param Sring $categorie Categorie à laquelle on veut assigner le groupe
+ */
 function testNote($connexion,$statement,$grp,$categorie){
   /**
-   * @author : Quentin Bouny
+   * @var PDOStatement $stmt Réponse de la requête en base de données.
    */
   try{
     $stmt = $connexion->prepare("SELECT Lycee FROM GROUPE WHERE NumGroupe in (SELECT idGroupe from RECOMPENSE)");
@@ -205,7 +254,7 @@ function testNote($connexion,$statement,$grp,$categorie){
     return false;
   }
   catch(Exception $e){
-
+    echo $e->getMessage();
   }
 }
 ?>
