@@ -29,19 +29,27 @@ public class HeureManager {
     {
         maBaseSQLite = MySQLite.getInstance(context);
     }
-
+    /**
+     * Permet d'écrire dans la table Heure en l'ouvrant à l'écriture
+     */
     public void open()
     {
         //on ouvre la table en lecture/écriture
         db = maBaseSQLite.getWritableDatabase();
     }
-
+    /**
+     * Permet de fermer la table Heure à l'écriture
+     */
     public void close()
     {
         //on ferme l'accès à la BDD
         db.close();
     }
-
+    /**
+     * Permet d'ajouter une heure dans la table
+     * @param heure Heure
+     * @return resultatInsert long
+     */
     public long addHeure(Heure heure) {
         // Ajout d'un enregistrement dans la table
 
@@ -52,7 +60,11 @@ public class HeureManager {
         // insert() retourne l'id du nouvel enregistrement inséré, ou -1 en cas d'erreur
         return db.insert(TABLE_NAME,null,values);
     }
-
+    /**
+     * Permet de modifier une heure dans la table
+     * @param heure Heure
+     * @return resultatModif int
+     */
     public int modHeure(Heure heure) {
         // modification d'un enregistrement
         // valeur de retour : (int) nombre de lignes affectées par la requête
@@ -66,7 +78,11 @@ public class HeureManager {
 
         return db.update(TABLE_NAME, values, where, whereArgs);
     }
-
+    /**
+     * Permet de supprimer une heure dans la table
+     * @param heure Heure
+     * @return resultatSuppr int
+     */
     public int supHeure(Heure heure) {
         // suppression d'un enregistrement
         // valeur de retour : (int) nombre de lignes affectées par la clause WHERE, 0 sinon
@@ -76,7 +92,11 @@ public class HeureManager {
 
         return db.delete(TABLE_NAME, where, whereArgs);
     }
-
+    /**
+     * Permet de récupérer une heure dans la table
+     * @param id int
+     * @return h Heure
+     */
     public Heure getHeure(int id) {
         // Retourne l'animal dont l'id est passé en paramètre
 
@@ -92,7 +112,10 @@ public class HeureManager {
 
         return h;
     }
-
+    /**
+     * Permet de récupérer toutes les heures dans la table
+     * @return curseurH Cursor
+     */
     public Cursor getHeures() {
         // sélection de tous les enregistrements de la table
         return db.rawQuery("SELECT * FROM "+TABLE_NAME, null);

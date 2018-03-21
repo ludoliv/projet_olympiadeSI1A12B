@@ -28,7 +28,9 @@ public class Envoi_Donnees extends Activity {
     TextView textProgress;
     private ProgressDialog m_ProgressDialog;
     private AccessServiceAPI m_ServiceAccess;
-
+    /**
+     * Permet de créer la page d'envoi des données à la base de donnée (pc)
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,7 +42,9 @@ public class Envoi_Donnees extends Activity {
 
 
     }
-
+    /**
+     * Envoi des données à un page php sur le pc de l'utilisateur
+     */
     public class TaskEnvoi extends AsyncTask<String,Void,Integer>{
         @Override
         public void onPreExecute(){

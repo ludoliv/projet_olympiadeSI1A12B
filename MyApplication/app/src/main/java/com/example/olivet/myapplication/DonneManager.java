@@ -33,19 +33,27 @@ public class DonneManager {
     {
         maBaseSQLite = MySQLite.getInstance(context);
     }
-
+    /**
+     * Permet d'écrire dans la table Donne en l'ouvrant à l'écriture
+     */
     public void open()
     {
         //on ouvre la table en lecture/écriture
         db = maBaseSQLite.getWritableDatabase();
     }
-
+    /**
+     * Permet de fermer la table Donne
+     */
     public void close()
     {
         //on ferme l'accès à la BDD
         db.close();
     }
-
+    /**
+     * Permet d'ajouter une relation Donne dans la table
+     * @param donne Donne
+     * @return resultatInsert long
+     */
     public long addDonne(Donne donne) {
         // Ajout d'un enregistrement dans la table
 
@@ -57,7 +65,11 @@ public class DonneManager {
         // insert() retourne l'id du nouvel enregistrement inséré, ou -1 en cas d'erreur
         return db.insert(TABLE_NAME,null,values);
     }
-
+    /**
+     * Permet de modifier une relation Donne dans la table
+     * @param donne Donne
+     * @return resultatModif int
+     */
     public int modDonne(Donne donne) {
         // modification d'un enregistrement
         // valeur de retour : (int) nombre de lignes affectées par la requête
@@ -72,7 +84,11 @@ public class DonneManager {
 
         return db.update(TABLE_NAME, values, where, whereArgs);
     }
-
+    /**
+     * Permet de supprimer une relation Donne dans la table
+     * @param donne Donne
+     * @return resultatSuppr int
+     */
     public int supDonne(Donne donne) {
         // suppression d'un enregistrement
         // valeur de retour : (int) nombre de lignes affectées par la clause WHERE, 0 sinon
@@ -82,7 +98,13 @@ public class DonneManager {
 
         return db.delete(TABLE_NAME, where, whereArgs);
     }
-
+    /**
+     * Permet de récupérer une relation Donne dans la table
+     * @param numj int
+     * @param numg int
+     * @param idN int
+     * @return d Donne
+     */
     public Donne getDonne(int numj, int numg, int idN) {
         // Retourne la donne dont l'id est passé en paramètre
 
@@ -98,15 +120,26 @@ public class DonneManager {
 
         return d;
     }
-
+    /**
+     * Permet de récupérer un idNote dans la table
+     * @param numJ int
+     * @param numG int
+     * @return idN Cursor
+     **/
     public Cursor getDonneIdNote(int numJ, int numG){
         return db.rawQuery("SELECT idNote FROM " + TABLE_NAME + " WHERE NumJury = " + numJ + " and NumGroupe = " + numG, null);
     }
-
+    /**
+     * Permet de récupérer les données des notes de la table Donne
+     * @return note Cursor
+     **/
     public Cursor getDonneNJNote(){
         return db.rawQuery("SELECT * FROM "+TABLE_NAME+" NATURAL JOIN note", null);
     }
-
+    /**
+     * Permet de récupérer l'ensemble des relations de la table Donne
+     * @return donne Cursor
+     **/
     public Cursor getDonnes() {
         // sélection de tous les enregistrements de la table
         return db.rawQuery("SELECT * FROM "+TABLE_NAME, null);

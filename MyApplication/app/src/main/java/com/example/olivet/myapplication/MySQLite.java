@@ -38,7 +38,12 @@ public class MySQLite extends SQLiteOpenHelper {
             sqLiteDatabase.execSQL(HeureManager.CREATE_TABLE_HEURE);
             sqLiteDatabase.execSQL(JugeManager.CREATE_TABLE_JUGE);
         }
-
+        /**
+        * Permet de créer une nouvelle bd si il s'agit d'une nouvelle version
+        * @param sqLiteDatabase SQLiteDatabase
+        * @param i int
+        * @param i2 int
+        */
         @Override
         public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i2) {
             // Mise à jour de la base de données

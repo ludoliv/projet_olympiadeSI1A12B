@@ -29,19 +29,27 @@ public class JuryManager {
     {
         maBaseSQLite = MySQLite.getInstance(context);
     }
-
+    /**
+     * Permet d'écrire dans la table Jury en l'ouvrant à l'écriture
+     */
     public void open()
     {
         //on ouvre la table en lecture/écriture
         db = maBaseSQLite.getWritableDatabase();
     }
-
+    /**
+     * Permet de fermer la table Jury
+     */
     public void close()
     {
         //on ferme l'accès à la BDD
         db.close();
     }
-
+    /**
+     * Permet d'ajouter un Jury
+     * @param jury Jury
+     * @return resultatInsert long
+     */
     public long addJury(Jury jury) {
         // Ajout d'un enregistrement dans la table
 
@@ -54,6 +62,11 @@ public class JuryManager {
         return db.insert(TABLE_NAME,null,values);
     }
 
+    /**
+     * Permet de modifier un Jury
+     * @param jury Jury
+     * @return resultatMod int
+     */
     public int modJury(Jury jury) {
         // modification d'un enregistrement
         // valeur de retour : (int) nombre de lignes affectées par la requête
@@ -67,7 +80,11 @@ public class JuryManager {
 
         return db.update(TABLE_NAME, values, where, whereArgs);
     }
-
+    /**
+     * Permet de supprimer un jury
+     * @param jury Jury
+     * @return resultatSuppr int
+     */
     public int supJury(Jury jury) {
         // suppression d'un enregistrement
         // valeur de retour : (int) nombre de lignes affectées par la clause WHERE, 0 sinon
@@ -77,7 +94,11 @@ public class JuryManager {
 
         return db.delete(TABLE_NAME, where, whereArgs);
     }
-
+    /**
+     * Permet de récupérer un jury en fonction de son id
+     * @param num int
+     * @return j Jury
+     */
     public Jury getJury(int num) {
         // Retourne le jury dont l'id est passé en paramètre
 
@@ -93,7 +114,10 @@ public class JuryManager {
 
         return j;
     }
-
+    /**
+     * Permet de récupérer l'ensemble des jurys dans la table
+     * @return curseur Cursor
+     */
     public Cursor getJurys() {
         // sélection de tous les enregistrements de la table
         return db.rawQuery("SELECT * FROM "+TABLE_NAME, null);

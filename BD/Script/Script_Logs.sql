@@ -1,0 +1,1 @@
+REPLACE into ADMINISTRATEUR values("admin","admin");

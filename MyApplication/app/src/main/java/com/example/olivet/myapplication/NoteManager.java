@@ -38,19 +38,27 @@ public class NoteManager {
     {
         maBaseSQLite = MySQLite.getInstance(context);
     }
-
+    /**
+     * Permet d'écrire dans la table en l'ouvrant à l'écriture
+     */
     public void open()
     {
         //on ouvre la table en lecture/écriture
         db = maBaseSQLite.getWritableDatabase();
     }
-
+    /**
+     * Permet de fermer la table à l'écriture
+     */
     public void close()
     {
         //on ferme l'accès à la BDD
         db.close();
     }
-
+    /**
+     * Permet d'ajouter une note dans la table
+     * @param note Note
+     * @return resultatInsert long
+     */
     public long addNote(Note note) {
         // Ajout d'un enregistrement dans la table
 
@@ -66,7 +74,11 @@ public class NoteManager {
         // insert() retourne l'id du nouvel enregistrement inséré, ou -1 en cas d'erreur
         return db.insert(TABLE_NAME,null,values);
     }
-
+    /**
+     * Permet de modifier une note dans la table
+     * @param note Note
+     * @return resultatModif int
+     */
     public int modNote(Note note) {
         // modification d'un enregistrement
         // valeur de retour : (int) nombre de lignes affectées par la requête
@@ -89,7 +101,11 @@ public class NoteManager {
         this.supNote(note);
         this.addNote(note);
     }
-
+    /**
+     * Permet de supprimer une note dans la table
+     * @param note Note
+     * @return resultatSuppr int
+     */
     public int supNote(Note note) {
         // suppression d'un enregistrement
         // valeur de retour : (int) nombre de lignes affectées par la clause WHERE, 0 sinon
@@ -99,7 +115,11 @@ public class NoteManager {
 
         return db.delete(TABLE_NAME, where, whereArgs);
     }
-
+    /**
+     * Permet de récupérer une note dans la table grâce à son id
+     * @param id int
+     * @return n Note
+     */
     public Note getNote(int id) {
         // Retourne la note dont l'id est passé en paramètre
 
@@ -118,7 +138,9 @@ public class NoteManager {
         }
         return n;
     }
-
+    /**
+     * Permet de récupérer toutes les note dans la table
+     */
     public Cursor getNotes() {
         // sélection de tous les enregistrements de la table
         return db.rawQuery("SELECT * FROM "+TABLE_NAME, null);
