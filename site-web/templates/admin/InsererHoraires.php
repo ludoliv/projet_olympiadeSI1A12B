@@ -101,7 +101,7 @@ if(!isset($_SESSION['loginOK'])){
         {
           echo '
             <div class="jumbotron text-dark bg-light" style="padding:0.5em">
-              <p>Début :'.$row["hDeb"].'</p>
+              <p>Début : '.$row["hDeb"].'</p>
               <p>Fin : '.$row["hFin"].'</p>
             </div>';
           }

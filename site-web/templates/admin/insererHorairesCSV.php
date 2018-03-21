@@ -89,59 +89,18 @@ if(!isset($_SESSION['loginOK'])){
       require "../../../BD/Interactions/InteractionsBD.php";
       $db = connect_database();
       try{
-        $maxNumGroupe = getMaxIDGROUPE($db);
-        $grpancien = 0;
-        $stmt2 = $db->prepare("SELECT * FROM ELEVE natural join PERSONNE natural join GROUPE where ID=IDEleve and NumGroupe = ?");
-        $stmt = $db->prepare("SELECT * FROM GROUPE where NumGroupe not in(SELECT NumGroupe FROM ELEVE)");
-        $stmt->execute();
-
-        for ($i=1; $i<=$maxNumGroupe; $i++){
-          $stmt2->bindParam(1, $i);
-          $stmt2->execute();
-          while($row = $stmt2->fetch())
-          {
-            if($row["NumGroupe"] != $grpancien){
-              if($i != 1){
-                echo '</div>';
-              }
-              echo '
-              <div id="grp-'.$row["NumGroupe"].'" class="jumbotron text-white bg-dark" style="padding:1em">
-                <h1>Groupe n°'.$row["NumGroupe"].'</h1>
-                <h2>Projet : '.$row["NomProjet"].'</h2>
-                <div class="jumbotron text-dark bg-light" style="padding:0.5em">
-                  <p>Élève n°'.$row["IDEleve"].'</p>
-                  <p>Nom : '.$row["Nom"].' '.$row["Prenom"].'</p>
-                </div>';
-              }
-              else{
-                echo '
-                <div class="jumbotron text-dark bg-light" style="padding:0.5em">
-                  <p>Élève n°'.$row["IDEleve"].'</p>
-                  <p>Nom : '.$row["Nom"].' '.$row["Prenom"].'</p>
-                </div>
-                ';
-              }
-              $grpancien = $row["NumGroupe"];
-            }
+        $stmt2 = $db->prepare("SELECT * FROM HEURE order by hDeb");
+        $stmt2->execute();
+        echo '<div class="jumbotron text-white bg-dark" style="padding:1em">';
+        while($row = $stmt2->fetch())
+        {
+          echo '
+            <div class="jumbotron text-dark bg-light" style="padding:0.5em">
+              <p>Début : '.$row["hDeb"].'</p>
+              <p>Fin : '.$row["hFin"].'</p>
+            </div>';
           }
-          echo "</div>";
-          while($row2 = $stmt->fetch()){
-            if($i != $maxNumGroupe-1){
-              echo '
-              <div id="grp-'.$row2["NumGroupe"].'" class="jumbotron text-white bg-dark" style="padding:1em">
-                <h1>Groupe n°'.$row2["NumGroupe"].'</h1>
-                <h2>Projet : '.$row2["NomProjet"].'</h2>
-              </div>';
-            }
-            else{
-              echo '
-              </div>
-              <div id="grp-'.$row2["NumGroupe"].'" class="jumbotron text-white bg-dark" style="padding:1em">
-                <h1>Groupe n°'.$row2["NumGroupe"].'</h1>
-                <h2>Projet : '.$row2["NomProjet"].'</h2>
-              </div>';
-            }
-        }
+        echo '</div>';
       }
       catch(Exception $e)
       {
