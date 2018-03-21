@@ -23,6 +23,10 @@ public class Page_connexion extends Activity {
 
     static ArrayList<ArrayList<Integer>> listeGrpNote = Recuperation_Envoi.listeGrpNote;
 
+    /**
+     * Affiche la page de connexion offline
+     * @param savedInstanceState Bundle
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -23,6 +23,11 @@ public class Planning extends Activity {
 
     ArrayList<ArrayList<Integer>> listeGrpNote = Recuperation_Envoi.listeGrpNote;
     public static Activity planning;
+    /**
+     * Somme note
+     * @param liste ArrayList<Integer>
+     * @return somme Integer
+     */
 
     Integer sommeListeSansPre(ArrayList<Integer> liste){
         Integer somme = 0;
@@ -40,7 +45,11 @@ public class Planning extends Activity {
         }
         return somme;
     }
-
+    /**
+     * Liste ID des groupes
+     * @param liste ArrayList<ArrayList<Integer>>
+     * @return listeRes ArrayList<Integer>
+     */
     ArrayList<Integer> listeID(ArrayList<ArrayList<Integer>> liste){
         ArrayList<Integer> listeRes = new ArrayList<Integer>();
         for (ArrayList<Integer> listeAux : liste){
@@ -242,7 +251,9 @@ public class Planning extends Activity {
         });
         lv.setAdapter(adapter);
     }
-
+    /**
+     * Permet de retourner à l'accueil en appuyant sur le bouton retour
+     */
     @Override
     public void onBackPressed() {
         new AlertDialog.Builder(this)

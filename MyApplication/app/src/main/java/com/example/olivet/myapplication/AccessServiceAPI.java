@@ -28,7 +28,7 @@ public class AccessServiceAPI {
     /**
      * Call service api with GET method and then return result form service as json string
      * @param url
-     * @return
+     * @return json String
      */
     public String getJSONStringFromUrl_GET(String url) {
         JSONArray jsonArray = null;
@@ -67,7 +67,7 @@ public class AccessServiceAPI {
     /**
      * Convert json string to json object
      * @param jsonString
-     * @return
+     * @return json Object
      */
     public JSONObject convertJSONString2Obj(String jsonString) {
         JSONObject jObj = null;

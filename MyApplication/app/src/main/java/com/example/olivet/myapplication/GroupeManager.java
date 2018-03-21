@@ -31,19 +31,27 @@ public class GroupeManager {
     {
         maBaseSQLite = MySQLite.getInstance(context);
     }
-
+    /**
+     * Permet d'écrire dans la table Groupe en l'ouvrant à l'écriture
+     */
     public void open()
     {
         //on ouvre la table en lecture/écriture
         db = maBaseSQLite.getWritableDatabase();
     }
-
+    /**
+     * Permet de fermer la table Groupe à l'écriture
+     */
     public void close()
     {
         //on ferme l'accès à la BDD
         db.close();
     }
-
+    /**
+     * Permet d'ajouter un groupe dans la table
+     * @param groupe Groupe
+     * @return ResultatInsert long
+     */
     public long addGroupe(Groupe groupe) {
         // Ajout d'un enregistrement dans la table
 
@@ -56,7 +64,11 @@ public class GroupeManager {
         // insert() retourne l'id du nouvel enregistrement inséré, ou -1 en cas d'erreur
         return db.insert(TABLE_NAME,null,values);
     }
-
+    /**
+     * Permet de récupérer un groupe dans la table grâce à son id
+     * @param id int
+     * @return a Groupe
+     */
     public Groupe getGroupe(int id) {
         // Retourne le groupe dont l'id est passé en paramètre
 
@@ -74,7 +86,11 @@ public class GroupeManager {
 
         return a;
     }
-
+    /**
+     * Permet de récupérer le numéro d'un groupe dans la table grâce au nom du projet
+     * @param NomProj String
+     * @return res int
+     */
     public int getNumGroupe(String NomProj){
         Cursor c = db.rawQuery("SELECT "+KEY_ID_GROUPE+" FROM "+TABLE_NAME+" WHERE "+KEY_NOMPROJ_GROUPE+"='"+NomProj+"'", null);
         int res = 0;
@@ -83,7 +99,10 @@ public class GroupeManager {
         }
         return res;
     }
-
+    /**
+     * Permet de récupérer tous les groupes dans la table
+     * @return curseurG Cursor
+     */
     public Cursor getGroupes() {
         // sélection de tous les enregistrements de la table
         return db.rawQuery("SELECT * FROM "+TABLE_NAME, null);

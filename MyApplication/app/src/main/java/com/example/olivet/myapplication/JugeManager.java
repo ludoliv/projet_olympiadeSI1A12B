@@ -34,19 +34,27 @@ public class JugeManager {
     {
         maBaseSQLite = MySQLite.getInstance(context);
     }
-
+    /**
+     * Permet d'écrire dans la table Juge en l'ouvrant à l'écriture
+     */
     public void open()
     {
         //on ouvre la table en lecture/écriture
         db = maBaseSQLite.getWritableDatabase();
     }
-
+    /**
+     * Permet de fermer table Juge à l'écriture
+     */
     public void close()
     {
         //on ferme l'accès à la BDD
         db.close();
     }
-
+    /**
+     * Permet d'ajouter une relation Juge dans la table
+     * @param juge Juge
+     * @return resultatInsert long
+     */
     public long addJuge(Juge juge) {
         // Ajout d'un enregistrement dans la table
 
@@ -58,7 +66,11 @@ public class JugeManager {
         // insert() retourne l'id du nouvel enregistrement inséré, ou -1 en cas d'erreur
         return db.insert(TABLE_NAME,null,values);
     }
-
+    /**
+     * Permet de modifier une relation Juge dans la table
+     * @param juge Juge
+     * @return resultatModif long
+     */
     public int modJuge(Juge juge) {
         // modification d'un enregistrement
         // valeur de retour : (int) nombre de lignes affectées par la requête
@@ -73,7 +85,11 @@ public class JugeManager {
 
         return db.update(TABLE_NAME, values, where, whereArgs);
     }
-
+    /**
+     * Permet de supprimer une relation Juge dans la table
+     * @param juge Juge
+     * @return resultatSuppr long
+     */
     public int supJuge(Juge juge) {
         // suppression d'un enregistrement
         // valeur de retour : (int) nombre de lignes affectées par la clause WHERE, 0 sinon
@@ -83,7 +99,13 @@ public class JugeManager {
 
         return db.delete(TABLE_NAME, where, whereArgs);
     }
-
+    /**
+     * Permet de récupérer une relation Juge dans la table
+     * @param numj int
+     * @param numg int
+     * @param idH int
+     * @return j Juge
+     */
     public Juge getJuge(int numj, int numg, int idH) {
         // Retourne le juge dont l'id est passé en paramètre
 
@@ -99,7 +121,10 @@ public class JugeManager {
 
         return j;
     }
-
+    /**
+     * Permet de récupérer toutes les relations Juge dans la table
+     * @return curseurJuge Cursor
+     */
     public Cursor getJuges() {
         // sélection de tous les enregistrements de la table
         return db.rawQuery("SELECT * FROM "+TABLE_NAME, null);

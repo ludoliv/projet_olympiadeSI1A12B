@@ -55,6 +55,11 @@ public class Recuperation_Envoi extends Activity{
         });
     }
 
+    /**
+     * Vérifie que les champs de login et de mdp ne sont pas vide et lance la tache Asynchrone dans ce cas
+     * @param v View
+     * @return
+     **/
     public void btnLog(View v){
         if("".equals(txtUsername.getText().toString())){
             txtUsername.setError("Identifiant requis");
@@ -77,6 +82,9 @@ public class Recuperation_Envoi extends Activity{
         }
     }
 
+    /**
+     * Tache Asynchrone qui récupère les données de la base de donnée (pc) pour les intégrer dans la base de donnée locale
+     **/
     public class TaskLogin extends AsyncTask<String, Void, Integer>{
         @Override
         public void onPreExecute(){

@@ -12,6 +12,10 @@ import android.view.Window;
 
 public class PopCrash extends Activity {
 
+    /**
+     * Créer une pop up qui indique qu'il y a eu un problème
+     * @param savedInstanceState Bundle
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

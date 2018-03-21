@@ -12,6 +12,10 @@ import android.view.Window;
 
 public class PopOk extends Activity {
 
+    /**
+     * créer une pop up disant qu'il s'agit d'un succès
+     * @param savedInstanceState Bundle
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

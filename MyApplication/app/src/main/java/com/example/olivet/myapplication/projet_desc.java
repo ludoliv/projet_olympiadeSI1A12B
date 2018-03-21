@@ -203,31 +203,45 @@ public class projet_desc extends Activity {
                                   });
         lv.setAdapter(adapter);
     }
-
+    /**
+     * Tooltip de prototype
+     */
     public void onClickProto(){
         Toast.makeText(getApplicationContext(),"Le prototype est fonctionnel, innovant et le travail réalisé est conséquent",Toast.LENGTH_LONG).show();
     }
-
+    /**
+     * Tooltip d'originalité
+     */
     public void onClickOri(){
         Toast.makeText(getApplicationContext(),"Le projet est original et innovant. « Vous seriez prêt à l’acquérir »",Toast.LENGTH_LONG).show();
     }
-
+    /**
+     * Tooltip de maitrise
+     */
     public void onClickMait(){
         Toast.makeText(getApplicationContext(),"Le développement théorique est conséquent et bien maitrisé.",Toast.LENGTH_LONG).show();
     }
-
+    /**
+     * Tooltip de Démarche scientifique
+     */
     public void onClickDem(){
         Toast.makeText(getApplicationContext(),"Le projet s’appui su des expérimentations, de la simulation théorique et numérique avec une comparaison entre le réel et le modèle et une optimisation.",Toast.LENGTH_LONG).show();
     }
-
+    /**
+     * Tooltip de pluridisciplinarité
+     */
     public void onClickPluri(){
         Toast.makeText(getApplicationContext(),"Le projet mobilise plusieurs discipline (SI, Math, Phy, …) et plusieurs technologies (Transfert d’énergie, traitement de l’information, mécanique, …)",Toast.LENGTH_LONG).show();
     }
-
+    /**
+     * Tooltip de communication
+     */
     public void onClickCom(){
         Toast.makeText(getApplicationContext(),"La présentation est claire, structurée, dynamique. Elle valorise le travail d’équipe. Les réponses aux questions sont pertinentes.",Toast.LENGTH_LONG).show();
     }
-
+    /**
+     * Permet de récupérer l'ensemble des paramètres nécéssaire au planning et le lance à l'appui de la touche retour
+     */
     @Override
     public void onBackPressed(){
         Intent i = new Intent(projet_desc.this,Planning.class);

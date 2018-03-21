@@ -21,6 +21,10 @@ public class MainActivity extends Activity {
     Button buttonEnvoie;
     public static Activity mainActivity;
 
+    /**
+     * Permet de créer la page d'accueil
+     * @param savedInstanceState Bundle
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

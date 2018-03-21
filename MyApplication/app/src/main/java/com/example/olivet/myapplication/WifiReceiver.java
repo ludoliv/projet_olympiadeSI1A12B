@@ -22,7 +22,10 @@ import java.util.Map;
  */
 
 public class WifiReceiver extends BroadcastReceiver {
-
+    /**
+     * Récupère l'activité en cours
+     * @return Activity
+     */
     private static Activity getForegroundActivity(){
         Activity activity = null;
         try {
@@ -59,6 +62,12 @@ public class WifiReceiver extends BroadcastReceiver {
         }
         return activity;}
 
+    /**
+     * Lorsque la tablette est connecté à la bonne wifi cela active les boutons adéquats
+     * @param context Context
+     * @param intent Intent
+     * @return
+     */
     @Override
     public void onReceive(Context context, Intent intent) {
 
