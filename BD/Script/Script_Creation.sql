@@ -106,3 +106,5 @@ create table OLYMPIADES(
   LogoIUT varchar(100),
   PRIMARY KEY(NumEdition)
 );
+
+insert into ADMINISTRATEUR values("admin","admin");
