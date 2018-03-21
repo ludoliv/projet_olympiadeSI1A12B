@@ -883,9 +883,10 @@
                 $id = $donnees[0];
                 $Nom = $donnees[1];
                 $Lycee = $donnees[2];
-                $img = $donnees[3];
+                $salle = $donnees[3];
+                $img = $donnees[4];
 
-                $p = new Groupe($id,$Nom,$Lycee,$img);
+                $p = new Groupe($id,$Nom,$Lycee,$salle,$img);
                 array_push($ListeGroupe,$p);
             }
             return $ListeGroupe;
