@@ -46,40 +46,46 @@ if($value == "none")
 else
 {
     $idGroupe = intval($value);
-    $query = "SELECT NumGroupe,NumJury FROM JUGE where idHeure=?";
+    $query = "SELECT NumJury,idHeure FROM JUGE where NumGroupe=?";
     $statement = $db->prepare($query);
-    $statement->bindParam(1,$idHeure);
+    $statement->bindParam(1,$idGroupe);
     $statement->execute();
 
-    $valid = true;
+    $valid = 1;
     while ($row = $statement->fetch())
     {
-        if($row['NumGroupe'] == $value)
+        if($row['idHeure'] == $idHeure)
         {
-            $valid = false;
+            $valid = 2;
             break;
+        }
+        elseif($row['NumJury'] == $idJury)
+        {
+          $valid = 3;
         }
     }
 
-    if($valid)
+    if($valid == 1)
     {
-        $stmt1 = $db->prepare("SELECT numSalle FROM GROUPE WHERE NumGroupe=?");
-        $stmt1->bindParam(1,$idGroupe);
-        $stmt1->execute();
-        $salle = $stmt1->fetch();
+          $stmt1 = $db->prepare("SELECT numSalle FROM GROUPE WHERE NumGroupe=?");
+          $stmt1->bindParam(1,$idGroupe);
+          $stmt1->execute();
+          $salle = $stmt1->fetch();
 
-        $stmt = $db->prepare("INSERT INTO JUGE (idHeure,NumJury,NumGroupe,numSalle) VALUES(?,?,?,?)");
-        $stmt->bindParam(1,$idHeure);
-        $stmt->bindParam(2,$idJury);
-        $stmt->bindParam(3,$idGroupe);
-        $stmt->bindParam(4,$salle['numSalle']);
-        $stmt->execute();
-
-        echo "Insertion dans la base de données réussie";
+          $stmt = $db->prepare("INSERT INTO JUGE (idHeure,NumJury,NumGroupe,numSalle) VALUES(?,?,?,?)");
+          $stmt->bindParam(1,$idHeure);
+          $stmt->bindParam(2,$idJury);
+          $stmt->bindParam(3,$idGroupe);
+          $stmt->bindParam(4,$salle['numSalle']);
+          $stmt->execute();
+          echo "Insertion réussie";
     }
-    else
+    elseif($valid == 2)
     {
-        echo "Requête non aboutie";
+        echo "Impossible car ce groupe est déjà évalué à cette horaire";
+    }
+    else {
+        echo "Impossible car ce jury évalue déjà ce groupe dans la journée";
     }
 }
 ?>
