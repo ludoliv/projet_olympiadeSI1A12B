@@ -281,40 +281,27 @@ function getCSVforHeure($connexion,$filename)
      * 
      * @var Pointeur $handle Pointeur vers le fichier à traiter.
      * @var Array $tabHeure Liste des créneaux horaires à insérer dans la base de données.
-     * @var Array $tabJuge Liste des instances de la table juge à insérer dans la base de données.
      * @var Integer $id ID maximum d'un groupe dans la base de données
      */
     $handle = fopen($filename,"r");
     $tabHeure = array();
-    $tabJuge = array();
     $id = getMaxIDHeure($connexion)+1;
     while(($data = fgetcsv($handle, 1000, ",")) !== FALSE)
     {
         $Hdeb = $data[0];
         $Hfin = $data[1];
-        $NumGroupe = $data[2];
-        $NumJury = $data[3];
-        $Salle = $data[4];
         
         $Heure = new Heure($id,$Hdeb,$Hfin);
-        $Juge = new Juge($NumJury,$NumGroupe,$id,$Salle);
 
         $resTest = testPInListeH($tabHeure,$Heure);
         if(!$resTest)
         {
             array_push($tabHeure,$Heure);
-            array_push($tabJuge,$Juge);
             $id++;
-        }
-        else
-        {
-            $Juge->setIdHeure($resTest);
-            array_push($tabJuge,$Juge);
         }
     }
 
     insertHeure($connexion,$tabHeure);
-    insertJuge($connexion,$tabJuge);
     fclose($handle);
 }
 

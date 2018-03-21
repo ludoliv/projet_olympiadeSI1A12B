@@ -58,6 +58,7 @@ if(!isset($_SESSION['loginOK'])){
             <a class="dropdown-item" href="insererJury.php">Créer</a>
           </div>
         </li>
+
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Horaires
@@ -72,3 +73,27 @@ if(!isset($_SESSION['loginOK'])){
 
   </nav>
 </div>
+
+<form name="AjoutHoraires" method="POST" style="padding-top: 2%" action="insertion_horaires.php">
+  <h4>Formulaire d'ajout d'un horaire :</h4>
+  <table>
+    <tr>
+      <td style="width: 300px">
+        <label style="padding-left: 2% ; padding-right: 2% ; padding-top: 2%">Heure de début :</label>
+      </td>
+      <td>
+        <input type="time" name="HeureDeb" value="08:00"required></input>
+      </td>
+    </tr>
+    <tr>
+      <td style="width: 300px">
+        <label style="padding-left: 2% ; padding-right: 2% ; padding-top: 2%">Heure de fin :</label>
+      </td>
+      <td>
+        <input type="time" name="HeureFin" value="08:20"required></input>
+      </td>
+    </tr>
+    </table>
+    <input type="submit" value="Ajouter horaire">
+</form>
+</body>

@@ -58,6 +58,7 @@ if(!isset($_SESSION['loginOK'])){
             <a class="dropdown-item" href="insererJury.php">Créer</a>
           </div>
         </li>
+
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Horaires
@@ -72,3 +73,20 @@ if(!isset($_SESSION['loginOK'])){
 
   </nav>
 </div>
+
+<form name="AjoutJury" method="POST" style="padding-top: 2%" action="insertion_horaires_CSV.php" enctype="multipart/form-data">
+  <h4>Formulaire d'ajout d'un horaire :</h4>
+  <table>
+    <tr>
+      <td style="width: 300px">
+        <label style="padding-left: 2% ; padding-right: 2% ; padding-top: 2%">Fichier CSV</label>
+      </td>
+      <td>
+        <input id="filename" type="file" name="file" required></input>
+      </td>
+    </tr>
+    </table>
+    <input type="submit" value="Ajouter horaire">
+</form>
+
+</body>
