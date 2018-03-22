@@ -117,9 +117,9 @@ $db = connect_database();
     <div class="col-4" style="overflow-y:scroll; height:100%; width: 400px">
       <?php
       try{
+        $firstCall = true;
         $maxNumGroupe = getMaxIDGROUPE($db);
         $grpancien = 0;
-        $firstCall = true;
         $stmt2 = $db->prepare("SELECT * FROM ELEVE natural join PERSONNE natural join GROUPE where ID=IDEleve and NumGroupe = ?");
         $stmt = $db->prepare("SELECT * FROM GROUPE where NumGroupe not in(SELECT NumGroupe FROM ELEVE)");
         $stmt->execute();
