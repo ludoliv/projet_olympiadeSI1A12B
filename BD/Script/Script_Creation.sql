@@ -107,3 +107,11 @@ create table OLYMPIADES(
 );
 
 insert into ADMINISTRATEUR values("admin","admin");
+insert into OLYMPIADES values(8,"olympiades.jpg","sponsor1.jpg","upsti.jpg","2018-03-22","bandeau.jpg","IUTO.jpg");
+insert into RECOMPENSE values (1,NULL,"Originalite");
+insert into RECOMPENSE values (2,NULL,"Prototype");
+insert into RECOMPENSE values (3,NULL,"DemarcheScientifique");
+insert into RECOMPENSE values (4,NULL,"pluriDisciplinarite");
+insert into RECOMPENSE values (5,NULL,"MaitriseScientifique");
+insert into RECOMPENSE values (6,NULL,"Communication");
+insert into RECOMPENSE values(7,NULL,"moyenne");

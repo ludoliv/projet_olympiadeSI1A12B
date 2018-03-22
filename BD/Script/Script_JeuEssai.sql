@@ -43,13 +43,3 @@ insert into PROFESSEUR values(0,1);
 insert into PROFESSEUR values(1,1);
 insert into PROFESSEUR values(8,2);
 insert into PROFESSEUR values(9,2);
-
-insert into RECOMPENSE values (1,NULL,"Originalite");
-insert into RECOMPENSE values (2,NULL,"Prototype");
-insert into RECOMPENSE values (3,NULL,"DemarcheScientifique");
-insert into RECOMPENSE values (4,NULL,"pluriDisciplinarite");
-insert into RECOMPENSE values (5,NULL,"MaitriseScientifique");
-insert into RECOMPENSE values (6,NULL,"Communication");
-insert into RECOMPENSE values(7,NULL,"moyenne");
-
-insert into OLYMPIADES values(1,"base.png","base.png","base.png",NULL,"base.png","base.png");

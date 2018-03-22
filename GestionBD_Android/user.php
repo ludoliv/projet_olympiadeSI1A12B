@@ -30,7 +30,7 @@ if(isset($action))
 				$listeHeure=array();
 				$relation=array();
 				//Login success + envoi bd
-				$sql =  'SELECT DISTINCT * FROM GROUPE NATURAL JOIN JUGE NATURAL JOIN JURY NATURAL JOIN HEURE where login_="'.$username.'" and password_="'.$pwd.'";';
+				$sql =  'SELECT DISTINCT * FROM GROUPE NATURAL JOIN JUGE NATURAL JOIN JURY NATURAL JOIN HEURE where login_="'.$username.'" and password_="'.$pwd.'"order by hDeb;';
 				$res = $cnn->query($sql);
 
 				while  ($row = $res->fetch()) {
