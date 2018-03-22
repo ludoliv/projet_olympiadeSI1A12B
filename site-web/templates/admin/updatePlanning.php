@@ -85,11 +85,6 @@ else
             $valid = 4;
             break;
         }
-        elseif($row['numSalle']==$grp['numSalle'])
-        {
-            $valid = 5;
-            break;
-        }
     }
 
     if($valid == 1)
@@ -127,10 +122,6 @@ else
         $statement->execute();
 
         echo "Assignation réussie";
-    }
-    elseif($valid == 5)
-    {
-        echo "Il y'a déjà un jury dans cette salle à cette horaire";
     }
     else {
         echo "Impossible car ce jury évalue déjà ce groupe dans la journée";
