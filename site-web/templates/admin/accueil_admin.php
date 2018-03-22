@@ -12,84 +12,78 @@ $_SESSION['connect']=0;
 if(!isset($_SESSION['loginOK'])){
   header('Location: ../protection/connexion.php');
 }?>
-<?php
-  include '../../../BD/Interactions/Connexion.php';
-  $db = connect_database();
-
-  $statement = $db->prepare("SELECT * from OLYMPIADES");
-  $statement->execute();
-
-  while($row = $statement->fetch()){
-    $numEdition = $row["NumEdition"];
-    $LogOlympiades = $row["LogOlympiades"];
-    $LogoSponsor = $row["LogoSponsor"];
-    $LogoUPSTI = $row["LogoUPSTI"];
-    $LogoIUT = $row["LogoIUT"];
-    $date = $row["datetimeOlymp"];
-  }
-?>
-<div class="container-fluid h-100" style="padding-bottom: 13%">
-
-  <div class="row justify-content-start">
-    <div class="col-2">
-      <?php include "menu_admin.php"; ?>
+<?php include 'menu_admin.php'; ?>
+<h1 id="titre" class="display-5 text-center vignets">Bienvenue, Administrateur</h1>
+<div class="container">
+  <div class="carousel slide bg-dark" data-ride="carousel" style="padding-top:1em ; padding-bottom: 1em">
+    <h1 class="text-center text-white">Projets de cette année</h1>
+    <div class="carousel-inner text-center">
+      <?php
+      require "../../../BD/Interactions/Connexion.php";
+      require "../../../BD/Interactions/InteractionsBD.php";
+      $db = connect_database();
+      try{
+        $cpt = 0;
+        $stmt = $db->prepare("SELECT * from GROUPE where image_Projet != 'None'");
+        $stmt->execute();
+        while($row = $stmt->fetch()){
+          if($cpt == 0){
+            echo '
+            <div class="carousel-item active">
+              <img src="../../images_projets/'.$row["image_Projet"].'" height="500px">
+              <br>
+              <div class=bg-light style=margin-top:15px>
+                <h5>'.strtoupper($row["NomProjet"][0]).substr($row["NomProjet"],1,strlen($row["NomProjet"])+1).'</h5>
+                <p>'.strtoupper($row["Lycee"][0]).substr($row["Lycee"],1,strlen($row["Lycee"])+1).'</p>
+              </div>
+            </div>
+            ';
+            $cpt++;
+          }
+          else{
+            echo '
+            <div class="carousel-item">
+              <img src="../../images_projets/'.$row["image_Projet"].'" height="500px">
+              <div class=bg-light style=margin-top:15px;>
+                <h5>'.strtoupper($row["NomProjet"][0]).substr($row["NomProjet"],1,strlen($row["NomProjet"])+1).'</h5>
+                <p>'.strtoupper($row["Lycee"][0]).substr($row["Lycee"],1,strlen($row["Lycee"])+1).'</p>
+              </div>
+            </div>
+            ';
+          }
+        }
+      }
+      catch(Exception $e){
+        $e->getMessage();
+      }
+      ?>
     </div>
-
-    <div class="col-8 text-center">
-      <h1 class="display-2"><?php echo "Olympiades n°".$numEdition?></h1>
-    </div>
-
-    <div class="col-2">
-      <div class="media" id="upsti">
-        <img class="img-thumbnail" height="200px" width="200px" src="<?php
-          echo '../../images/'.$LogoUPSTI;
-        ?>"/>
-      </div>
-    </div>
+    <a id="prev" class="carousel-control-prev" role="button" data-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a id="next" class="carousel-control-next" role="button" data-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
   </div>
-
-  <div class="row justify-content-center h-100">
-    <div class="col align-self-center">
-      <div class="media" id="olymp">
-        <img class="img-thumbnail" height="200px" width="200px" src="<?php
-          echo '../../images/'.$LogOlympiades;
-        ?>"/>
-      </div>
-    </div>
-  </div>
-
-  <div class="row justify-content-end">
-    <div class="col-4">
-      <div class="media" id="sponsor">
-        <img class="img-thumbnail" height="200px" width="200px" src="<?php
-          echo '../../images/'.$LogoSponsor;
-        ?>"/>
-      </div>
-    </div>
-    <div class="col-4 text-center align-self-center">
-      <h5 id="date"><?php echo $date?></h5>
-    </div>
-    <div class="col-4">
-      <div class="media" id="iut">
-        <img class="img-thumbnail" height="200px" width="200px" src="<?php
-          echo '../../images/'.$LogoIUT;
-        ?>"/>
-      </div>
-    </div>
-  </div>
-
 </div>
+<script type="text/javascript">
+$(document).ready(function(){
+  $(".carousel").carousel({
+    interval: 10000
+  });
+  $("#titre").addClass("load");
+  document.getElementById("prev").onclick = function(){$(".carousel").carousel('prev')}
+  document.getElementById("next").onclick = function(){$(".carousel").carousel('next')}
+  function openNav() {
+      document.getElementById("mySidenav").style.width = "250px";
+  }
 
-<script>
-let elemdate = document.getElementById("date").textContent.split(" ")[0].split("-");
-document.getElementById("date").textContent = elemdate[2]+"-"+elemdate[1]+"-"+elemdate[0];
-function openNav() {
-    document.getElementById("mySidenav").style.width = "250px";
-}
-
-function closeNav() {
-    document.getElementById("mySidenav").style.width = "0";
-}
+  function closeNav() {
+      document.getElementById("mySidenav").style.width = "0";
+  }
+});
 </script>
 </body>
 </html>

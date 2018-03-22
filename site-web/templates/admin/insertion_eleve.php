@@ -32,5 +32,5 @@
         echo $e->getMessage();
     }
 
-    //header('Location:InsererEleve.php');
+    header('Location:InsererEleve.php');
 ?>

@@ -16,7 +16,7 @@ create table GROUPE(
     NumGroupe int,
     NomProjet varchar(30),
     Lycee varchar(100),
-    numSalle int,
+    numSalle varchar(30),
     image_Projet varchar(100),
     PRIMARY key(NumGroupe)
 );

@@ -1,138 +1,185 @@
 <!DOCTYPE html>
-<html>
+<html class="h-100">
 <head>
 <link rel="stylesheet" href="../../css/index.css"/>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
 </head>
-<body>
+<body class="h-100">
 <?php session_start();
 $_SESSION['connect']=0;
 if(!isset($_SESSION['loginOK'])){
   header('Location: ../protection/connexion.php');
 }?>
-<div style="display:flex">
-  <?php include 'menu_admin.php'; ?>
-
-  <nav class="navbar navbar-expand-lg navbar-light navbar-right" style="margin-left: 11%">
-
-    <div class="collapse navbar-collapse" id="navbar">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Élèves
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="InsererEleveCSV.php">Import CSV</a>
-            <a class="dropdown-item" href="InsererEleve.php">Créer</a>
-          </div>
-        </li>
-
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Professeurs
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="InsererProfesseurCSV.php">Import CSV</a>
-            <a class="dropdown-item" href="InsererProfesseur.php">Créer</a>
-          </div>
-        </li>
-
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Groupes
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="InsererGroupeCSV.php">Import CSV</a>
-            <a class="dropdown-item" href="InsererGroupe.php">Créer</a>
-          </div>
-        </li>
-
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Jurys
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="insererJuryCSV.php">Import CSV</a>
-            <a class="dropdown-item" href="insererJury.php">Créer</a>
-          </div>
-        </li>
-
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Horaires
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="insererHorairesCSV.php">Import CSV</a>
-            <a class="dropdown-item" href="InsererHoraires.php">Créer</a>
-          </div>
-        </li>
-      </ul>
-    </div>
-
-  </nav>
-</div>
-
 <?php
-  include '../../../BD/Interactions/Connexion.php';
-
-  $db = connect_database();
-  $grp = array();
-
-  try{
-    $stmt = $db->prepare("SELECT NumGroupe FROM GROUPE where NumGroupe != 0");
-    $stmt->execute();
-    while($row = $stmt->fetch()){
-      array_push($grp, $row["NumGroupe"]);
-    }
-  }
-  catch(Exception $e){}
-
+include 'menu_admin.php';
+require "../../../BD/Interactions/Connexion.php";
+require "../../../BD/Interactions/InteractionsBD.php";
+$db = connect_database();
 ?>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarText">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Élèves
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" href="InsererEleveCSV.php">Import CSV</a>
+          <a class="dropdown-item" href="InsererEleve.php">Créer</a>
+        </div>
+      </li>
 
-<form name="AjoutEleve" method="POST" style="padding-top: 2%" action="insertion_eleve.php">
-  <h4>Formulaire d'ajout d'un élève :</h4>
-  <table>
-    <tr>
-      <td style="width: 300px">
-        <label style="padding-left: 2% ; padding-right: 2% ; padding-top: 2%">Nom de l'élève :</label>
-      </td>
-      <td>
-        <input type="text" name="Name" required></input>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <label style="padding-left: 2% ; padding-right: 2% ; padding-top: 2%">Prénom de l'élève :</label>
-      </td>
-      <td>
-        <input type="input" name="LastName" required></input>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <label style="padding-left: 2% ; padding-right: 2% ; padding-top: 2%">Filière de l'élève :</label>
-      </td>
-      <td>
-        <input type="input" name="Filiere" required></input>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <label style="padding-left: 2% ; padding-right: 2% ; padding-top: 2%"> Numéro de groupe : </label>
-      </td>
-      <td>
-        <select style="width: 50px" name="Groupe" required>
-          <?php
-          foreach($grp as $g){
-            echo  "<option>".$g."</option>";
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Professeurs
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="InsererProfesseurCSV.php">Import CSV</a>
+          <a class="dropdown-item" href="InsererProfesseur.php">Créer</a>
+        </div>
+      </li>
+
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Groupes
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="InsererGroupeCSV.php">Import CSV</a>
+          <a class="dropdown-item" href="InsererGroupe.php">Créer</a>
+        </div>
+      </li>
+
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Jurys
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="insererJuryCSV.php">Import CSV</a>
+          <a class="dropdown-item" href="insererJury.php">Créer</a>
+        </div>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Horaires
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="insererHorairesCSV.php">Import CSV</a>
+          <a class="dropdown-item" href="InsererHoraires.php">Créer</a>
+        </div>
+      </li>
+    </ul>
+  </div>
+</nav>
+<div id="main" class="container-fluid" style="height:50%">
+  <div class="row justify-content-between" style="height:150%">
+    <div class="col-8">
+      <form name="AjoutEleve" method="POST" style="padding-top: 2%" action="insertion_eleve.php">
+        <h4>Formulaire d'ajout d'un élève :</h4>
+        <div class="form-group row">
+          <label for="name" class="col-4">Nom</label>
+          <input class="col-8" id="name" type="text" name="Name" required></input>
+        </div>
+        <div class="form-group row">
+          <label for="LastName" class="col-4">Prénom</label>
+          <input class="col-8" id="LastName" type="input" name="LastName" required></input>
+        </div>
+        <div class="form-group row">
+          <label for="Filiere" class="col-4">Filière</label>
+          <select class="col-8" id="Filiere" type="input" name="Filiere" required>
+            <option></option>
+            <option>S</option>
+            <option>STI2D</option>
+          </select>
+        </div>
+        <div class="form-group row">
+          <label for="Groupe" class="col-4">Numéro de groupe</label>
+          <select class="col-8" id="Groupe" type="input" name="Groupe" required>
+            <option></option>
+            <?php
+              $stmt = $db->prepare("SELECT distinct NumGroupe from GROUPE");
+              $stmt->execute();
+              while($row = $stmt->fetch()){
+                echo "<option>".$row[0]."</option>";
+              }
+            ?>
+          </select>
+        </div>
+        <div class="text-center">
+          <button class="btn btn-dark" type="submit">Ajouter Eleves</button>
+        </div>
+      </form>
+    </div>
+    <div class="col-4" style="overflow-y:scroll; height:100%; width: 400px">
+      <?php
+      try{
+        $firstCall = true;
+        $maxNumGroupe = getMaxIDGROUPE($db);
+        $grpancien = 0;
+        $stmt2 = $db->prepare("SELECT * FROM ELEVE natural join PERSONNE natural join GROUPE where ID=IDEleve and NumGroupe = ?");
+        $stmt = $db->prepare("SELECT * FROM GROUPE where NumGroupe not in(SELECT NumGroupe FROM ELEVE)");
+        $stmt->execute();
+
+        for ($i=1; $i<=$maxNumGroupe; $i++){
+          $stmt2->bindParam(1, $i);
+          $stmt2->execute();
+          while($row = $stmt2->fetch())
+          {
+            if($row["NumGroupe"] != $grpancien){
+              if($i != 1){
+                echo '</div>';
+              }
+              $firstCall = !$firstCall;
+              echo '
+              <div id="grp-'.$row["NumGroupe"].'" class="jumbotron text-white bg-dark" style="padding:1em">
+                <h1>Groupe n°'.$row["NumGroupe"].'</h1>
+                <h2>Projet : '.$row["NomProjet"].'</h2>
+                <div class="jumbotron text-dark bg-light" style="padding:0.5em">
+                  <p>Élève n°'.$row["IDEleve"].'</p>
+                  <p>Nom : '.$row["Nom"].' '.$row["Prenom"].'</p>
+                </div>';
+              }
+              else{
+                echo '
+                <div class="jumbotron text-dark bg-light" style="padding:0.5em">
+                  <p>Élève n°'.$row["IDEleve"].'</p>
+                  <p>Nom : '.$row["Nom"].' '.$row["Prenom"].'</p>
+                </div>
+                ';
+              }
+              $grpancien = $row["NumGroupe"];
+            }
           }
-          ?>
-        </select>
-      </td>
-    </tr>
-    </table>
-    <input type="submit" value="Ajouter Eleves">
-</form>
+          if(!$firstCall){
+            echo "</div>";
+          }
+          while($row2 = $stmt->fetch()){
+            if($i != $maxNumGroupe-1){
+              echo '
+              <div id="grp-'.$row2["NumGroupe"].'" class="jumbotron text-white bg-dark" style="padding:1em">
+                <h1>Groupe n°'.$row2["NumGroupe"].'</h1>
+                <h2>Projet : '.$row2["NomProjet"].'</h2>
+              </div>';
+            }
+            else{
+              echo '
+              </div>
+              <div id="grp-'.$row2["NumGroupe"].'" class="jumbotron text-white bg-dark" style="padding:1em">
+                <h1>Groupe n°'.$row2["NumGroupe"].'</h1>
+                <h2>Projet : '.$row2["NomProjet"].'</h2>
+              </div>';
+            }
+        }
+      }
+      catch(Exception $e)
+      {
+        echo $e->getMessage();
+      }
+      ?>
+    </div>
+  </div>
 </body>
