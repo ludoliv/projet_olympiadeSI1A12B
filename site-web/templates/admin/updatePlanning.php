@@ -105,11 +105,11 @@ else
           $stmt->bindParam(3,$idGroupe);
           $stmt->bindParam(4,$salle['numSalle']);
           $stmt->execute();
-          echo "Insertion réussie".$IDMaxJury;
+          echo "Insertion réussie";
     }
     elseif($valid == 2)
     {
-        echo "Impossible car ce groupe est déjà évalué à cette horaire".$IDMaxJury;
+        echo "Impossible car ce groupe est déjà évalué à cette horaire";
     }
     elseif($valid == 4)
     {
@@ -126,14 +126,14 @@ else
         $statement->bindParam(4,$salle['numSalle']);
         $statement->execute();
 
-        echo "Assignation réussie".$IDMaxJury;
+        echo "Assignation réussie";
     }
     elseif($valid == 5)
     {
-        echo "Il y'a déjà un jury dans cette salle à cette horaire".$IDMaxJury;
+        echo "Il y'a déjà un jury dans cette salle à cette horaire";
     }
     else {
-        echo "Impossible car ce jury évalue déjà ce groupe dans la journée".$IDMaxJury;
+        echo "Impossible car ce jury évalue déjà ce groupe dans la journée";
     }
 }
 ?>
