@@ -2,6 +2,7 @@
 
 $name = $_GET['name'];
 $value = $_GET['value'];
+$IDMaxJury = null;
 
 include '../../../BD/Interactions/Connexion.php';
 include '../../../BD/Interactions/InteractionsBD.php';
@@ -20,18 +21,18 @@ elseif(strlen($name) == 3)
     if($IDMaxJury >= 10)
     {
         $idHeure = intval($name[0]);
-        $idJury = intval($name[1]+$name[2]);
+        $idJury = intval($name[1].$name[2]);
     }
     else
     {
-        $idHeure = intval($name[0]+$name[1]);
+        $idHeure = intval($name[0].$name[1]);
         $idJury = intval($name[2]);
     }
 }
 else
 {
-    $idHeure = intval($name[0]+$name[1]);
-    $idJury = intval($name[2]+$name[3]);
+    $idHeure = intval($name[0].$name[1]);
+    $idJury = intval($name[2].$name[3]);
 }
 
 if($value == "none")
