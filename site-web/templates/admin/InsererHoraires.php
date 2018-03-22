@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html>
+<html class="h-100">
 <head>
 <link rel="stylesheet" href="../../css/index.css"/>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
 </head>
-<body>
+<body class="h-100">
 <?php session_start();
 $_SESSION['connect']=0;
 if(!isset($_SESSION['loginOK'])){
@@ -94,18 +94,22 @@ if(!isset($_SESSION['loginOK'])){
       require "../../../BD/Interactions/InteractionsBD.php";
       $db = connect_database();
       try{
+        $firstCall = true;
         $stmt2 = $db->prepare("SELECT * FROM HEURE order by hDeb");
         $stmt2->execute();
         echo '<div class="jumbotron text-white bg-dark" style="padding:1em">';
         while($row = $stmt2->fetch())
         {
+          $firstCall = !$firstCall;
           echo '
             <div class="jumbotron text-dark bg-light" style="padding:0.5em">
               <p>Début : '.$row["hDeb"].'</p>
               <p>Fin : '.$row["hFin"].'</p>
             </div>';
           }
-        echo '</div>';
+          if(!$firstCall){
+            echo "</div>";
+          }
       }
       catch(Exception $e)
       {

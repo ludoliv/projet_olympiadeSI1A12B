@@ -17,5 +17,5 @@
         echo $e->getMessage();
     }
 
-    header('Location:InsererEleve.php');
+    header('Location:InsererEleveCSV.php');
 ?>
