@@ -77,7 +77,7 @@ $db = connect_database();
 <div id="main" class="container-fluid" style="height:50%">
   <div class="row justify-content-between" style="height:150%">
     <div class="col-8">
-      <form name="AjoutProfesseur" method="POST" style="padding-top: 2%" action="insertion_professeur.php">
+      <form name="AjoutProfesseur" method="POST" style="padding-top: 2%" action="insertion_prof_CSV.php" enctype="multipart/form-data">
         <h4>Formulaire d'ajout d'un professeur :</h4>
         <div class="form-group row">
           <label for="filename" class="col-4">Fichier CSV</label>
