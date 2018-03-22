@@ -37,16 +37,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/imageView7"
-        android:layout_width="507dp"
-        android:layout_height="95dp"
-        android:layout_marginTop="436dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <ListView
         android:id="@+id/lv"
         android:layout_width="858dp"
@@ -57,5 +47,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"></ListView>
+
+    <ImageView
+        android:id="@+id/imageView7"
+        android:layout_width="507dp"
+        android:layout_height="95dp"
+        android:layout_marginTop="500dp"
+        app:layout_constraintBottom_toBottomOf="@+id/lv"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
