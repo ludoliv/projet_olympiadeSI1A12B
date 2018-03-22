@@ -164,7 +164,10 @@ public class Planning extends Activity {
                 View view = super.getView(position,convertView,parent);
                 TextView tv = view.findViewById(R.id.textViewCol1);
                 String text = tv.getText().toString();
-                if (position != 0 && text != "Pause"){
+                String couleur = "#ffffff";//Vert
+                if (position != 0 && !text.equals("Pause")){
+                    System.out.println(position);
+                    System.out.println(text);
                     GroupeManager gpMan = new GroupeManager(view.getContext());
                     gpMan.open();
                     int idGp = gpMan.getNumGroupe(text);
@@ -174,7 +177,7 @@ public class Planning extends Activity {
                     while (indice<listeGrpNote.size() && test){
                         ArrayList<Integer> listeNote = listeGrpNote.get(indice);
                         indice += 1;
-                        String couleur = "#389f38";//Vert
+                        couleur = "#389f38";//Vert
                         if (idGp == listeNote.get(0)) {
                             int fin = 1;
                             while (fin < listeNote.size() && couleur.equals("#389f38")) {
@@ -198,6 +201,9 @@ public class Planning extends Activity {
                     if (listeGrpNote.size()==0){
                         view.setBackgroundColor((Color.parseColor("#df1d1d")));
                     }
+                }
+                else{
+                    view.setBackgroundColor(Color.TRANSPARENT);
                 }
                 return view;
             }
