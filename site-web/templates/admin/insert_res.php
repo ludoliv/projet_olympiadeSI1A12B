@@ -9,13 +9,13 @@ $pluridisciplinarite = $_POST['pluridisciplinarite'];
 $maitrise = $_POST['maitrise'];
 $dev_dur = $_POST['developpement_durable'];
 $moyenne = $_POST['moyenne'];
-// echo $originalite;
-// echo $prototype;
-// echo $demarche_si;
-// echo $pluridisciplinarite;
-// echo $maitrise;
-// echo $dev_dur;
-// echo $moyenne;
+echo $originalite;
+echo $prototype;
+echo $demarche_si;
+echo $pluridisciplinarite;
+echo $maitrise;
+echo $dev_dur;
+echo $moyenne;
 function clear_assignement($connexion)
 {
   try{
@@ -165,10 +165,20 @@ function testNote($connexion,$statement,$grp,$categorie){
         }
         echo "Groupe:".$grp."<br>";
         $stmt->execute();
+
+        $stmt2 = $connexion->prepare("SELECT * FROM GROUPE WHERE NumGroupe=?");
+        $stmt2->bindParam(1,$grp);
+        $stmt2->execute();
+
+        $Groupe = $stmt2->fetch();
+
         $cpt = 0;
         while ($row = $stmt->fetch())
         {
-          $cpt++;
+          if($row['Lycee'] == $Groupe['Lycee'])
+          {
+            $cpt++;
+          }
         }
         if($cpt < 2)
         {
