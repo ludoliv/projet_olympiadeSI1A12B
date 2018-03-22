@@ -27,5 +27,5 @@
         echo $e->getMessage();
     }
 
-    header('Location:InsererGroupe.php');9
+    header('Location:InsererGroupe.php');
 ?>

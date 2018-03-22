@@ -31,7 +31,7 @@
                             $ListeJury = getJury($db);
                             foreach($ListeJury as $j)
                             {
-                                echo "<th>".$j->getNumJury()."</th>";
+                                echo "<th>".$j->getLogin()."</th>";
                             }
                         ?>
                         </tr>
@@ -43,7 +43,7 @@
                         foreach($ListeHeure as $h)
                         {
                             echo "<tr id =".$h->getID().">";
-                            echo "<td>".$h->getDeb().":".$h->getFin()."</td>";
+                            echo "<td>".$h->getDeb()."-".$h->getFin()."</td>";
                             foreach ($ListeJury as $j)
                             {
                                 echo "<td>";

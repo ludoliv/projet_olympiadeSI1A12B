@@ -1,5 +1,7 @@
 <?php
-include("PDOConnection.php");
+  include '../BD/Interactions/Connexion.php';
+
+  $cnn = connect_database();
 
 //Define some value
 define("ACTION_LOGIN", "login");

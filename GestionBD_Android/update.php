@@ -1,5 +1,7 @@
 <?php
-  include("PDOConnection.php");
+  include '../BD/Interactions/Connexion.php';
+
+  $cnn = connect_database();
   $data=$_POST['data'];
   $data_decode=json_decode($data,true);
   function insererDonne($data_decode, $cnn){

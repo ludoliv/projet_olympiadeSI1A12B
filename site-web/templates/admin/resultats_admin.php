@@ -201,7 +201,7 @@
         </article>
       </div> -->
 
-    <div style="padding-left: 5% ; padding-right: 5% ; padding-top: 5%">
+    <div id="form" style="padding-left: 5% ; padding-right: 5% ; padding-top: 5%">
       <h3>Attribution des prix :</h3>
       <form method="post" action="insert_res.php">
         <table class="table">
@@ -315,7 +315,13 @@
         </table>
         <center>
           <div>
-            <input class="btn btn-dark" type="submit" value="Attribuer"/>
+            <input class="btn btn-dark" type="submit" onclick="show()" value="Attribuer"/>
+            <script>
+              function show()
+              {
+                console.log($("select['demarche_si']"));
+              }
+            </script>
           </div>
         </center>
       </form>
