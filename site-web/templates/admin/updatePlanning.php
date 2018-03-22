@@ -51,6 +51,11 @@ else
     $statement->bindParam(1,$idGroupe);
     $statement->execute();
 
+    $query2 = "SELECT NumJury,NumGroupe FROM JUGE where idHeure=?";
+    $statement1 = $db->prepare($query2);
+    $statement1->bindParam(1,$idHeure);
+    $statement1->execute();
+
     $valid = 1;
     while ($row = $statement->fetch())
     {
@@ -62,6 +67,15 @@ else
         elseif($row['NumJury'] == $idJury)
         {
           $valid = 3;
+          break;
+        }
+    }
+
+    while ($row = $statement1->fetch())
+    {
+        if($row['NumJury'] == $idJury && $row['NumGroupe']!= $idGroupe)
+        {
+            $valid = 4;
         }
     }
 
@@ -83,6 +97,23 @@ else
     elseif($valid == 2)
     {
         echo "Impossible car ce groupe est déjà évalué à cette horaire";
+    }
+    elseif($valid == 4)
+    {
+        $stmt1 = $db->prepare("DELETE FROM JUGE WHERE idHeure=? and NumJury=?");
+        $stmt1->bindParam(1,$idHeure);
+        $stmt1->bindParam(2,$idJury);
+        $stmt1->execute();
+        $salle = $stmt1->fetch();
+
+        $statement = $db->prepare("INSERT INTO JUGE (idHeure,NumJury,NumGroupe,numSalle) VALUES(?,?,?,?)");
+        $statement->bindParam(1,$idHeure);
+        $statement->bindParam(2,$idJury);
+        $statement->bindParam(3,$idGroupe);
+        $statement->bindParam(4,$salle['numSalle']);
+        $statement->execute();
+
+        echo "Assignation réussie";
     }
     else {
         echo "Impossible car ce jury évalue déjà ce groupe dans la journée";
