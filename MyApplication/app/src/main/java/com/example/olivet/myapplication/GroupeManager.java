@@ -56,6 +56,7 @@ public class GroupeManager {
         // Ajout d'un enregistrement dans la table
 
         ContentValues values = new ContentValues();
+        values.put(KEY_ID_GROUPE,groupe.getId_groupe());
         values.put(KEY_NOMPROJ_GROUPE, groupe.getNom_projet());
         values.put(KEY_LYCEE_GROUPE, groupe.getLycee());
         values.put(KEY_SALLE_GROUPE, groupe.getSalle());

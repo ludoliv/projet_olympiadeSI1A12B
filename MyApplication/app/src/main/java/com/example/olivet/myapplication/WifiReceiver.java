@@ -77,7 +77,7 @@ public class WifiReceiver extends BroadcastReceiver {
         WifiInfo wifiInfo = wifiManager.getConnectionInfo();
         String ssid = wifiInfo.getSSID();
         Activity act=getForegroundActivity();
-        if(info != null && info.isConnected() && ssid.equals("\"MSI 1103\"")) {
+        if(info != null && info.isConnected() && ssid.equals(Donnees_BD.NOM_WIFI)) {
 
             if (act instanceof MainActivity){
                 ((MainActivity) act).buttonConsulter.setEnabled(true);
