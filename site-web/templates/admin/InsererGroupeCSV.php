@@ -89,6 +89,7 @@ if(!isset($_SESSION['loginOK'])){
       require "../../../BD/Interactions/InteractionsBD.php";
       $db = connect_database();
       try{
+        $firstCall = true;
         $maxNumGroupe = getMaxIDGROUPE($db);
         $grpancien = 0;
         $stmt2 = $db->prepare("SELECT * FROM ELEVE natural join PERSONNE natural join GROUPE where ID=IDEleve and NumGroupe = ?");
@@ -104,6 +105,7 @@ if(!isset($_SESSION['loginOK'])){
               if($i != 1){
                 echo '</div>';
               }
+              $firstCall = !$firstCall;
               echo '
               <div id="grp-'.$row["NumGroupe"].'" class="jumbotron text-white bg-dark" style="padding:1em">
                 <h1>Groupe n°'.$row["NumGroupe"].'</h1>
@@ -124,7 +126,9 @@ if(!isset($_SESSION['loginOK'])){
               $grpancien = $row["NumGroupe"];
             }
           }
-          echo "</div>";
+          if(!$firstCall){
+            echo "</div>";
+          }
           while($row2 = $stmt->fetch()){
             if($i != $maxNumGroupe-1){
               echo '

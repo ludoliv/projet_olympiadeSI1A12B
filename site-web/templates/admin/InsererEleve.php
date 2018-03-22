@@ -78,7 +78,7 @@ $db = connect_database();
 <div id="main" class="container-fluid" style="height:50%">
   <div class="row justify-content-between" style="height:150%">
     <div class="col-8">
-      <form name="AjoutEleve" method="POST" style="padding-top: 2%" action="insertion_groupe.php">
+      <form name="AjoutEleve" method="POST" style="padding-top: 2%" action="insertion_eleve.php">
         <h4>Formulaire d'ajout d'un élève :</h4>
         <div class="form-group row">
           <label for="name" class="col-4">Nom</label>
@@ -89,21 +89,25 @@ $db = connect_database();
           <input class="col-8" id="LastName" type="input" name="LastName" required></input>
         </div>
         <div class="form-group row">
-          <label for="num" class="col-4">Filière</label>
-          <select class="col-8" id="num" type="input" name="num" required>
+          <label for="Filiere" class="col-4">Filière</label>
+          <select class="col-8" id="Filiere" type="input" name="Filiere" required>
+            <option></option>
+            <option>S</option>
+            <option>STI2D</option>
+          </select>
+        </div>
+        <div class="form-group row">
+          <label for="Groupe" class="col-4">Numéro de groupe</label>
+          <select class="col-8" id="Groupe" type="input" name="Groupe" required>
             <option></option>
             <?php
-              $stmt = $db->prepare("SELECT distinct Filiere from ELEVE");
+              $stmt = $db->prepare("SELECT distinct NumGroupe from GROUPE");
               $stmt->execute();
               while($row = $stmt->fetch()){
                 echo "<option>".$row[0]."</option>";
               }
             ?>
           </select>
-        </div>
-        <div class="form-group row">
-          <label for="img" class="col-4">Chemin de l'image du projet :</label>
-          <input class="col-8" id="img" type="input" name="img" required></input>
         </div>
         <div class="text-center">
           <button class="btn btn-dark" type="submit">Ajouter Eleves</button>
@@ -113,19 +117,63 @@ $db = connect_database();
     <div class="col-4" style="overflow-y:scroll; height:100%; width: 400px">
       <?php
       try{
-        $stmt2 = $db->prepare("SELECT * FROM ELEVE natural join PERSONNE where ID=IDEleve");
-        $stmt2->execute();
-        echo '<div class="jumbotron text-white bg-dark" style="padding:1em">';
-        while($row = $stmt2->fetch())
-        {
-          echo '
-            <div class="jumbotron text-dark bg-light" style="padding:0.5em">
-              <p>Élève n°'.$row["IDEleve"].'</p>
-              <p>Filière : '.$row["Filiere"].'</p>
-              <p>'.$row["Nom"].' '.$row["Prenom"].'</p>
-            </div>';
+        $maxNumGroupe = getMaxIDGROUPE($db);
+        $grpancien = 0;
+        $firstCall = true;
+        $stmt2 = $db->prepare("SELECT * FROM ELEVE natural join PERSONNE natural join GROUPE where ID=IDEleve and NumGroupe = ?");
+        $stmt = $db->prepare("SELECT * FROM GROUPE where NumGroupe not in(SELECT NumGroupe FROM ELEVE)");
+        $stmt->execute();
+
+        for ($i=1; $i<=$maxNumGroupe; $i++){
+          $stmt2->bindParam(1, $i);
+          $stmt2->execute();
+          while($row = $stmt2->fetch())
+          {
+            if($row["NumGroupe"] != $grpancien){
+              if($i != 1){
+                echo '</div>';
+              }
+              $firstCall = !$firstCall;
+              echo '
+              <div id="grp-'.$row["NumGroupe"].'" class="jumbotron text-white bg-dark" style="padding:1em">
+                <h1>Groupe n°'.$row["NumGroupe"].'</h1>
+                <h2>Projet : '.$row["NomProjet"].'</h2>
+                <div class="jumbotron text-dark bg-light" style="padding:0.5em">
+                  <p>Élève n°'.$row["IDEleve"].'</p>
+                  <p>Nom : '.$row["Nom"].' '.$row["Prenom"].'</p>
+                </div>';
+              }
+              else{
+                echo '
+                <div class="jumbotron text-dark bg-light" style="padding:0.5em">
+                  <p>Élève n°'.$row["IDEleve"].'</p>
+                  <p>Nom : '.$row["Nom"].' '.$row["Prenom"].'</p>
+                </div>
+                ';
+              }
+              $grpancien = $row["NumGroupe"];
+            }
           }
-        echo '</div>';
+          if(!$firstCall){
+            echo "</div>";
+          }
+          while($row2 = $stmt->fetch()){
+            if($i != $maxNumGroupe-1){
+              echo '
+              <div id="grp-'.$row2["NumGroupe"].'" class="jumbotron text-white bg-dark" style="padding:1em">
+                <h1>Groupe n°'.$row2["NumGroupe"].'</h1>
+                <h2>Projet : '.$row2["NomProjet"].'</h2>
+              </div>';
+            }
+            else{
+              echo '
+              </div>
+              <div id="grp-'.$row2["NumGroupe"].'" class="jumbotron text-white bg-dark" style="padding:1em">
+                <h1>Groupe n°'.$row2["NumGroupe"].'</h1>
+                <h2>Projet : '.$row2["NomProjet"].'</h2>
+              </div>';
+            }
+        }
       }
       catch(Exception $e)
       {

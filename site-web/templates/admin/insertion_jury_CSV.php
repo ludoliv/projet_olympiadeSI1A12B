@@ -17,5 +17,5 @@
         echo $e->getMessage();
     }
 
-    header('Location:insererJury.php');
+    header('Location:insererJuryCSV.php');
 ?>
