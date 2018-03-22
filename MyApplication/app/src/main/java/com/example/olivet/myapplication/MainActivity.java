@@ -42,7 +42,7 @@ public class MainActivity extends Activity {
         WifiManager wifiManager = (WifiManager)getApplicationContext().getSystemService(Context.WIFI_SERVICE);
         WifiInfo wifiInfo = wifiManager.getConnectionInfo();
         String ssid = wifiInfo.getSSID();
-        if(mWifi.isConnected() && ssid.equals("\"MSI 1103\"")){
+        if(mWifi.isConnected() && ssid.equals(Donnees_BD.NOM_WIFI)){
             buttonConsulter.setEnabled(true);
             buttonConsulter.setBackgroundColor(Color.GRAY);
             buttonConsulter.setTextColor(Color.BLACK);
