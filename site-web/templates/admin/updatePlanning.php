@@ -73,7 +73,7 @@ else
 
     while ($row = $statement1->fetch())
     {
-        if($row['NumJury'] == $idJury && $row['NumGroupe']!= $idGroupe)
+        if($row['NumJury'] == $idJury && $row['NumGroupe']!= $idGroupe && $valid == 1)
         {
             $valid = 4;
         }
