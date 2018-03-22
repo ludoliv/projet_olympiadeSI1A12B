@@ -30,8 +30,9 @@ if(!isset($_SESSION['loginOK'])){
           if($cpt == 0){
             echo '
             <div class="carousel-item active">
-              <img src="../../images_projets/'.$row["image_Projet"].'" width="500px" height="700px">
-              <div class="carousel-caption d-none d-md-block bg-dark">
+              <img src="../../images_projets/'.$row["image_Projet"].'" height="500px">
+              <br>
+              <div class=bg-light style=margin-top:15px>
                 <h5>'.strtoupper($row["NomProjet"][0]).substr($row["NomProjet"],1,strlen($row["NomProjet"])+1).'</h5>
                 <p>'.strtoupper($row["Lycee"][0]).substr($row["Lycee"],1,strlen($row["Lycee"])+1).'</p>
               </div>
@@ -42,8 +43,8 @@ if(!isset($_SESSION['loginOK'])){
           else{
             echo '
             <div class="carousel-item">
-              <img src="../../images_projets/'.$row["image_Projet"].'" width="500px" height="700px">
-              <div class="carousel-caption d-none d-md-block bg-dark">
+              <img src="../../images_projets/'.$row["image_Projet"].'" height="500px">
+              <div class=bg-light style=margin-top:15px;>
                 <h5>'.strtoupper($row["NomProjet"][0]).substr($row["NomProjet"],1,strlen($row["NomProjet"])+1).'</h5>
                 <p>'.strtoupper($row["Lycee"][0]).substr($row["Lycee"],1,strlen($row["Lycee"])+1).'</p>
               </div>
@@ -70,7 +71,7 @@ if(!isset($_SESSION['loginOK'])){
 <script type="text/javascript">
 $(document).ready(function(){
   $(".carousel").carousel({
-    interval: 1000
+    interval: 10000
   });
   $("#titre").addClass("load");
   document.getElementById("prev").onclick = function(){$(".carousel").carousel('prev')}
