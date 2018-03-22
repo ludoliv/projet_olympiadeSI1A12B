@@ -17,5 +17,5 @@
         echo $e->getMessage();
     }
 
-    header('Location:InsererProfesseur.php');
+    header('Location:InsererProfesseurCSV.php');
 ?>
