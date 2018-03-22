@@ -110,6 +110,7 @@ public class Planning extends Activity {
         int k = 1;
         matrixCursor.addRow(new Object[] { k,"Nom évenement","Horaire", "Salle" });
         k += 1;
+        //System.out.println(getIntent().getExtras().getStringArrayList("nomProjet").size());
         for (int i = 0; i < getIntent().getExtras().getStringArrayList("nomProjet").size(); i++){
             if (i == 0){
                 matrixCursor.addRow(new Object[] { k,

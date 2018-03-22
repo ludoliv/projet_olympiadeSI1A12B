@@ -54,6 +54,7 @@ public class HeureManager {
         // Ajout d'un enregistrement dans la table
 
         ContentValues values = new ContentValues();
+        values.put(KEY_IDHEURE,heure.getIdHeure());
         values.put(KEY_HDEB, heure.gethDeb());
         values.put(KEY_HFIN, heure.gethFin());
 
