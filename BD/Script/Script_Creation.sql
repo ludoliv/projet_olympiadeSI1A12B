@@ -73,7 +73,6 @@ create table JUGE(
     FOREIGN KEY(NumGroupe) REFERENCES GROUPE(NumGroupe),
     FOREIGN KEY(idHeure) REFERENCES HEURE(idHeure),
     CONSTRAINT Pk_Jury_groupe UNIQUE (NumJury,NumGroupe),
-    CONSTRAINT PK_Heure_Salle UNIQUE (idHeure,numSalle),
     CONSTRAINT Pk_Groupe_Heure UNIQUE (NumGroupe,idHeure),
     CONSTRAINT Pk_Jury_Heure UNIQUE (NumJury,idHeure)
 );
