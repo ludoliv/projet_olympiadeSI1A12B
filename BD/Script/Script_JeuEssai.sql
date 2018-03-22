@@ -44,8 +44,6 @@ insert into PROFESSEUR values(1,1);
 insert into PROFESSEUR values(8,2);
 insert into PROFESSEUR values(9,2);
 
-insert into ADMINISTRATEUR values("admin","admin");
-
 insert into RECOMPENSE values (1,NULL,"Originalite");
 insert into RECOMPENSE values (2,NULL,"Prototype");
 insert into RECOMPENSE values (3,NULL,"DemarcheScientifique");

@@ -95,11 +95,13 @@ $db = connect_database();
     <div class="col-4" style="overflow-y:scroll; height:100%; width: 400px">
       <?php
       try{
+        $firstCall = true;
         $stmt2 = $db->prepare("select * from JURY");
         $stmt2->execute();
         echo '<div class="jumbotron text-white bg-dark" style="padding:1em">';
         while($row = $stmt2->fetch())
         {
+          $firstCall = !$firstCall;
           echo '
             <div class="jumbotron text-dark bg-light" style="padding:0.5em">
               <p>Jury n°'.$row["NumJury"].'</p>
@@ -107,7 +109,9 @@ $db = connect_database();
               '<p>Password : '.$row["password_"].'</p>
             </div>';
           }
-        echo '</div>';
+          if(!$firstCall){
+            echo "</div>";
+          }
       }
       catch(Exception $e)
       {
