@@ -2,6 +2,7 @@
 
 $name = $_GET['name'];
 $value = $_GET['value'];
+$IDMaxJury = null;
 
 include '../../../BD/Interactions/Connexion.php';
 include '../../../BD/Interactions/InteractionsBD.php';
@@ -20,18 +21,18 @@ elseif(strlen($name) == 3)
     if($IDMaxJury >= 10)
     {
         $idHeure = intval($name[0]);
-        $idJury = intval($name[1]+$name[2]);
+        $idJury = intval($name[1].$name[2]);
     }
     else
     {
-        $idHeure = intval($name[0]+$name[1]);
+        $idHeure = intval($name[0].$name[1]);
         $idJury = intval($name[2]);
     }
 }
 else
 {
-    $idHeure = intval($name[0]+$name[1]);
-    $idJury = intval($name[2]+$name[3]);
+    $idHeure = intval($name[0].$name[1]);
+    $idJury = intval($name[2].$name[3]);
 }
 
 if($value == "none")
@@ -104,11 +105,11 @@ else
           $stmt->bindParam(3,$idGroupe);
           $stmt->bindParam(4,$salle['numSalle']);
           $stmt->execute();
-          echo "Insertion réussie";
+          echo "Insertion réussie".$IDMaxJury;
     }
     elseif($valid == 2)
     {
-        echo "Impossible car ce groupe est déjà évalué à cette horaire";
+        echo "Impossible car ce groupe est déjà évalué à cette horaire".$IDMaxJury;
     }
     elseif($valid == 4)
     {
@@ -125,14 +126,14 @@ else
         $statement->bindParam(4,$salle['numSalle']);
         $statement->execute();
 
-        echo "Assignation réussie";
+        echo "Assignation réussie".$IDMaxJury;
     }
     elseif($valid == 5)
     {
-        echo "Il y'a déjà un jury dans cette salle à cette horaire";
+        echo "Il y'a déjà un jury dans cette salle à cette horaire".$IDMaxJury;
     }
     else {
-        echo "Impossible car ce jury évalue déjà ce groupe dans la journée";
+        echo "Impossible car ce jury évalue déjà ce groupe dans la journée".$IDMaxJury;
     }
 }
 ?>

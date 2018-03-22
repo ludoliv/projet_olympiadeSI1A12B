@@ -44,17 +44,17 @@
                         {
                             echo "<tr id =".$h->getID().">";
                             echo "<td>".$h->getDeb().":".$h->getFin()."</td>";
-                            for ($i = 1; $i <= count($ListeJury);$i++)
+                            foreach ($ListeJury as $j)
                             {
                                 echo "<td>";
-                                echo "<select name='".$h->getID().$i."' onchange=assign(this.name,this.value)>";
+                                echo "<select name='".$h->getID().$j->getNumJury()."' onchange=assign(this.name,this.value)>";
                                 $stmt = $db->prepare("select * from JUGE");
                                 $stmt->execute();
                                 $verif = false;
                                 $idSelected = null;
                                 while($row = $stmt->fetch())
                                 {
-                                    if( ($row['NumJury'] == $i) && ($h->getID() == $row['idHeure'] ))
+                                    if( ($row['NumJury'] == $j->getNumJury()) && ($h->getID() == $row['idHeure'] ))
                                     {
                                         $verif = true;
                                         $idSelected = $row['NumGroupe'];
